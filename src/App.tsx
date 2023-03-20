@@ -5,6 +5,8 @@ function App() {
     <div className="App">
       <header>
         {/* TODO: Logo and title */}
+        <h1>Frontend Mentor</h1>
+        <h2>Feedback board</h2>
         <nav>
           {/* TODO: Component to filter by type of feedback */}
           {/* TODO: Roadmap summary and link to roadmap section */}
