@@ -1,5 +1,5 @@
 import App from "../App";
 
-export default function Root() {
+export default function RootRoute() {
   return <App />;
 }
