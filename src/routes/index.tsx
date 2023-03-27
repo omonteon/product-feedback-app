@@ -1,5 +1,5 @@
-import App from "../App";
+import HomePage from "../pages/Home";
 
 export default function RootRoute() {
-  return <App />;
+  return <HomePage />;
 }

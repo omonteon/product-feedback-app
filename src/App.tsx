@@ -1,25 +1,40 @@
-import "./App.css";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import RootRoute from "./routes";
+import FeedbackDetailsRoute from "./routes/feedback";
+import FeedbackNewRoute from "./routes/feedback/new";
+import FeedbackEditRoute from "./routes/feedback/edit";
+import { action as deleteFeedbackAction } from "./routes/feedback/delete";
+import RoadmapRoute from "./routes/roadmap";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <RootRoute />,
+  },
+  {
+    path: "/feedback/new",
+    element: <FeedbackNewRoute />,
+  },
+  {
+    path: "/feedback/:feedbackId",
+    element: <FeedbackDetailsRoute />,
+  },
+  {
+    path: "/feedback/edit/:feedbackId",
+    element: <FeedbackEditRoute />,
+  },
+  {
+    path: "/feedback/delete/:feedbackId",
+    action: deleteFeedbackAction,
+  },
+  {
+    path: "/roadmap",
+    element: <RoadmapRoute />,
+  },
+]);
 
 function App() {
-  return (
-    <div className="App">
-      <header>
-        {/* TODO: Logo and title */}
-        <h1>Frontend Mentor</h1>
-        <h2>Feedback board</h2>
-        <nav>
-          {/* TODO: Component to filter by type of feedback */}
-          {/* TODO: Roadmap summary and link to roadmap section */}
-        </nav>
-      </header>
-      <main>
-        <header>
-          {/* TODO: Top bar with sorting component + buton to add feedback (link to section) */}
-        </header>
-        <section>{/* TODO: List of feedback cards */}</section>
-      </main>
-    </div>
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;
