@@ -1,5 +1,7 @@
+import FeedbackNewPage from "../../pages/FeedbackNew";
+
 function FeedbackNewRoute() {
-  return <div>FeedbackNew</div>;
+  return <FeedbackNewPage />;
 }
 
 export default FeedbackNewRoute;

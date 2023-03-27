@@ -3,8 +3,8 @@ import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import RootRoute from "./routes";
 import FeedbackDetailsRoute from "./routes/feedback";
-import FeedbackNewRoute from "./routes/feedback/New";
-import FeedbackEditRoute from "./routes/feedback/Edit";
+import FeedbackNewRoute from "./routes/feedback/new";
+import FeedbackEditRoute from "./routes/feedback/edit";
 import { action as deleteFeedbackAction } from "./routes/feedback/delete";
 import RoadmapRoute from "./routes/roadmap";
 import "./index.css";
@@ -19,7 +19,7 @@ const router = createBrowserRouter([
     element: <FeedbackNewRoute />,
   },
   {
-    path: "/feedback/details/:feedbackId",
+    path: "/feedback/:feedbackId",
     element: <FeedbackDetailsRoute />,
   },
   {

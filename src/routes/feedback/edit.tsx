@@ -1,7 +1,8 @@
 import React from "react";
+import FeedbackEditPage from "../../pages/FeedbackEdit";
 
 function FeedbackEditRoute() {
-  return <div>FeedbackEdit</div>;
+  return <FeedbackEditPage />;
 }
 
 export default FeedbackEditRoute;
