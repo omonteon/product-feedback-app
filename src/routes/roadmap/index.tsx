@@ -1,5 +1,7 @@
+import RoadmapPage from "../../pages/Roadmap";
+
 function RoadmapRoute() {
-  return <div>RoadmapRoute</div>;
+  return <RoadmapPage />;
 }
 
 export default RoadmapRoute;
