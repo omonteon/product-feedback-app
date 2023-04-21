@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 function HomePage() {
   return (
     <>
@@ -6,6 +8,7 @@ function HomePage() {
         <h1>Frontend Mentor</h1>
         <h2>Feedback board</h2>
         <nav>
+          <Link to="/roadmap">Roadmap </Link>
           {/* TODO: Component to filter by type of feedback */}
           {/* TODO: Roadmap summary and link to roadmap section */}
         </nav>
