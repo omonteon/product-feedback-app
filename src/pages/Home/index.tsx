@@ -1,17 +1,12 @@
-import { Link } from "react-router-dom";
+import styles from "./home.module.css";
 
 function HomePage() {
   return (
     <>
-      <header>
+      <header className={styles.header}>
         {/* TODO: Logo and title */}
         <h1>Frontend Mentor</h1>
         <h2>Feedback board</h2>
-        <nav>
-          <Link to="/roadmap">Roadmap </Link>
-          {/* TODO: Component to filter by type of feedback */}
-          {/* TODO: Roadmap summary and link to roadmap section */}
-        </nav>
       </header>
       <main>
         Home Page

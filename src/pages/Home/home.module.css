@@ -1,0 +1,22 @@
+.header {
+  background-image: radial-gradient(
+    128.88% 128.88% at 103.9% -10.39%,
+    #e84d70 0%,
+    #a337f6 53.09%,
+    #28a7ed 100%
+  );
+  color: white;
+  padding: 16px 24px;
+}
+
+.header h1 {
+  font-size: 1rem;
+  line-height: normal;
+}
+
+.header h2 {
+  font-size: 0.875rem;
+  font-weight: 400;
+  opacity: 0.75;
+  line-height: normal;
+}
