@@ -1,4 +1,7 @@
 .header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   background-image: radial-gradient(
     128.88% 128.88% at 103.9% -10.39%,
     #e84d70 0%,
@@ -19,4 +22,34 @@
   font-weight: 400;
   opacity: 0.75;
   line-height: normal;
+}
+
+.main header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--gray-dark-a);
+  padding: 0.5rem 1.5rem;
+  color: white;
+}
+
+.main header p {
+  font-size: 0.8125rem;
+  font-weight: 400;
+  margin: 0;
+}
+
+.button {
+  background-color: var(--primary-a);
+  color: white;
+  border: none;
+  padding: 0.625rem 1rem;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  border-radius: 10px;
+}
+
+.button:hover {
+  filter: brightness(1.1);
+  cursor: pointer;
 }
