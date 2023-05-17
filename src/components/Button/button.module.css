@@ -1,0 +1,29 @@
+.button {
+  color: white;
+  border: none;
+  padding: 0.625rem 1rem;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  border-radius: 10px;
+}
+
+.button:hover {
+  filter: brightness(1.1);
+  cursor: pointer;
+}
+
+.primaryPurple {
+  background-color: var(--primary-purple);
+}
+
+.primaryBlue {
+  background-color: var(--primary-blue);
+}
+
+.dark {
+  background-color: var(--gray-dark-b);
+}
+
+.danger {
+  background-color: var(--accent-red);
+}
