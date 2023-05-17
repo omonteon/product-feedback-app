@@ -3,6 +3,7 @@ import { ReactComponent as CloseIcon } from "../../assets/close-icon.svg";
 import { ReactComponent as HamIcon } from "../../assets/ham-icon.svg";
 import { ReactComponent as ChevronIcon } from "../../assets/chevron-icon.svg";
 import { useState } from "react";
+import Button from "../../components/Button/Button";
 
 function HomePage() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -29,7 +30,9 @@ function HomePage() {
           <p>
             Sort by : Most Upvotes <ChevronIcon />{" "}
           </p>
-          <button className={styles.button}>+ Add Feedback</button>
+          <Button onClick={() => console.log("Add Feedback")}>
+            + Add Feedback
+          </Button>
         </header>
         <section>{/* TODO: List of feedback cards */}</section>
       </main>
