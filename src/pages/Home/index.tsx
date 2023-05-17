@@ -1,10 +1,10 @@
-import styles from "./home.module.css";
-import { ReactComponent as CloseIcon } from "../../assets/close-icon.svg";
-import { ReactComponent as HamIcon } from "../../assets/ham-icon.svg";
-import { ReactComponent as ChevronIcon } from "../../assets/chevron-icon.svg";
 import { useState } from "react";
+import { ReactComponent as CloseIcon } from "@assets/close-icon.svg";
+import { ReactComponent as HamIcon } from "@assets/ham-icon.svg";
+import { ReactComponent as ChevronIcon } from "@assets/chevron-icon.svg";
 import Button from "@components/Button";
 import Drawer from "@components/Drawer";
+import styles from "./home.module.css";
 
 function HomePage() {
   const [menuOpen, setMenuOpen] = useState(false);
