@@ -27,3 +27,8 @@
 .danger {
   background-color: var(--accent-red);
 }
+
+.clean {
+  background-color: transparent;
+  padding: 0;
+}
