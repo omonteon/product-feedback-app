@@ -11,3 +11,8 @@
   cursor: pointer;
   background-color: var(--hover-blue);
 }
+
+.tag.checked {
+  color: white;
+  background-color: var(--primary-blue);
+}
