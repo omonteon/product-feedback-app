@@ -1,9 +1,9 @@
 .drawer {
+  background-color: var(--gray-light-100);
   position: fixed;
   right: 0;
   top: 75px;
   height: 100%;
-  background: #ffffff;
   box-shadow: -2px 0 8px rgba(0, 0, 0, 0.1);
   padding: 20px;
   width: 70vw;
