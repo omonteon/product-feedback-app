@@ -1,0 +1,12 @@
+.badge {
+  display: flex;
+  align-items: center;
+  column-gap: 1rem;
+}
+
+.badge > .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 4px;
+  display: inline-block;
+}
