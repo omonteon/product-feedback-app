@@ -1,0 +1,17 @@
+.cardContainer {
+  padding: 76px 24px;
+  text-align: center;
+}
+
+.cardContainer img {
+  width: 6.25rem;
+}
+
+.cardContainer h3 {
+  margin: 2rem 0 1rem 0;
+}
+
+.cardContainer p {
+  margin-bottom: 1.5rem;
+  color: var(--gray-dark-c);
+}
