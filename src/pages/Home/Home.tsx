@@ -3,6 +3,7 @@ import { ReactComponent as ChevronIcon } from "@assets/chevron-icon.svg";
 import Button from "@components/Button";
 import styles from "./home.module.css";
 import Sidebar from "@components/Sidebar";
+import EmptyFeedback from "@components/EmptyFeedback";
 
 // Next tasks
 // 1. Create Card component [DONE]
@@ -45,7 +46,9 @@ function HomePage() {
             + Add Feedback
           </Button>
         </header>
-        <section>{/* TODO: List of feedback cards */}</section>
+        <section className={styles.mainContent}>
+          <EmptyFeedback />
+        </section>
       </main>
     </>
   );

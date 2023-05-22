@@ -43,3 +43,7 @@
   font-weight: 400;
   margin: 0;
 }
+
+.mainContent {
+  padding: 32px 24px;
+}
