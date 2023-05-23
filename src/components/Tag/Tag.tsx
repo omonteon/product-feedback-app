@@ -4,10 +4,11 @@ import CheckableTag from "./CheckableTag";
 
 interface TagProps {
   children?: ReactNode;
+  className?: string;
 }
 
-function Tag({ children }: TagProps) {
-  return <button className={styles.tag}>{children}</button>;
+function Tag({ children, className = "" }: TagProps) {
+  return <button className={`${styles.tag} ${className}`}>{children}</button>;
 }
 
 Tag.CheckableTag = CheckableTag;
