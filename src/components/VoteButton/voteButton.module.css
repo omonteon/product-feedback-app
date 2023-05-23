@@ -1,0 +1,26 @@
+.voteButton {
+  background-color: var(--gray-light-300);
+  position: relative;
+  display: flex;
+  align-items: center;
+  column-gap: 0.75rem;
+  padding: 4px 16px;
+  border-radius: 10px;
+  font-size: 0.8125rem;
+}
+
+.voteButton input {
+  margin: 0;
+  position: absolute;
+  left: 0;
+  top: 0;
+  /* opacity: 0; */
+}
+
+.upVoteIcon {
+  transform: rotate(180deg);
+}
+
+.upVoteIcon path {
+  stroke: var(--primary-blue);
+}
