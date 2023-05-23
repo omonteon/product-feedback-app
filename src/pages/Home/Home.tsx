@@ -18,6 +18,8 @@ import FeedbackCard from "@components/FeedbackCard";
 // 5. Implement Roadmap card component [DONE]
 // 6. Implement DropDown component [PENDING]
 // 7. Implement empty home card component [DONE]
+// 8. Rename all index.tsx files to index.ts because they don't contain jsx
+// 9. Install and configure ESLint
 
 // TODO: Get this from some API or from localStorage
 const feedbackList: Array<Feedback> = [
