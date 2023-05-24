@@ -17,6 +17,10 @@
   opacity: 0;
 }
 
+.voteButton:has(:focus-visible) {
+  outline: 2px solid var(--accent-orange);
+}
+
 .upVoteIcon {
   transform: rotate(180deg);
 }
