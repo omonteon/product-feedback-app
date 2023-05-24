@@ -1,8 +1,9 @@
+import { Feedback } from "src/interfaces/Feedback";
 import Card from "@components/Card";
 import Tag from "@components/Tag";
-import { Feedback } from "src/interfaces/Feedback";
-import styles from "./feedbackCard.module.css";
 import VoteButton from "@components/VoteButton";
+import CommentCount from "./CommentCount";
+import styles from "./feedbackCard.module.css";
 
 interface FeedbackCardProps {
   feedback: Feedback;
@@ -40,6 +41,7 @@ function FeedbackCard({ feedback, toggleVote }: FeedbackCardProps) {
           count={upVoteCount}
           onChange={() => toggleVote(id)}
         />
+        <CommentCount count={commentCount} />
       </footer>
     </Card>
   );

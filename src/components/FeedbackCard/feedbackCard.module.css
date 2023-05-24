@@ -21,4 +21,14 @@ label.upVoted path {
 
 .feedbackCard footer {
   display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.commentBubble {
+  display: flex;
+  align-items: center;
+  column-gap: 0.5rem;
+  font-weight: 700;
+  font-size: 0.8125rem;
 }
