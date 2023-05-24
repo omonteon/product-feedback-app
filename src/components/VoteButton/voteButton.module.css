@@ -3,7 +3,7 @@
   position: relative;
   display: flex;
   align-items: center;
-  column-gap: 0.75rem;
+  column-gap: 0.5rem;
   padding: 4px 16px;
   border-radius: 10px;
   font-size: 0.8125rem;
@@ -12,9 +12,9 @@
 .voteButton input {
   margin: 0;
   position: absolute;
-  left: 0;
-  top: 0;
-  /* opacity: 0; */
+  left: 16px;
+  top: 9px;
+  opacity: 0;
 }
 
 .upVoteIcon {
