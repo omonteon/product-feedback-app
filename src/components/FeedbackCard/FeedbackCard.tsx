@@ -4,6 +4,7 @@ import Tag from "@components/Tag";
 import VoteButton from "@components/VoteButton";
 import CommentCount from "./CommentCount";
 import styles from "./feedbackCard.module.css";
+import { Link } from "react-router-dom";
 
 interface FeedbackCardProps {
   feedback: Feedback;
@@ -30,20 +31,22 @@ function FeedbackCard({ feedback, toggleVote }: FeedbackCardProps) {
   // }
 
   return (
-    <Card className={styles.feedbackCard}>
-      <h4>{title}</h4>
-      <p>{description}</p>
-      <Tag className={styles.feedbackCardTag}>{tag}</Tag>
-      <footer>
-        <VoteButton
-          className={`${upVoted ? styles.upVoted : ""}`}
-          upVoted={upVoted}
-          count={upVoteCount}
-          onChange={() => toggleVote(id)}
-        />
-        <CommentCount count={commentCount} />
-      </footer>
-    </Card>
+    <Link to={`feedback/${id}`} className={styles.linkWrapper}>
+      <Card className={styles.feedbackCard}>
+        <h4>{title}</h4>
+        <p>{description}</p>
+        <Tag className={styles.feedbackCardTag}>{tag}</Tag>
+        <footer>
+          <VoteButton
+            className={`${upVoted ? styles.upVoted : ""}`}
+            upVoted={upVoted}
+            count={upVoteCount}
+            onChange={() => toggleVote(id)}
+          />
+          <CommentCount count={commentCount} />
+        </footer>
+      </Card>
+    </Link>
   );
 }
 
