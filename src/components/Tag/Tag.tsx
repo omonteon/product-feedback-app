@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
-import styles from "./tag.module.css";
 import CheckableTag from "./CheckableTag";
+import styles from "./tag.module.css";
 
 interface TagProps {
   children?: ReactNode;
@@ -8,7 +8,7 @@ interface TagProps {
 }
 
 function Tag({ children, className = "" }: TagProps) {
-  return <button className={`${styles.tag} ${className}`}>{children}</button>;
+  return <div className={`${styles.tag} ${className}`}>{children}</div>;
 }
 
 Tag.CheckableTag = CheckableTag;
