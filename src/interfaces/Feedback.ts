@@ -13,4 +13,5 @@ export interface Feedback {
   tag: FeedbackTag;
   upVoteCount: number;
   commentCount: number;
+  upVoted: boolean;
 }
