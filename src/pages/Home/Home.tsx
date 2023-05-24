@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ReactComponent as ChevronIcon } from "@assets/chevron-icon.svg";
 import Button from "@components/Button";
 import styles from "./home.module.css";
@@ -22,7 +22,7 @@ import FeedbackCard from "@components/FeedbackCard";
 // 9. Install and configure ESLint
 
 // TODO: Get this from some API or from localStorage
-const feedbackList: Array<Feedback> = [
+const feedbackListResponse: Array<Feedback> = [
   {
     id: 0,
     title: "Add tags for solutions",
@@ -30,6 +30,7 @@ const feedbackList: Array<Feedback> = [
     tag: "Enhancement",
     upVoteCount: 112,
     commentCount: 2,
+    upVoted: false,
   },
   {
     id: 1,
@@ -39,14 +40,37 @@ const feedbackList: Array<Feedback> = [
     tag: "Feature",
     upVoteCount: 99,
     commentCount: 4,
+    upVoted: true,
   },
 ];
 
 function HomePage() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [feedbackList, setFeedbackList] = useState(feedbackListResponse);
+
+  useEffect(() => {
+    setFeedbackList(feedbackListResponse);
+  }, []);
 
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
+  };
+
+  const toggleVote = (id: number) => {
+    const updatedList = feedbackList.map((feedback) => {
+      if (feedback.id === id) {
+        return {
+          ...feedback,
+          upVoteCount: feedback.upVoted
+            ? feedback.upVoteCount - 1
+            : feedback.upVoteCount + 1,
+          upVoted: !feedback.upVoted,
+        };
+      }
+      return feedback;
+    });
+    setFeedbackList(updatedList);
+    // TODO: Update in API or localstorage
   };
 
   return (
@@ -76,7 +100,11 @@ function HomePage() {
             <EmptyFeedback />
           ) : (
             feedbackList.map((feedback) => (
-              <FeedbackCard key={feedback.id} feedback={feedback} />
+              <FeedbackCard
+                key={feedback.id}
+                feedback={feedback}
+                toggleVote={toggleVote}
+              />
             ))
           )}
         </section>
