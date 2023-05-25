@@ -20,7 +20,8 @@
     "paths": {
       // "@/*": ["src/*"],
       "@components/*": ["src/components/*"],
-      "@assets/*": ["src/assets/*"]
+      "@assets/*": ["src/assets/*"],
+      "@api/*": ["src/api/*"]
     }
   },
   "include": ["src", "svg.d.ts"],
