@@ -12,7 +12,7 @@ function VoteButton({
   className = "",
   count = 0,
   upVoted = false,
-  onChange,
+  onChange = () => {},
 }: VoteButtonProps) {
   return (
     <label className={`${styles.voteButton} ${className}`}>
@@ -20,6 +20,7 @@ function VoteButton({
       <input
         type="checkbox"
         checked={upVoted}
+        onClick={(event) => event.stopPropagation()} // This is to avoid a card with a link being triggered
         onChange={onChange}
         aria-checked={upVoted}
       />
