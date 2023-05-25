@@ -4,16 +4,20 @@ import Tag from "@components/Tag";
 import VoteButton from "@components/VoteButton";
 import CommentCount from "./CommentCount";
 import styles from "./feedbackCard.module.css";
-import { Link } from "react-router-dom";
 
 interface FeedbackCardProps {
   feedback: Feedback;
-  toggleVote: (id: number) => void;
+  redirectTo?: string;
+  onToggleVote: (id: number) => void;
 }
 
 // TODO: Style the content
 // TODO: Add upvote component and comment component
-function FeedbackCard({ feedback, toggleVote }: FeedbackCardProps) {
+function FeedbackCard({
+  feedback,
+  redirectTo,
+  onToggleVote,
+}: FeedbackCardProps) {
   const {
     id,
     title = "",
@@ -30,23 +34,27 @@ function FeedbackCard({ feedback, toggleVote }: FeedbackCardProps) {
 
   // }
 
+  // TODO: Let the card be clickable to take to another route, but
+  // at the same time, let clickable child elements be interactive
+  // without taking you to another route
   return (
-    <Link to={`feedback/${id}`} className={styles.linkWrapper}>
-      <Card className={styles.feedbackCard}>
-        <h4>{title}</h4>
-        <p>{description}</p>
-        <Tag className={styles.feedbackCardTag}>{tag}</Tag>
-        <footer>
-          <VoteButton
-            className={`${upVoted ? styles.upVoted : ""}`}
-            upVoted={upVoted}
-            count={upVoteCount}
-            onChange={() => toggleVote(id)}
-          />
-          <CommentCount count={commentCount} />
-        </footer>
-      </Card>
-    </Link>
+    <Card
+      to={redirectTo}
+      className={`${styles.feedbackCard} ${styles.linkWrapper}`}
+    >
+      <h4>{title}</h4>
+      <p>{description}</p>
+      <Tag className={styles.feedbackCardTag}>{tag}</Tag>
+      <footer>
+        <VoteButton
+          className={`${upVoted ? styles.upVoted : ""}`}
+          upVoted={upVoted}
+          count={upVoteCount}
+          onChange={() => onToggleVote(id)}
+        />
+        <CommentCount count={commentCount} />
+      </footer>
+    </Card>
   );
 }
 

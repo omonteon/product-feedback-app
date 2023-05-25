@@ -20,6 +20,8 @@ import FeedbackCard from "@components/FeedbackCard";
 // 7. Implement empty home card component [DONE]
 // 8. Rename all index.tsx files to index.ts because they don't contain jsx
 // 9. Install and configure ESLint
+// 10. Define naming convention for event handler props and event handler functions
+// 11. Read and define convention on how to use size units in the project (CSS).
 
 // TODO: Get this from some API or from localStorage
 const feedbackListResponse: Array<Feedback> = [
@@ -56,7 +58,7 @@ function HomePage() {
     setSidebarOpen(!sidebarOpen);
   };
 
-  const toggleVote = (id: number) => {
+  const handleToggleVote = (id: number) => {
     const updatedList = feedbackList.map((feedback) => {
       if (feedback.id === id) {
         return {
@@ -103,7 +105,8 @@ function HomePage() {
               <FeedbackCard
                 key={feedback.id}
                 feedback={feedback}
-                toggleVote={toggleVote}
+                redirectTo={`feedback/${feedback.id}`}
+                onToggleVote={handleToggleVote}
               />
             ))
           )}

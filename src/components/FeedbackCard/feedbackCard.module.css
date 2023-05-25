@@ -32,8 +32,3 @@ label.upVoted path {
   font-weight: 700;
   font-size: 0.8125rem;
 }
-
-.linkWrapper {
-  color: inherit;
-  text-decoration: none;
-}
