@@ -1,0 +1,19 @@
+.feedbackDetails {
+  padding: 1.5rem;
+}
+
+.feedbackDetails header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+
+.feedbackDetails a {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: var(--gray-dark-c);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  column-gap: 0.75rem;
+}
