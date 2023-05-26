@@ -39,7 +39,9 @@ function FeedbackDetailsPage() {
           <ChevronLeftIcon /> Go Back
         </Link>
 
-        <Button type="primaryBlue">Edit Feedback</Button>
+        <Button type="primaryBlue" to="edit">
+          Edit Feedback
+        </Button>
       </header>
       {feedback === null ? (
         <>Issue retrieving details</>

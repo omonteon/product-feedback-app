@@ -6,6 +6,7 @@ import Sidebar from "@components/Sidebar";
 import EmptyFeedback from "@components/EmptyFeedback";
 import { Feedback } from "src/interfaces/Feedback";
 import FeedbackCard from "@components/FeedbackCard";
+import { getFeedbackList } from "@api/FeedbackAPI";
 
 // Next tasks
 // 1. Create Card component [DONE]
@@ -24,34 +25,13 @@ import FeedbackCard from "@components/FeedbackCard";
 // 11. Read and define convention on how to use size units in the project (CSS).
 
 // TODO: Get this from some API or from localStorage
-const feedbackListResponse: Array<Feedback> = [
-  {
-    id: 0,
-    title: "Add tags for solutions",
-    description: "Easier to search for solutions based on a specific stack.",
-    tag: "Enhancement",
-    upVoteCount: 112,
-    commentCount: 2,
-    upVoted: false,
-  },
-  {
-    id: 1,
-    title: "Add a dark theme option",
-    description:
-      "It would help people with light sensitivities and who prefer dark mode.",
-    tag: "Feature",
-    upVoteCount: 99,
-    commentCount: 4,
-    upVoted: true,
-  },
-];
 
 function HomePage() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [feedbackList, setFeedbackList] = useState(feedbackListResponse);
+  const [feedbackList, setFeedbackList] = useState<Feedback[]>([]);
 
   useEffect(() => {
-    setFeedbackList(feedbackListResponse);
+    setFeedbackList(getFeedbackList());
   }, []);
 
   const toggleSidebar = () => {
