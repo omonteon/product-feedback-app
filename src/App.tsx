@@ -20,11 +20,11 @@ const router = createBrowserRouter([
     element: <FeedbackDetailsRoute />,
   },
   {
-    path: "/feedback/edit/:feedbackId",
+    path: "/feedback/:feedbackId/edit",
     element: <FeedbackEditRoute />,
   },
   {
-    path: "/feedback/delete/:feedbackId",
+    path: "/feedback/:feedbackId/delete",
     action: deleteFeedbackAction,
   },
   {
