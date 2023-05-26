@@ -17,17 +17,22 @@ export interface Feedback {
   upVoted: boolean;
 }
 
+export interface FeedbackDetails extends Feedback {
+  comments?: Comment[];
+}
+
 export interface FeedbackAPIResponse {
-  currentUser: User;
+  currentUser: CurrentUser;
   productRequests: ProductRequest[];
 }
 
+// TODO: Separate these interfaces into their own files
 export interface Vote {
   productRequestId: number;
   voted: "up" | "down";
 }
 
-export interface User {
+export interface CurrentUser {
   image: string;
   name: string;
   username: string;
@@ -38,7 +43,13 @@ export interface Comment {
   id: number;
   content: string;
   user: User;
-  replyingTo?: string;
+  replies: CommentReply[];
+}
+
+export interface CommentReply {
+  content: string;
+  replyingTo: string;
+  user: User;
 }
 
 export interface ProductRequest {
@@ -49,4 +60,10 @@ export interface ProductRequest {
   status: string;
   description: string;
   comments?: Comment[];
+}
+
+export interface User {
+  image: string;
+  name: string;
+  username: string;
 }
