@@ -2,7 +2,13 @@ import { ReactNode } from "react";
 import styles from "./button.module.css";
 import { Link } from "react-router-dom";
 
-type ButtonType = "primaryPurple" | "primaryBlue" | "dark" | "danger" | "clean";
+type ButtonType =
+  | "primaryPurple"
+  | "primaryBlue"
+  | "dark"
+  | "danger"
+  | "clean"
+  | "link";
 
 interface ButtonProps {
   tabIndex?: number;
