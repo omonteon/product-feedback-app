@@ -2,7 +2,11 @@
   "currentUser": {
     "image": "./assets/user-images/image-zena.jpg",
     "name": "Zena Kelley",
-    "username": "velvetround"
+    "username": "velvetround",
+    "votes": [
+      { "productRequestId": 1, "voted": "up" },
+      { "productRequestId": 2, "voted": "down" }
+    ]
   },
   "productRequests": [
     {
@@ -108,7 +112,7 @@
       "status": "suggestion",
       "description": "Images and screencasts can enhance comments on solutions.",
       "comments": [
-        { 
+        {
           "id": 6,
           "content": "Right now, there is no ability to add images while giving feedback which isn't ideal because I have to use another app to show what I mean",
           "user": {
