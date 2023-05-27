@@ -1,6 +1,7 @@
 import {
   Feedback,
   FeedbackAPIResponse,
+  FeedbackDetails,
   ProductRequest,
 } from "src/interfaces/Feedback";
 
@@ -24,7 +25,23 @@ function getFeedbackById(id: number | undefined): Feedback {
     throw new Error(`Feedback item with id ${id} was not found`);
   }
   // TODO: Convert this in a different function
-  return adaptProductRequestToFeedback(productRequestItem);
+  return adaptProductRequestToFeedbackDetails(productRequestItem);
+}
+
+function adaptProductRequestToFeedbackDetails(
+  productRequest: ProductRequest
+): FeedbackDetails {
+  return {
+    id: productRequest.id,
+    title: productRequest.title,
+    description: productRequest.description,
+    tag: productRequest.category,
+    status: productRequest.status,
+    upVoteCount: productRequest.upvotes,
+    upVoted: false,
+    commentCount: productRequest.comments?.length ?? 0, // FIXME: this has to include replies too
+    comments: productRequest.comments,
+  };
 }
 
 function adaptProductRequestToFeedback(
