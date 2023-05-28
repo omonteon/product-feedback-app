@@ -1,0 +1,14 @@
+.container h3 {
+  margin-bottom: 1.5rem;
+}
+
+.form textarea::placeholder {
+  font-family: "Jost";
+}
+
+.form footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 1rem;
+}
