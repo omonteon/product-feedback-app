@@ -1,8 +1,7 @@
 import { Comment } from "src/interfaces/Feedback";
-import AvatarTestImage from "@assets/avatar-test.png";
-import styles from "./comment.module.css";
-import Button from "@components/Button";
 import CommentReply from "./CommentReply";
+import CommentHeader from "./CommentHeader";
+import styles from "./comment.module.css";
 
 interface CommentProps {
   className?: string;
@@ -13,17 +12,7 @@ function Comment({ className = "", comment }: CommentProps) {
   const { user, content, replies = [] } = comment;
   return (
     <div className={`${styles.comment} ${className}`}>
-      <header>
-        <div className={styles.userInfo}>
-          <img src={AvatarTestImage} alt={user.name} />
-          <div>
-            <h5>{user.name}</h5>
-            <p>@{user.username}</p>
-          </div>
-        </div>
-        {/* <img src={user.image} /> */}
-        <Button type="link">Reply</Button>
-      </header>
+      <CommentHeader user={user} />
       <p>{content}</p>
       {replies.length > 0 ? (
         <div className={styles.replies}>

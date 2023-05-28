@@ -2,9 +2,14 @@
   color: var(--gray-dark-c);
 }
 
-.comment header {
+.header {
   display: flex;
   align-items: center;
+}
+
+.userInfo img {
+  width: 40px;
+  height: 40px;
 }
 
 .userInfo {
@@ -16,11 +21,6 @@
 .userInfo h5 {
   font-size: 0.8125rem;
   line-height: 1.4;
-}
-
-.comment header img {
-  width: 40px;
-  height: 40px;
 }
 
 .content b {
