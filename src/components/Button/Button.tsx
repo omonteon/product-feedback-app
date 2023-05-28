@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
-import styles from "./button.module.css";
 import { Link } from "react-router-dom";
+import styles from "./button.module.css";
 
 type ButtonType =
   | "primaryPurple"
@@ -10,6 +10,8 @@ type ButtonType =
   | "clean"
   | "link";
 
+type ButtonHTMLType = "button" | "submit" | "reset" | undefined;
+
 interface ButtonProps {
   tabIndex?: number;
   type?: ButtonType;
@@ -18,6 +20,8 @@ interface ButtonProps {
   children?: ReactNode;
   ariaExpanded?: boolean;
   ariaControls?: string;
+  htmlType?: ButtonHTMLType;
+  disabled?: boolean;
 }
 
 function Button({
@@ -27,14 +31,20 @@ function Button({
   children,
   ariaExpanded,
   ariaControls,
+  htmlType = "button",
+  disabled = false,
   onClick,
 }: ButtonProps) {
   const content = (
     <button
+      type={htmlType}
       aria-expanded={ariaExpanded}
       aria-controls={ariaControls}
       tabIndex={tabIndex}
-      className={`${styles.button} ${styles[type]}`}
+      className={`${styles.button} ${styles[type]} ${
+        disabled ? styles.disabled : ""
+      }`}
+      disabled={disabled}
       onClick={onClick}
     >
       {children}

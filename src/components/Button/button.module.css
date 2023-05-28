@@ -38,3 +38,9 @@
   padding: 0;
   color: var(--primary-blue);
 }
+
+.disabled,
+.disabled:focus,
+.disabled:hover {
+  filter: brightness(0.8);
+}
