@@ -8,6 +8,7 @@ import styles from "./feedbackDetails.module.css";
 import Button from "@components/Button";
 import Card from "@components/Card";
 import Comment from "@components/Comment";
+import AddComment from "@components/AddComment";
 
 // TODO: Use a react router loader
 
@@ -61,6 +62,7 @@ function FeedbackDetailsPage() {
           ) : null}
         </div>
       )}
+      <AddComment className={styles.addComment} />
     </main>
   );
 }
