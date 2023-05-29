@@ -13,7 +13,7 @@ function getFeedbackList(): Feedback[] {
   return adaptProductRequestsToFeedbackList(productRequests);
 }
 
-function getFeedbackById(id: number | undefined): Feedback {
+async function getFeedbackById(id: number | undefined): Promise<Feedback> {
   if (id === undefined) {
     throw new Error("There was no id provided to get the feedback item.");
   }
@@ -24,8 +24,12 @@ function getFeedbackById(id: number | undefined): Feedback {
   if (productRequestItem === null) {
     throw new Error(`Feedback item with id ${id} was not found`);
   }
-  // TODO: Convert this in a different function
-  return adaptProductRequestToFeedbackDetails(productRequestItem);
+  // TODO: Implement rejection too
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve(adaptProductRequestToFeedbackDetails(productRequestItem));
+    }, 1000);
+  });
 }
 
 function adaptProductRequestToFeedbackDetails(

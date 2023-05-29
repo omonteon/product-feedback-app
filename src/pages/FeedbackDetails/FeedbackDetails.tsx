@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useState } from "react";
+import { Link, useLoaderData, Params } from "react-router-dom";
 import { getFeedbackById } from "@api/FeedbackAPI";
 import { FeedbackDetails } from "src/interfaces/Feedback";
 import { ReactComponent as ChevronLeftIcon } from "@assets/chevron-left-icon.svg";
@@ -10,16 +10,27 @@ import Card from "@components/Card";
 import Comment from "@components/Comment";
 import AddComment from "@components/AddComment";
 
-// TODO: Use a react router loader
+interface LoaderFunctionArgs {
+  params: Params;
+}
+
+export async function loader({
+  params,
+}: LoaderFunctionArgs): Promise<FeedbackDetails> {
+  const feedback = await getFeedbackById(Number(params.feedbackId));
+  if (!feedback) {
+    throw new Response("", {
+      status: 404,
+      statusText: "Not Found",
+    });
+  }
+
+  return feedback;
+}
 
 function FeedbackDetailsPage() {
-  const { feedbackId } = useParams();
-  const [feedback, setFeedback] = useState<FeedbackDetails | null>(null);
-
-  useEffect(() => {
-    const feedbackResponse = getFeedbackById(Number(feedbackId));
-    setFeedback(feedbackResponse);
-  }, []);
+  const _feedback = useLoaderData() as FeedbackDetails;
+  const [feedback, setFeedback] = useState<FeedbackDetails | null>(_feedback); // TODO: remove this after implementing an action or using useFetcher
 
   const handleToggleVote = () => {
     if (feedback === null) {
@@ -52,11 +63,17 @@ function FeedbackDetailsPage() {
         <div className={styles.content}>
           <FeedbackCard feedback={feedback} onToggleVote={handleToggleVote} />
 
-          {feedback.comments && feedback.commentCount > 0 ? (
+          {feedback?.comments && feedback.commentCount > 0 ? (
             <Card className={styles.comments}>
               <h3>{feedback.commentCount} Comments</h3>
               {feedback.comments.map((comment) => {
-                return <Comment comment={comment} className={styles.comment} />;
+                return (
+                  <Comment
+                    key={comment.id}
+                    comment={comment}
+                    className={styles.comment}
+                  />
+                );
               })}
             </Card>
           ) : null}
