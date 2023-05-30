@@ -5,7 +5,7 @@
     "username": "velvetround",
     "votes": [
       { "productRequestId": 1, "voted": "up" },
-      { "productRequestId": 2, "voted": "down" }
+      { "productRequestId": 2, "voted": "up" }
     ]
   },
   "productRequests": [
