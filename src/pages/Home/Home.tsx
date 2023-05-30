@@ -1,12 +1,12 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { useLoaderData } from "react-router-dom";
+import { CurrentUser, Feedback, Vote } from "src/interfaces/Feedback";
 import { ReactComponent as ChevronIcon } from "@assets/chevron-icon.svg";
 import Button from "@components/Button";
-import styles from "./home.module.css";
 import Sidebar from "@components/Sidebar";
 import EmptyFeedback from "@components/EmptyFeedback";
-import { Feedback } from "src/interfaces/Feedback";
 import FeedbackCard from "@components/FeedbackCard";
-import { getFeedbackList } from "@api/FeedbackAPI";
+import styles from "./home.module.css";
 
 // Next tasks
 // 1. Create Card component [DONE]
@@ -23,36 +23,23 @@ import { getFeedbackList } from "@api/FeedbackAPI";
 // 9. Install and configure ESLint
 // 10. Define naming convention for event handler props and event handler functions
 // 11. Read and define convention on how to use size units in the project (CSS).
-
-// TODO: Get this from some API or from localStorage
+// 12. How to type rr6 loaders ? https://github.com/remix-run/react-router/discussions/9792
+// 13. Use Context API to share the current user data
+// 14. Maybe change everything to be called ProductRequest instead of Feedback ?
+// 15. Document the order in which imports should be done
 
 function HomePage() {
-  const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [feedbackList, setFeedbackList] = useState<Feedback[]>([]);
+  const { currentUser, feedbackList } = useLoaderData() as {
+    currentUser: CurrentUser;
+    feedbackList: Feedback[];
+  };
+  console.log(currentUser, feedbackList);
 
-  useEffect(() => {
-    setFeedbackList(getFeedbackList());
-  }, []);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const userVotes = currentUser.votes ?? [];
 
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
-  };
-
-  const handleToggleVote = (id: number) => {
-    const updatedList = feedbackList.map((feedback) => {
-      if (feedback.id === id) {
-        return {
-          ...feedback,
-          upVoteCount: feedback.upVoted
-            ? feedback.upVoteCount - 1
-            : feedback.upVoteCount + 1,
-          upVoted: !feedback.upVoted,
-        };
-      }
-      return feedback;
-    });
-    setFeedbackList(updatedList);
-    // TODO: Update in API or localstorage
   };
 
   return (
@@ -86,7 +73,8 @@ function HomePage() {
                 key={feedback.id}
                 feedback={feedback}
                 redirectTo={`feedback/${feedback.id}`}
-                onToggleVote={handleToggleVote}
+                upVoted={isFeedbackUpVoted(userVotes, feedback.id)}
+                // onToggleVote={handleToggleVote}
               />
             ))
           )}
@@ -94,6 +82,13 @@ function HomePage() {
       </main>
     </>
   );
+}
+
+// TODO: Move this unot a utils module maybe?
+function isFeedbackUpVoted(userVotes: Vote[], feedbackId: number): boolean {
+  console.log(userVotes, feedbackId);
+
+  return userVotes.some((vote) => vote.productRequestId === feedbackId);
 }
 
 export default HomePage;
