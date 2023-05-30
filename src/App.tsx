@@ -1,7 +1,8 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import RootRoute from "./routes";
+import RootRoute, { loader as homeLoader } from "./routes";
 import FeedbackDetailsRoute, {
-  loader as feedbackLoader,
+  loader as feedbackDetailsLoader,
+  action as feedbackDetailsAction,
 } from "./routes/feedback";
 import FeedbackNewRoute from "./routes/feedback/new";
 import FeedbackEditRoute from "./routes/feedback/edit";
@@ -12,6 +13,7 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <RootRoute />,
+    loader: homeLoader,
   },
   {
     path: "/feedback/new",
@@ -20,7 +22,8 @@ const router = createBrowserRouter([
   {
     path: "/feedback/:feedbackId",
     element: <FeedbackDetailsRoute />,
-    loader: feedbackLoader,
+    loader: feedbackDetailsLoader,
+    action: feedbackDetailsAction,
   },
   {
     path: "/feedback/:feedbackId/edit",
