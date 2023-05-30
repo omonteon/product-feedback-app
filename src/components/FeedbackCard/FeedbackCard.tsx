@@ -8,7 +8,7 @@ import styles from "./feedbackCard.module.css";
 interface FeedbackCardProps {
   feedback: Feedback;
   redirectTo?: string;
-  onToggleVote: (id: number) => void;
+  upVoted?: boolean;
 }
 
 // TODO: Style the content
@@ -16,27 +16,16 @@ interface FeedbackCardProps {
 function FeedbackCard({
   feedback,
   redirectTo,
-  onToggleVote,
+  upVoted = false,
 }: FeedbackCardProps) {
   const {
-    id,
     title = "",
     description = "",
-    tag = "Enhancement",
-    upVoteCount = 0,
+    category = "Enhancement",
+    upvotes = 0,
     commentCount = 0,
-    upVoted = false,
   } = feedback;
 
-  // ??: Where should you put handlers ?
-  // ??: Should there be arrow funcs or funcs declarations ?
-  // const handleToggleVote = () => {
-
-  // }
-
-  // TODO: Let the card be clickable to take to another route, but
-  // at the same time, let clickable child elements be interactive
-  // without taking you to another route
   return (
     <Card
       to={redirectTo}
@@ -44,13 +33,12 @@ function FeedbackCard({
     >
       <h4>{title}</h4>
       <p>{description}</p>
-      <Tag className={styles.feedbackCardTag}>{tag}</Tag>
+      <Tag className={styles.feedbackCardTag}>{category}</Tag>
       <footer>
         <VoteButton
           className={`${upVoted ? styles.upVoted : ""}`}
           upVoted={upVoted}
-          count={upVoteCount}
-          onChange={() => onToggleVote(id)}
+          count={upvotes}
         />
         <CommentCount count={commentCount} />
       </footer>
