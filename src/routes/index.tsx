@@ -1,6 +1,6 @@
 import { CurrentUser, Feedback } from "src/interfaces/Feedback";
-import HomePage from "../pages/Home";
 import { getFeedbackList, getCurrentUser } from "@api/FeedbackAPI";
+import HomePage from "../pages/Home";
 
 interface HomeData {
   feedbackList: Feedback[];
