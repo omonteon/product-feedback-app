@@ -9,12 +9,11 @@ export type FeedbackTag =
 export interface Feedback {
   id: number;
   title: string;
+  category: FeedbackTag;
+  upvotes: number;
+  status: string;
   description: string;
-  tag: FeedbackTag;
-  status: string; // TODO: Create type with different status
-  upVoteCount: number;
   commentCount: number;
-  upVoted: boolean;
 }
 
 export interface FeedbackDetails extends Feedback {
@@ -36,7 +35,7 @@ export interface CurrentUser {
   image: string;
   name: string;
   username: string;
-  votes?: Vote[]; // Array of votes made by the user
+  votes?: Vote[];
 }
 
 export interface Comment {
