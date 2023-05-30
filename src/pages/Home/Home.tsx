@@ -33,7 +33,6 @@ function HomePage() {
     currentUser: CurrentUser;
     feedbackList: Feedback[];
   };
-  console.log(currentUser, feedbackList);
 
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const userVotes = currentUser.votes ?? [];
@@ -74,7 +73,6 @@ function HomePage() {
                 feedback={feedback}
                 redirectTo={`feedback/${feedback.id}`}
                 upVoted={isFeedbackUpVoted(userVotes, feedback.id)}
-                // onToggleVote={handleToggleVote}
               />
             ))
           )}
@@ -86,8 +84,6 @@ function HomePage() {
 
 // TODO: Move this unot a utils module maybe?
 function isFeedbackUpVoted(userVotes: Vote[], feedbackId: number): boolean {
-  console.log(userVotes, feedbackId);
-
   return userVotes.some((vote) => vote.productRequestId === feedbackId);
 }
 
