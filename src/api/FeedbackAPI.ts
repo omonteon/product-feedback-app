@@ -75,6 +75,26 @@ async function updateFeedbackById(
   return productRequestItem as FeedbackDetails;
 }
 
+async function updateCurrentUser(
+  currentUserUpdated: CurrentUser
+): Promise<CurrentUser> {
+  const dataStr: string = localStorage.getItem("data") ?? "";
+  const data: FeedbackAPIResponse = JSON.parse(dataStr ?? "");
+  const currentUser = data.currentUser;
+
+  Object.assign(currentUser, currentUserUpdated);
+  localStorage.setItem("data", JSON.stringify({ ...data, currentUser }));
+  // TODO: Implement rejection too
+  // return new Promise((resolve, reject) => {
+  //   setTimeout(() => {
+  //     resolve(productRequestItem as FeedbackDetails);
+  //   }, 1000);
+  // });
+  return currentUser;
+}
+
+// Adapters
+
 function adaptProductRequestToFeedbackDetails(
   productRequest: ProductRequest
 ): FeedbackDetails {
@@ -113,4 +133,10 @@ function adaptProductRequestsToFeedbackList(
     return adaptProductRequestToFeedback(productRequest);
   });
 }
-export { getFeedbackList, getCurrentUser, getFeedbackById, updateFeedbackById };
+export {
+  getFeedbackList,
+  getCurrentUser,
+  getFeedbackById,
+  updateFeedbackById,
+  updateCurrentUser,
+};
