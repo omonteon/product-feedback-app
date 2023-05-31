@@ -11,8 +11,6 @@ interface FeedbackCardProps {
   upVoted?: boolean;
 }
 
-// TODO: Style the content
-// TODO: Add upvote component and comment component
 function FeedbackCard({
   feedback,
   redirectTo,

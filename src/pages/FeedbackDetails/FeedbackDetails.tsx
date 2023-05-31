@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { Link, useLoaderData, Params } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 import { FeedbackDetails, Vote } from "src/interfaces/Feedback";
 import { ReactComponent as ChevronLeftIcon } from "@assets/chevron-left-icon.svg";
 import FeedbackCard from "@components/FeedbackCard";
