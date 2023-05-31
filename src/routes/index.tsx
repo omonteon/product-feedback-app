@@ -1,5 +1,11 @@
+import { ActionFunctionArgs } from "react-router-dom";
 import { CurrentUser, Feedback } from "src/interfaces/Feedback";
-import { getFeedbackList, getCurrentUser } from "@api/FeedbackAPI";
+import {
+  getFeedbackList,
+  getCurrentUser,
+  updateFeedbackById,
+  updateCurrentUser,
+} from "@api/FeedbackAPI";
 import HomePage from "../pages/Home";
 
 interface HomeData {
@@ -18,6 +24,28 @@ export async function loader(): Promise<HomeData> {
   }
 
   return { feedbackList, currentUser };
+}
+
+export async function action({ request }: ActionFunctionArgs) {
+  let formData = await request.formData();
+  const feedbackId = Number(formData.get("feedbackId"));
+  // TODO: Maybe we can get the "checked" property ??
+  const upVoted = formData.get("upVoted") === "true";
+  const currentUser = await getCurrentUser();
+  // TODO: I don't think this could should be here...
+  const updatedCurrentUser = {
+    ...currentUser,
+    votes: upVoted
+      ? currentUser.votes?.concat({ productRequestId: feedbackId, voted: "up" })
+      : currentUser.votes?.filter(
+          (vote) => vote.productRequestId !== feedbackId
+        ),
+  };
+  await updateCurrentUser(updatedCurrentUser);
+
+  return updateFeedbackById(feedbackId, {
+    upvotes: Number(formData.get("upvotes")),
+  } as Feedback);
 }
 
 export default function RootRoute() {

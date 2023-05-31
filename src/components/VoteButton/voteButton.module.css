@@ -21,6 +21,15 @@
   outline: 2px solid var(--accent-orange);
 }
 
+.voteButton:has(:checked) {
+  background-color: var(--primary-blue);
+  color: white;
+}
+
+.voteButton:has(:checked) path {
+  stroke: white;
+}
+
 .upVoteIcon {
   transform: rotate(180deg);
 }

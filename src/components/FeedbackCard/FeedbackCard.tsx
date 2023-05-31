@@ -19,6 +19,7 @@ function FeedbackCard({
   upVoted = false,
 }: FeedbackCardProps) {
   const {
+    id,
     title = "",
     description = "",
     category = "Enhancement",
@@ -35,11 +36,7 @@ function FeedbackCard({
       <p>{description}</p>
       <Tag className={styles.feedbackCardTag}>{category}</Tag>
       <footer>
-        <VoteButton
-          className={`${upVoted ? styles.upVoted : ""}`}
-          upVoted={upVoted}
-          count={upvotes}
-        />
+        <VoteButton feedbackId={id} upVoted={upVoted} count={upvotes} />
         <CommentCount count={commentCount} />
       </footer>
     </Card>

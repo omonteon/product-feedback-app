@@ -9,15 +9,6 @@
 .feedbackCardTag {
   margin-bottom: 1rem;
 }
-/* TODO: Investigate why I need to specify label here to not be overriden */
-label.upVoted {
-  background-color: var(--primary-blue);
-  color: white;
-}
-
-label.upVoted path {
-  stroke: white;
-}
 
 .feedbackCard footer {
   display: flex;

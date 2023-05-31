@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Link, useLoaderData, Params } from "react-router-dom";
-import { getFeedbackById, updateFeedbackById } from "@api/FeedbackAPI";
-import { Feedback, FeedbackDetails } from "src/interfaces/Feedback";
+import { FeedbackDetails, Vote } from "src/interfaces/Feedback";
 import { ReactComponent as ChevronLeftIcon } from "@assets/chevron-left-icon.svg";
 import FeedbackCard from "@components/FeedbackCard";
 import styles from "./feedbackDetails.module.css";
@@ -11,7 +10,10 @@ import Comment from "@components/Comment";
 import AddComment from "@components/AddComment";
 
 function FeedbackDetailsPage() {
-  const feedback = useLoaderData() as FeedbackDetails;
+  const { userVotes, feedback } = useLoaderData() as {
+    userVotes: Vote[];
+    feedback: FeedbackDetails;
+  };
 
   return (
     <main className={styles.feedbackDetails}>
@@ -28,7 +30,10 @@ function FeedbackDetailsPage() {
         <>Issue retrieving details</>
       ) : (
         <div className={styles.content}>
-          <FeedbackCard feedback={feedback} />
+          <FeedbackCard
+            feedback={feedback}
+            upVoted={isFeedbackUpVoted(userVotes, feedback.id)}
+          />
 
           {feedback?.comments && feedback.comments.length > 0 ? (
             <Card className={styles.comments}>
@@ -49,6 +54,11 @@ function FeedbackDetailsPage() {
       <AddComment className={styles.addComment} />
     </main>
   );
+}
+
+// TODO: Move this unot a utils module maybe?
+function isFeedbackUpVoted(userVotes: Vote[], feedbackId: number): boolean {
+  return userVotes.some((vote) => vote.productRequestId === feedbackId);
 }
 
 export default FeedbackDetailsPage;
