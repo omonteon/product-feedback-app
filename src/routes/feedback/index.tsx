@@ -34,7 +34,7 @@ export async function loader({
 
 export async function action({ request, params }: ActionFunctionArgs) {
   const feedbackId = Number(params.feedbackId);
-  let formData = await request.formData();
+  const formData = await request.formData();
 
   // TODO: Maybe we can get the "checked" property ??
   const upVoted = formData.get("upVoted") === "true";
