@@ -1,4 +1,3 @@
-import { SubmitOptions } from "react-router-dom";
 import { ReactComponent as ChevronIcon } from "@assets/chevron-icon.svg";
 import styles from "./voteButton.module.css";
 import { useFetcher } from "react-router-dom";
