@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { useLoaderData } from "react-router-dom";
+import { Suspense, useState } from "react";
+import { Await, useLoaderData } from "react-router-dom";
 import { CurrentUser, Feedback, Vote } from "src/interfaces/Feedback";
 import { ReactComponent as ChevronIcon } from "@assets/chevron-icon.svg";
 import Button from "@components/Button";
@@ -7,6 +7,8 @@ import Sidebar from "@components/Sidebar";
 import EmptyFeedback from "@components/EmptyFeedback";
 import FeedbackCard from "@components/FeedbackCard";
 import styles from "./home.module.css";
+import Skeleton from "@components/Skeleton";
+import Card from "@components/Card";
 
 // Next tasks
 // 1. Create Card component [DONE]
@@ -19,23 +21,23 @@ import styles from "./home.module.css";
 // 5. Implement Roadmap card component [DONE]
 // 6. Implement DropDown component [PENDING]
 // 7. Implement empty home card component [DONE]
-// 8. Rename all index.tsx files to index.ts because they don't contain jsx
-// 9. Install and configure ESLint
-// 10. Define naming convention for event handler props and event handler functions
+// 8. Rename all index.tsx files to index.ts because they don't contain jsx [DONE]
+// 9. Install and configure ESLint [DONE]
+// 10. Define naming convention for event handler props and event handler functions.
 // 11. Read and define convention on how to use size units in the project (CSS).
-// 12. How to type rr6 loaders ? https://github.com/remix-run/react-router/discussions/9792
+// 12. How to type rr6 loaders ? https://github.com/remix-run/react-router/discussions/9792 [DONE]
 // 13. Use Context API to share the current user data
 // 14. Maybe change everything to be called ProductRequest instead of Feedback ?
 // 15. Document the order in which imports should be done
 
 function HomePage() {
-  const { currentUser, feedbackList } = useLoaderData() as {
-    currentUser: CurrentUser;
-    feedbackList: Feedback[];
+  const data = useLoaderData();
+  const { currentUserPromise, feedbackListPromise } = data as {
+    currentUserPromise: Promise<CurrentUser>;
+    feedbackListPromise: Promise<Feedback[]>;
   };
 
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const userVotes = currentUser.votes ?? [];
 
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
@@ -63,20 +65,45 @@ function HomePage() {
             + Add Feedback
           </Button>
         </header>
-        <section className={styles.mainContent}>
-          {feedbackList.length === 0 ? (
-            <EmptyFeedback />
-          ) : (
-            feedbackList.map((feedback) => (
-              <FeedbackCard
-                key={feedback.id}
-                feedback={feedback}
-                redirectTo={`feedback/${feedback.id}`}
-                upVoted={isFeedbackUpVoted(userVotes, feedback.id)}
-              />
-            ))
-          )}
-        </section>
+        <Suspense
+          fallback={
+            <Card>
+              <Skeleton />
+            </Card>
+          }
+        >
+          <Await
+            resolve={feedbackListPromise}
+            errorElement={<p>Error loading home data</p>}
+          >
+            {(feedbackList: Feedback[]) => (
+              <Await
+                resolve={currentUserPromise}
+                errorElement={<p>Error loading home data</p>}
+              >
+                {(currentUser: CurrentUser) => (
+                  <section className={styles.mainContent}>
+                    {feedbackList?.length === 0 ? (
+                      <EmptyFeedback />
+                    ) : (
+                      feedbackList?.map((feedback) => (
+                        <FeedbackCard
+                          key={feedback.id}
+                          feedback={feedback}
+                          redirectTo={`feedback/${feedback.id}`}
+                          upVoted={isFeedbackUpVoted(
+                            currentUser.votes ?? [],
+                            feedback.id
+                          )}
+                        />
+                      ))
+                    )}
+                  </section>
+                )}
+              </Await>
+            )}
+          </Await>
+        </Suspense>
       </main>
     </>
   );

@@ -1,5 +1,5 @@
-import { ActionFunctionArgs } from "react-router-dom";
-import { CurrentUser, Feedback } from "src/interfaces/Feedback";
+import { ActionFunctionArgs, defer } from "react-router-dom";
+import { Feedback } from "src/interfaces/Feedback";
 import {
   getFeedbackList,
   getCurrentUser,
@@ -8,22 +8,14 @@ import {
 } from "@api/FeedbackAPI";
 import HomePage from "../pages/Home";
 
-interface HomeData {
-  feedbackList: Feedback[];
-  currentUser: CurrentUser;
-}
+export async function loader() {
+  const feedbackListPromise = getFeedbackList();
+  const currentUserPromise = getCurrentUser();
 
-export async function loader(): Promise<HomeData> {
-  const feedbackList = await getFeedbackList();
-  const currentUser = await getCurrentUser();
-  if (!feedbackList) {
-    throw new Response("", {
-      status: 404,
-      statusText: "Not Found",
-    });
-  }
-
-  return { feedbackList, currentUser };
+  return defer({
+    feedbackListPromise,
+    currentUserPromise,
+  });
 }
 
 export async function action({ request }: ActionFunctionArgs) {
