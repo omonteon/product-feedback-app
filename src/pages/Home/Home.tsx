@@ -67,9 +67,11 @@ function HomePage() {
         </header>
         <Suspense
           fallback={
-            <Card>
-              <Skeleton />
-            </Card>
+            <div className={styles.loadingList}>
+              <Card>
+                <Skeleton />
+              </Card>
+            </div>
           }
         >
           <Await

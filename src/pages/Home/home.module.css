@@ -50,3 +50,7 @@
   flex-direction: column;
   row-gap: 1rem;
 }
+
+.loadingList {
+  margin: 2rem 1.5rem;
+}
