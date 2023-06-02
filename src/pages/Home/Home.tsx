@@ -29,6 +29,9 @@ import Card from "@components/Card";
 // 13. Use Context API to share the current user data
 // 14. Maybe change everything to be called ProductRequest instead of Feedback ?
 // 15. Document the order in which imports should be done
+// 16. Configure testing enviroment
+// 17. Add "Page" suffix at the end of page components
+// 18. Improve how icons are imported
 
 function HomePage() {
   const data = useLoaderData();
@@ -61,9 +64,7 @@ function HomePage() {
               Most Upvotes <ChevronIcon />{" "}
             </b>
           </p>
-          <Button onClick={() => console.log("Add Feedback")}>
-            + Add Feedback
-          </Button>
+          <Button to="/feedback/new">+ Add Feedback</Button>
         </header>
         <Suspense
           fallback={
@@ -78,9 +79,11 @@ function HomePage() {
             resolve={feedbackListPromise}
             errorElement={<p>Error loading home data</p>}
           >
+            {/* TODO: Refactor this to use hook instead of render props */}
             {(feedbackList: Feedback[]) => (
               <Await
                 resolve={currentUserPromise}
+                // TODO: Create a better error element
                 errorElement={<p>Error loading home data</p>}
               >
                 {(currentUser: CurrentUser) => (
