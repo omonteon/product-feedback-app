@@ -1,7 +1,3 @@
-import React from "react";
-
-function FeedbackNewPage() {
-  return <div>FeedbackNewPage</div>;
-}
+import FeedbackNewPage from "./FeedbackNew";
 
 export default FeedbackNewPage;
