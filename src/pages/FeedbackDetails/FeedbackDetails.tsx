@@ -2,11 +2,11 @@ import { Link, useLoaderData } from "react-router-dom";
 import { FeedbackDetails, Vote } from "src/interfaces/Feedback";
 import { ReactComponent as ChevronLeftIcon } from "@assets/chevron-left-icon.svg";
 import FeedbackCard from "@components/FeedbackCard";
-import styles from "./feedbackDetails.module.css";
 import Button from "@components/Button";
 import Card from "@components/Card";
 import Comment from "@components/Comment";
 import AddComment from "@components/AddComment";
+import styles from "./feedbackDetails.module.css";
 
 function FeedbackDetailsPage() {
   const { userVotes, feedback } = useLoaderData() as {
