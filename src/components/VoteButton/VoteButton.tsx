@@ -25,6 +25,8 @@ function VoteButton({
     voteCount = formUpvotes;
   }
 
+  // FIXME: When you click/tap the padding of the label, it does not trigger the checkbox
+
   return (
     <label className={`${styles.voteButton} ${className}`}>
       <ChevronIcon className={styles.upVoteIcon} />
