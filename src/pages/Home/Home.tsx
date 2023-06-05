@@ -1,5 +1,5 @@
 import { Suspense, useState } from "react";
-import { Await, useLoaderData } from "react-router-dom";
+import { Await, useAsyncValue, useLoaderData } from "react-router-dom";
 import { CurrentUser, Feedback, Vote } from "src/interfaces/Feedback";
 import { ReactComponent as ChevronIcon } from "@assets/chevron-icon.svg";
 import Button from "@components/Button";
@@ -32,14 +32,15 @@ import Card from "@components/Card";
 // 16. Configure testing enviroment
 // 17. Add "Page" suffix at the end of page components
 // 18. Improve how icons are imported
+// 19. Create custom hooks
+
+type HomeDataTuple = [Feedback[], CurrentUser];
+type HomeData = {
+  data: HomeDataTuple;
+};
 
 function HomePage() {
-  const data = useLoaderData();
-  const { currentUserPromise, feedbackListPromise } = data as {
-    currentUserPromise: Promise<CurrentUser>;
-    feedbackListPromise: Promise<Feedback[]>;
-  };
-
+  const { data } = useLoaderData() as HomeData;
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const toggleSidebar = () => {
@@ -75,42 +76,33 @@ function HomePage() {
             </div>
           }
         >
-          <Await
-            resolve={feedbackListPromise}
-            errorElement={<p>Error loading home data</p>}
-          >
-            {/* TODO: Refactor this to use hook instead of render props */}
-            {(feedbackList: Feedback[]) => (
-              <Await
-                resolve={currentUserPromise}
-                // TODO: Create a better error element
-                errorElement={<p>Error loading home data</p>}
-              >
-                {(currentUser: CurrentUser) => (
-                  <section className={styles.mainContent}>
-                    {feedbackList?.length === 0 ? (
-                      <EmptyFeedback />
-                    ) : (
-                      feedbackList?.map((feedback) => (
-                        <FeedbackCard
-                          key={feedback.id}
-                          feedback={feedback}
-                          redirectTo={`feedback/${feedback.id}`}
-                          upVoted={isFeedbackUpVoted(
-                            currentUser.votes ?? [],
-                            feedback.id
-                          )}
-                        />
-                      ))
-                    )}
-                  </section>
-                )}
-              </Await>
-            )}
+          <Await resolve={data} errorElement={<p>Error loading home data</p>}>
+            <FeedbackList />
           </Await>
         </Suspense>
       </main>
     </>
+  );
+}
+
+function FeedbackList() {
+  const [feedbackList, currentUser] = useAsyncValue() as HomeDataTuple;
+
+  return (
+    <section className={styles.mainContent}>
+      {feedbackList?.length === 0 ? (
+        <EmptyFeedback />
+      ) : (
+        feedbackList?.map((feedback) => (
+          <FeedbackCard
+            key={feedback.id}
+            feedback={feedback}
+            redirectTo={`feedback/${feedback.id}`}
+            upVoted={isFeedbackUpVoted(currentUser.votes ?? [], feedback.id)}
+          />
+        ))
+      )}
+    </section>
   );
 }
 

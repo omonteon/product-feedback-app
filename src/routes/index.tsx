@@ -13,8 +13,7 @@ export async function loader() {
   const currentUserPromise = getCurrentUser();
 
   return defer({
-    feedbackListPromise,
-    currentUserPromise,
+    data: Promise.all([feedbackListPromise, currentUserPromise]),
   });
 }
 
