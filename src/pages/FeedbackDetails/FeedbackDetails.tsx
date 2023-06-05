@@ -1,5 +1,9 @@
-import { Link, useLoaderData } from "react-router-dom";
-import { FeedbackDetails, Vote } from "src/interfaces/Feedback";
+import { Await, Link, useAsyncValue, useLoaderData } from "react-router-dom";
+import {
+  CurrentUser,
+  FeedbackDetails as IFeedbackDetails,
+  Vote,
+} from "src/interfaces/Feedback";
 import { ReactComponent as ChevronLeftIcon } from "@assets/chevron-left-icon.svg";
 import FeedbackCard from "@components/FeedbackCard";
 import Button from "@components/Button";
@@ -7,12 +11,16 @@ import Card from "@components/Card";
 import Comment from "@components/Comment";
 import AddComment from "@components/AddComment";
 import styles from "./feedbackDetails.module.css";
+import { Suspense } from "react";
+import Skeleton from "@components/Skeleton";
+
+type FeedbackDetailsDataTuple = [IFeedbackDetails, CurrentUser];
+type FeedbackDetailsData = {
+  data: FeedbackDetailsDataTuple;
+};
 
 function FeedbackDetailsPage() {
-  const { userVotes, feedback } = useLoaderData() as {
-    userVotes: Vote[];
-    feedback: FeedbackDetails;
-  };
+  const { data } = useLoaderData() as FeedbackDetailsData;
 
   return (
     <main className={styles.feedbackDetails}>
@@ -25,33 +33,50 @@ function FeedbackDetailsPage() {
           Edit Feedback
         </Button>
       </header>
-      {feedback === null ? (
-        <>Issue retrieving details</>
-      ) : (
-        <div className={styles.content}>
-          <FeedbackCard
-            feedback={feedback}
-            upVoted={isFeedbackUpVoted(userVotes, feedback.id)}
-          />
-
-          {feedback?.comments && feedback.comments.length > 0 ? (
-            <Card className={styles.comments}>
-              <h3>{feedback.comments.length} Comments</h3>
-              {feedback.comments.map((comment) => {
-                return (
-                  <Comment
-                    key={comment.id}
-                    comment={comment}
-                    className={styles.comment}
-                  />
-                );
-              })}
+      <Suspense
+        fallback={
+          <div className={styles.loadingList}>
+            <Card>
+              <Skeleton />
             </Card>
-          ) : null}
-        </div>
-      )}
+          </div>
+        }
+      >
+        <Await resolve={data} errorElement={<p>Error loading home data</p>}>
+          <FeedbackDetails />
+        </Await>
+      </Suspense>
       <AddComment className={styles.addComment} />
     </main>
+  );
+}
+
+function FeedbackDetails() {
+  const [feedback, currentUser] = useAsyncValue() as FeedbackDetailsDataTuple;
+  const userVotes = currentUser.votes ?? [];
+
+  return (
+    <div className={styles.content}>
+      <FeedbackCard
+        feedback={feedback}
+        upVoted={isFeedbackUpVoted(userVotes, feedback.id)}
+      />
+
+      {feedback?.comments && feedback.comments.length > 0 ? (
+        <Card className={styles.comments}>
+          <h3>{feedback.comments.length} Comments</h3>
+          {feedback.comments.map((comment) => {
+            return (
+              <Comment
+                key={comment.id}
+                comment={comment}
+                className={styles.comment}
+              />
+            );
+          })}
+        </Card>
+      ) : null}
+    </div>
   );
 }
 

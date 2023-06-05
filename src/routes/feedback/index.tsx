@@ -1,5 +1,5 @@
-import { Params, ActionFunctionArgs } from "react-router-dom";
-import { FeedbackDetails, Feedback, Vote } from "src/interfaces/Feedback";
+import { Params, ActionFunctionArgs, defer } from "react-router-dom";
+import { Feedback } from "src/interfaces/Feedback";
 import {
   getCurrentUser,
   getFeedbackById,
@@ -12,24 +12,11 @@ interface LoaderFunctionArgs {
   params: Params;
 }
 
-interface LoaderFunctionReturn {
-  userVotes: Vote[];
-  feedback: FeedbackDetails;
-}
+export async function loader({ params }: LoaderFunctionArgs) {
+  const feedback = getFeedbackById(Number(params.feedbackId));
+  const currentUser = getCurrentUser();
 
-export async function loader({
-  params,
-}: LoaderFunctionArgs): Promise<LoaderFunctionReturn> {
-  const feedback = await getFeedbackById(Number(params.feedbackId));
-  const currentUser = await getCurrentUser();
-  if (!feedback || !currentUser) {
-    throw new Response("", {
-      status: 404,
-      statusText: "Not Found",
-    });
-  }
-
-  return { userVotes: currentUser.votes ?? [], feedback };
+  return defer({ data: Promise.all([feedback, currentUser]) });
 }
 
 export async function action({ request, params }: ActionFunctionArgs) {
