@@ -33,6 +33,7 @@ import Card from "@components/Card";
 // 17. Add "Page" suffix at the end of page components
 // 18. Improve how icons are imported
 // 19. Create custom hooks
+// 20. Make a schema for the forms (https://www.taniarascia.com/schema-based-form-system/)
 
 type HomeDataTuple = [Feedback[], CurrentUser];
 type HomeData = {
@@ -54,6 +55,7 @@ function HomePage() {
           <h1>Frontend Mentor</h1>
           <h2>Feedback board</h2>
         </div>
+        {/* TODO: Fix keyboard navigation which enters the sidebar when is hidden */}
         <Sidebar open={sidebarOpen} toggle={toggleSidebar} />
       </header>
       <main className={styles.main}>
