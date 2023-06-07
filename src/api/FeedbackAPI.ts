@@ -94,16 +94,22 @@ async function updateCurrentUser(
 }
 
 export async function addNewFeedback(
-  feedback: ProductRequest
+  feedback: Feedback
 ): Promise<ProductRequest> {
   const dataStr: string = localStorage.getItem("data") ?? "";
   const data: FeedbackAPIResponse = JSON.parse(dataStr ?? "");
   const productRequests: ProductRequest[] = data.productRequests;
-  const feedbackList = [feedback, ...productRequests];
+  const productRequest = {
+    ...feedback,
+    comments: [],
+  } as ProductRequest;
 
   localStorage.setItem(
     "data",
-    JSON.stringify({ ...data, productRequests: feedbackList })
+    JSON.stringify({
+      ...data,
+      productRequests: [productRequest, ...productRequests],
+    })
   );
   // TODO: Implement rejection too
   return new Promise((resolve, reject) => {
