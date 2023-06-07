@@ -4,13 +4,13 @@
     "name": "Zena Kelley",
     "username": "velvetround",
     "votes": [
-      { "productRequestId": 1, "voted": "up" },
-      { "productRequestId": 2, "voted": "up" }
+      { "productRequestId": "1", "voted": "up" },
+      { "productRequestId": "2", "voted": "up" }
     ]
   },
   "productRequests": [
     {
-      "id": 1,
+      "id": "1",
       "title": "Add tags for solutions",
       "category": "enhancement",
       "upvotes": 112,
@@ -18,7 +18,7 @@
       "description": "Easier to search for solutions based on a specific stack.",
       "comments": [
         {
-          "id": 1,
+          "id": "1",
           "content": "Awesome idea! Trying to find framework-specific projects within the hubs can be tedious",
           "user": {
             "image": "./assets/user-images/image-suzanne.jpg",
@@ -27,7 +27,7 @@
           }
         },
         {
-          "id": 2,
+          "id": "2",
           "content": "Please use fun, color-coded labels to easily identify them at a glance",
           "user": {
             "image": "./assets/user-images/image-thomas.jpg",
@@ -38,7 +38,7 @@
       ]
     },
     {
-      "id": 2,
+      "id": "2",
       "title": "Add a dark theme option",
       "category": "feature",
       "upvotes": 99,
@@ -46,7 +46,7 @@
       "description": "It would help people with light sensitivities and who prefer dark mode.",
       "comments": [
         {
-          "id": 3,
+          "id": "3",
           "content": "Also, please allow styles to be applied based on system preferences. I would love to be able to browse Frontend Mentor in the evening after my device’s dark mode turns on without the bright background it currently has.",
           "user": {
             "image": "./assets/user-images/image-elijah.jpg",
@@ -55,7 +55,7 @@
           }
         },
         {
-          "id": 4,
+          "id": "4",
           "content": "Second this! I do a lot of late night coding and reading. Adding a dark theme can be great for preventing eye strain and the headaches that result. It’s also quite a trend with modern apps and  apparently saves battery life.",
           "user": {
             "image": "./assets/user-images/image-james.jpg",
@@ -86,7 +86,7 @@
       ]
     },
     {
-      "id": 3,
+      "id": "3",
       "title": "Q&A within the challenge hubs",
       "category": "feature",
       "upvotes": 65,
@@ -94,7 +94,7 @@
       "description": "Challenge-specific Q&A would make for easy reference.",
       "comments": [
         {
-          "id": 5,
+          "id": "5",
           "content": "Much easier to get answers from devs who can relate, since they've either finished the challenge themselves or are in the middle of it.",
           "user": {
             "image": "./assets/user-images/image-george.jpg",
@@ -105,7 +105,7 @@
       ]
     },
     {
-      "id": 4,
+      "id": "4",
       "title": "Add image/video upload to feedback",
       "category": "enhancement",
       "upvotes": 51,
@@ -113,7 +113,7 @@
       "description": "Images and screencasts can enhance comments on solutions.",
       "comments": [
         {
-          "id": 6,
+          "id": "6",
           "content": "Right now, there is no ability to add images while giving feedback which isn't ideal because I have to use another app to show what I mean",
           "user": {
             "image": "./assets/user-images/image-javier.jpg",
@@ -122,7 +122,7 @@
           }
         },
         {
-          "id": 7,
+          "id": "7",
           "content": "Yes I'd like to see this as well. Sometimes I want to add a short video or gif to explain the site's behavior..",
           "user": {
             "image": "./assets/user-images/image-roxanne.jpg",
@@ -133,7 +133,7 @@
       ]
     },
     {
-      "id": 5,
+      "id": "5",
       "title": "Ability to follow others",
       "category": "feature",
       "upvotes": 42,
@@ -141,7 +141,7 @@
       "description": "Stay updated on comments and solutions other people post.",
       "comments": [
         {
-          "id": 8,
+          "id": "8",
           "content": "I also want to be notified when devs I follow submit projects on FEM. Is in-app notification also in the pipeline?",
           "user": {
             "image": "./assets/user-images/image-victoria.jpg",
@@ -161,7 +161,7 @@
           ]
         },
         {
-          "id": 9,
+          "id": "9",
           "content": "I've been saving the profile URLs of a few people and I check what they’ve been doing from time to time. Being able to follow them solves that",
           "user": {
             "image": "./assets/user-images/image-jackson.jpg",
@@ -172,7 +172,7 @@
       ]
     },
     {
-      "id": 6,
+      "id": "6",
       "title": "Preview images not loading",
       "category": "bug",
       "upvotes": 3,
@@ -180,7 +180,7 @@
       "description": "Challenge preview images are missing when you apply a filter."
     },
     {
-      "id": 7,
+      "id": "7",
       "title": "More comprehensive reports",
       "category": "feature",
       "upvotes": 123,
@@ -208,7 +208,7 @@
       ]
     },
     {
-      "id": 8,
+      "id": "8",
       "title": "Learning paths",
       "category": "feature",
       "upvotes": 28,
@@ -227,7 +227,7 @@
       ]
     },
     {
-      "id": 9,
+      "id": "9",
       "title": "One-click portfolio generation",
       "category": "feature",
       "upvotes": 62,
@@ -246,7 +246,7 @@
       ]
     },
     {
-      "id": 10,
+      "id": "10",
       "title": "Bookmark challenges",
       "category": "feature",
       "upvotes": 31,
@@ -265,7 +265,7 @@
       ]
     },
     {
-      "id": 11,
+      "id": "11",
       "title": "Animated solution screenshots",
       "category": "bug",
       "upvotes": 9,
@@ -273,7 +273,7 @@
       "description": "Screenshots of solutions with animations don’t display correctly."
     },
     {
-      "id": 12,
+      "id": "12",
       "title": "Add micro-interactions",
       "category": "enhancement",
       "upvotes": 71,
@@ -281,7 +281,7 @@
       "description": "Small animations at specific points can add delight.",
       "comments": [
         {
-          "id": 15,
+          "id": "15",
           "content": "I'd love to see this! It always makes me so happy to see little details like these on websites.",
           "user": {
             "image": "./assets/user-images/image-victoria.jpg",
