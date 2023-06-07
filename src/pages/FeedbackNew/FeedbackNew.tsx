@@ -70,7 +70,7 @@ function FeedbackNewPage() {
                 Include any specific comments on what should be improved, added,
                 etc.
               </p>
-              <textarea rows={4} name="detail" required></textarea>
+              <textarea rows={4} name="description" required></textarea>
               <span className={styles.errorMsg}>Can&apos;t be empty</span>
             </div>
             <Button
