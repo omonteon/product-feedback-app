@@ -1,13 +1,23 @@
 import { Form, Link } from "react-router-dom";
 import { ReactComponent as ChevronLeftIcon } from "@assets/chevron-left-icon.svg";
-// import { ReactComponent as ChevronDownIcon } from "@assets/chevron-icon.svg";
 import { ReactComponent as PlusIcon } from "@assets/plus-icon.svg";
 import Select from "react-dropdown-select";
 import Card from "@components/Card";
 import Button from "@components/Button";
 import styles from "./feedbackNew.module.css";
+import { useState } from "react";
+
+const categories = [
+  { label: "Feature", value: "feature" },
+  { label: "UI", value: "ui" },
+  { label: "UX", value: "ux" },
+  { label: "Enhancement", value: "enhancement" },
+  { label: "Bug", value: "bug" },
+];
 
 function FeedbackNewPage() {
+  const [category, setCategory] = useState(categories[0].value);
+
   return (
     <div className={styles.feedbackNew}>
       <header>
@@ -33,17 +43,14 @@ function FeedbackNewPage() {
               <Select
                 className={styles.dropdownButton}
                 searchable={false}
-                name="category"
-                options={[
-                  { label: "Feature", value: "feature" },
-                  { label: "UI", value: "ui" },
-                  { label: "UX", value: "ux" },
-                  { label: "Enhancement", value: "enhancement" },
-                  { label: "Bug", value: "bug" },
-                ]}
-                values={[{ label: "Feature", value: "feature" }]}
-                onChange={console.log}
+                options={categories}
+                values={[categories[0]]}
+                onChange={(values) => {
+                  setCategory(values[0].value);
+                }}
+                required
               />
+              <input type="hidden" name="category" value={category} />
             </div>
 
             <div>
