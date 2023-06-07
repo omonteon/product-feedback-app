@@ -30,7 +30,7 @@ async function getCurrentUser(): Promise<CurrentUser> {
   });
 }
 
-async function getFeedbackById(id: number | undefined): Promise<Feedback> {
+async function getFeedbackById(id: string | undefined): Promise<Feedback> {
   if (id === undefined) {
     throw new Error("There was no id provided to get the feedback item.");
   }
@@ -50,7 +50,7 @@ async function getFeedbackById(id: number | undefined): Promise<Feedback> {
 }
 
 async function updateFeedbackById(
-  id: number | undefined,
+  id: string | undefined,
   feedbackUpdated: Feedback
 ): Promise<Feedback> {
   if (id === undefined) {
@@ -59,7 +59,7 @@ async function updateFeedbackById(
   const dataStr: string = localStorage.getItem("data") ?? "";
   const data: FeedbackAPIResponse = JSON.parse(dataStr ?? "");
   const productRequests: ProductRequest[] = data.productRequests;
-  let productRequestItem = productRequests.find((pr) => pr.id === id) ?? null;
+  const productRequestItem = productRequests.find((pr) => pr.id === id) ?? null;
   if (productRequestItem === null) {
     throw new Error(`Feedback item with id ${id} was not found`);
   }
@@ -91,6 +91,26 @@ async function updateCurrentUser(
   //   }, 1000);
   // });
   return currentUser;
+}
+
+export async function addNewFeedback(
+  feedback: ProductRequest
+): Promise<ProductRequest> {
+  const dataStr: string = localStorage.getItem("data") ?? "";
+  const data: FeedbackAPIResponse = JSON.parse(dataStr ?? "");
+  const productRequests: ProductRequest[] = data.productRequests;
+  const feedbackList = [feedback, ...productRequests];
+
+  localStorage.setItem(
+    "data",
+    JSON.stringify({ ...data, productRequests: feedbackList })
+  );
+  // TODO: Implement rejection too
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve(feedback);
+    }, 1000);
+  });
 }
 
 // Adapters

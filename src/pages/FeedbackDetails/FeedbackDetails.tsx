@@ -81,7 +81,7 @@ function FeedbackDetails() {
 }
 
 // TODO: Move this unot a utils module maybe?
-function isFeedbackUpVoted(userVotes: Vote[], feedbackId: number): boolean {
+function isFeedbackUpVoted(userVotes: Vote[], feedbackId: string): boolean {
   return userVotes.some((vote) => vote.productRequestId === feedbackId);
 }
 

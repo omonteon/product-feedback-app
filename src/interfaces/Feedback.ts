@@ -7,7 +7,7 @@ export type FeedbackTag =
   | "Feature";
 
 export interface Feedback {
-  id: number;
+  id: string;
   title: string;
   category: FeedbackTag;
   upvotes: number;
@@ -27,7 +27,7 @@ export interface FeedbackAPIResponse {
 
 // TODO: Separate these interfaces into their own files
 export interface Vote {
-  productRequestId: number;
+  productRequestId: string;
   voted: "up" | "down";
 }
 
@@ -52,7 +52,7 @@ export interface CommentReply {
 }
 
 export interface ProductRequest {
-  id: number;
+  id: string;
   title: string;
   category: FeedbackTag;
   upvotes: number;

@@ -13,14 +13,17 @@ interface LoaderFunctionArgs {
 }
 
 export async function loader({ params }: LoaderFunctionArgs) {
-  const feedback = getFeedbackById(Number(params.feedbackId));
+  const feedback = getFeedbackById(params.feedbackId);
   const currentUser = getCurrentUser();
 
   return defer({ data: Promise.all([feedback, currentUser]) });
 }
 
 export async function action({ request, params }: ActionFunctionArgs) {
-  const feedbackId = Number(params.feedbackId);
+  if (!params.feedbackId) {
+    throw new Error("Feedback id missing");
+  }
+  const feedbackId = params.feedbackId;
   const formData = await request.formData();
   const upVoted = formData.get("upVoted") === "true";
   const currentUser = await getCurrentUser();
@@ -36,7 +39,7 @@ export async function action({ request, params }: ActionFunctionArgs) {
 
   await updateCurrentUser(updatedCurrentUser);
 
-  return updateFeedbackById(Number(params.feedbackId), {
+  return updateFeedbackById(params.feedbackId, {
     upvotes: Number(formData.get("upvotes")),
   } as Feedback);
 }
