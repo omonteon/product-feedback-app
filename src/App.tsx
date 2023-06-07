@@ -7,7 +7,9 @@ import FeedbackDetailsRoute, {
   loader as feedbackDetailsLoader,
   action as feedbackDetailsAction,
 } from "./routes/feedback";
-import FeedbackNewRoute from "./routes/feedback/new";
+import FeedbackNewRoute, {
+  action as feedbackNewAction,
+} from "./routes/feedback/new";
 import FeedbackEditRoute from "./routes/feedback/edit";
 import { action as deleteFeedbackAction } from "./routes/feedback/delete";
 import RoadmapRoute from "./routes/roadmap";
@@ -22,6 +24,7 @@ const router = createBrowserRouter([
   {
     path: "/feedback/new",
     element: <FeedbackNewRoute />,
+    action: feedbackNewAction,
   },
   {
     path: "/feedback/:feedbackId",
