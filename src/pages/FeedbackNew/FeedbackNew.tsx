@@ -17,6 +17,11 @@ const categories = [
 
 function FeedbackNewPage() {
   const [category, setCategory] = useState(categories[0].value);
+  const [formSubmitted, setFormSubmitted] = useState(false);
+
+  function handleSubmitForm() {
+    setFormSubmitted(true);
+  }
 
   return (
     <div className={styles.feedbackNew}>
@@ -31,13 +36,19 @@ function FeedbackNewPage() {
         </span>
         <Card>
           <h3>Create New Feedback</h3>
-          <Form className={styles.form} method="post">
-            <div>
+          <Form
+            className={`${styles.form} ${
+              formSubmitted ? styles.formSubmitted : ""
+            }`}
+            method="post"
+          >
+            <div className={styles.formElement}>
               <label htmlFor="title">Feedback title</label>
               <p>Add a short, descriptive line</p>
-              <input type="text" name="title" />
+              <input type="text" name="title" required />
+              <span className={styles.errorMsg}>Can&apos;t be empty</span>
             </div>
-            <div>
+            <div className={styles.formElement}>
               <label htmlFor="title">Category</label>
               <p>Choose a category for your feedback</p>
               <Select
@@ -53,15 +64,20 @@ function FeedbackNewPage() {
               <input type="hidden" name="category" value={category} />
             </div>
 
-            <div>
+            <div className={styles.formElement}>
               <label htmlFor="title">Feedback Detail</label>
               <p>
                 Include any specific comments on what should be improved, added,
                 etc.
               </p>
-              <textarea rows={4} name="detail"></textarea>
+              <textarea rows={4} name="detail" required></textarea>
+              <span className={styles.errorMsg}>Can&apos;t be empty</span>
             </div>
-            <Button type="primaryPurple" htmlType="submit">
+            <Button
+              type="primaryPurple"
+              htmlType="submit"
+              onClick={handleSubmitForm}
+            >
               Add Feedback
             </Button>
             <Button to=".." type="dark">
