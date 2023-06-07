@@ -11,7 +11,7 @@ async function getFeedbackList(): Promise<Feedback[]> {
   const data: FeedbackAPIResponse = JSON.parse(dataStr ?? "");
   const productRequests: ProductRequest[] = data.productRequests;
 
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     setTimeout(() => {
       resolve(adaptProductRequestsToFeedbackList(productRequests));
     }, 1000);
@@ -23,7 +23,7 @@ async function getCurrentUser(): Promise<CurrentUser> {
   const data: FeedbackAPIResponse = JSON.parse(dataStr ?? "");
   const currentUser = data.currentUser;
 
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     setTimeout(() => {
       resolve(currentUser);
     }, 1000);
@@ -42,7 +42,7 @@ async function getFeedbackById(id: string | undefined): Promise<Feedback> {
     throw new Error(`Feedback item with id ${id} was not found`);
   }
   // TODO: Implement rejection too
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     setTimeout(() => {
       resolve(adaptProductRequestToFeedbackDetails(productRequestItem));
     }, 1000);
@@ -112,7 +112,7 @@ export async function addNewFeedback(
     })
   );
   // TODO: Implement rejection too
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     setTimeout(() => {
       resolve(feedback);
     }, 1000);
