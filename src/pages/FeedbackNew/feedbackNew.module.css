@@ -51,6 +51,10 @@ form > a > button {
   width: 100%;
 }
 
+.form.submitting {
+  opacity: 0.6;
+}
+
 .formElement {
   margin-bottom: 1.5rem;
 }
