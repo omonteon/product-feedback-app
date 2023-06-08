@@ -1,0 +1,46 @@
+.form > button,
+form > a > button {
+  margin-top: 1rem;
+  display: block;
+  width: 100%;
+}
+
+.form.submitting {
+  opacity: 0.6;
+}
+
+.formElement {
+  margin-bottom: 1.5rem;
+}
+
+.formElement:last-of-type {
+  margin-bottom: 2.5rem;
+}
+
+.formElement label {
+  font-weight: 700;
+  font-size: 0.8125rem;
+  display: inline-block;
+}
+
+.formElement p {
+  font-size: 0.8125rem;
+  color: var(--gray-dark-c);
+  margin-bottom: 1rem;
+}
+
+.formElement .errorMsg {
+  display: none;
+  color: var(--accent-red);
+  font-size: 0.875rem;
+}
+
+.formSubmitted textarea:invalid,
+.formSubmitted input:invalid {
+  outline: var(--accent-red) solid 1px;
+}
+
+.formSubmitted .formElement:has(input:invalid) .errorMsg,
+.formSubmitted .formElement:has(textarea:invalid) .errorMsg {
+  display: block;
+}
