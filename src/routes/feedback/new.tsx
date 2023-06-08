@@ -16,8 +16,12 @@ export async function action({ request }: ActionFunctionArgs) {
     commentCount: 0,
   } as Feedback;
 
-  await addNewFeedback(feedback);
-  return redirect(`../feedback/${feedback.id}`);
+  const response = await addNewFeedback(feedback);
+  if (response.id === feedback.id) {
+    return redirect(`../feedback/${feedback.id}`);
+  } else {
+    throw new Error("There was an issue adding the new feedback");
+  }
 }
 
 function FeedbackNewRoute() {
