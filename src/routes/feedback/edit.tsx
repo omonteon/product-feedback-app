@@ -1,7 +1,7 @@
 import {
   ActionFunctionArgs,
   LoaderFunctionArgs,
-  // defer,
+  defer,
   redirect,
 } from "react-router-dom";
 import FeedbackEditPage from "../../pages/FeedbackEdit";
@@ -9,11 +9,8 @@ import { getFeedbackById, updateFeedbackById } from "@api/FeedbackAPI";
 import { Feedback } from "src/interfaces/Feedback";
 
 export async function loader({ params }: LoaderFunctionArgs) {
-  const feedback = await getFeedbackById(params.feedbackId);
-
-  // TODO: Implement defer to show loading state
-  // return defer({ feedback });
-  return { feedback };
+  const feedbackPromise = getFeedbackById(params.feedbackId);
+  return defer({ feedbackPromise });
 }
 
 export async function action({ request, params }: ActionFunctionArgs) {
