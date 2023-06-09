@@ -22,7 +22,7 @@ function FeedbackEditPage() {
         </span>
         <Card>
           <h3>Editing {feedback.title}</h3>
-          <FeedbackForm defaultFeedback={feedback} />
+          <FeedbackForm defaultFeedback={feedback} editing={true} />
         </Card>
       </main>
     </div>
