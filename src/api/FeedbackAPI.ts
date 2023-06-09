@@ -63,16 +63,14 @@ async function updateFeedbackById(
   if (productRequestItem === null) {
     throw new Error(`Feedback item with id ${id} was not found`);
   }
-  // productRequestItem = { ...productRequestItem, ...feedbackUpdated };
   Object.assign(productRequestItem, feedbackUpdated);
   localStorage.setItem("data", JSON.stringify({ ...data, productRequests }));
   // TODO: Implement rejection too
-  // return new Promise((resolve, reject) => {
-  //   setTimeout(() => {
-  //     resolve(productRequestItem as FeedbackDetails);
-  //   }, 1000);
-  // });
-  return productRequestItem as FeedbackDetails;
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(productRequestItem as FeedbackDetails);
+    }, 1000);
+  });
 }
 
 async function updateCurrentUser(
