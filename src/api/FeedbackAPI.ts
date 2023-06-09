@@ -91,9 +91,7 @@ async function updateCurrentUser(
   return currentUser;
 }
 
-export async function addNewFeedback(
-  feedback: Feedback
-): Promise<ProductRequest> {
+async function addNewFeedback(feedback: Feedback): Promise<ProductRequest> {
   const dataStr: string = localStorage.getItem("data") ?? "";
   const data: FeedbackAPIResponse = JSON.parse(dataStr ?? "");
   const productRequests: ProductRequest[] = data.productRequests;
@@ -113,6 +111,25 @@ export async function addNewFeedback(
   return new Promise((resolve) => {
     setTimeout(() => {
       resolve(feedback);
+    }, 1000);
+  });
+}
+
+async function deleteFeedback(id: string | undefined) {
+  if (id === undefined) {
+    throw new Error("There was no id provided to get the feedback item.");
+  }
+  const dataStr: string = localStorage.getItem("data") ?? "";
+  const data: FeedbackAPIResponse = JSON.parse(dataStr ?? "");
+  const productRequests: ProductRequest[] = data.productRequests.filter(
+    (pr) => pr.id !== id
+  );
+
+  localStorage.setItem("data", JSON.stringify({ ...data, productRequests }));
+  // TODO: Implement rejection too
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(`Feedback item with id: ${id} was successfully deleted.`);
     }, 1000);
   });
 }
@@ -161,6 +178,8 @@ export {
   getFeedbackList,
   getCurrentUser,
   getFeedbackById,
+  addNewFeedback,
   updateFeedbackById,
   updateCurrentUser,
+  deleteFeedback,
 };
