@@ -90,7 +90,7 @@ function FeedbackForm({ defaultFeedback, editing = false }: FeedbackFormProps) {
           type="primaryPurple"
           htmlType="submit"
           name="intent"
-          value="add"
+          value="update"
           disabled={submittingForm}
           onClick={handleSubmitForm}
           block
@@ -114,7 +114,13 @@ function FeedbackForm({ defaultFeedback, editing = false }: FeedbackFormProps) {
         Cancel
       </Button>
       {editing ? (
-        <Button type="danger" name="intent" value="delete" block>
+        <Button
+          type="danger"
+          htmlType="submit"
+          name="intent"
+          value="delete"
+          block
+        >
           Delete
         </Button>
       ) : null}
