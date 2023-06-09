@@ -5,7 +5,11 @@ import {
   redirect,
 } from "react-router-dom";
 import FeedbackEditPage from "../../pages/FeedbackEdit";
-import { getFeedbackById, updateFeedbackById } from "@api/FeedbackAPI";
+import {
+  deleteFeedback,
+  getFeedbackById,
+  updateFeedbackById,
+} from "@api/FeedbackAPI";
 import { Feedback } from "src/interfaces/Feedback";
 
 export async function loader({ params }: LoaderFunctionArgs) {
@@ -16,6 +20,12 @@ export async function loader({ params }: LoaderFunctionArgs) {
 export async function action({ request, params }: ActionFunctionArgs) {
   const formData = await request.formData();
   const updates = Object.fromEntries(formData);
+
+  if (updates.intent === "delete") {
+    await deleteFeedback(params.feedbackId);
+    return redirect("/");
+  }
+  // Update feedback
   const feedback = {
     id: params.feedbackId,
     title: updates.title,
