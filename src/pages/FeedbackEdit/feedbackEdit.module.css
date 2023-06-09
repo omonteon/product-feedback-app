@@ -1,0 +1,45 @@
+.container {
+  margin: 1.5rem;
+}
+
+.container main {
+  position: relative;
+}
+
+.container header {
+  height: 40px;
+  display: flex;
+  align-items: center;
+  column-gap: 0.75rem;
+  margin-bottom: 2.75rem;
+}
+
+.container header a {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: var(--gray-dark-c);
+  text-decoration: none;
+}
+
+.container h3 {
+  margin-top: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.plusIcon {
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  left: 1.5rem;
+  top: -20px;
+  background: radial-gradient(
+    128.88% 128.88% at 103.9% -10.39%,
+    #e84d70 0%,
+    #a337f6 53.09%,
+    #28a7ed 100%
+  );
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

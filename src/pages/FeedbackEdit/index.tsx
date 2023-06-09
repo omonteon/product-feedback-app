@@ -1,5 +1,3 @@
-function FeedbackEditPage() {
-  return <div>FeedbackEditPage</div>;
-}
+import FeedbackEditPage from "./FeedbackEdit";
 
 export default FeedbackEditPage;
