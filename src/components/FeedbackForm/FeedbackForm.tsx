@@ -15,11 +15,13 @@ const categories = [
 
 interface FeedbackFormProps {
   defaultFeedback?: Feedback;
+  editing?: boolean;
 }
 
-function FeedbackForm({ defaultFeedback }: FeedbackFormProps) {
+function FeedbackForm({ defaultFeedback, editing = false }: FeedbackFormProps) {
   const submittingForm = useNavigation().state === "submitting";
   const defaultCategory = defaultFeedback?.category ?? "Feature";
+  const defaultValue = categories.find((c) => c.value === defaultCategory);
   const [category, setCategory] = useState<FeedbackTag>(defaultCategory);
   const [formSubmitted, setFormSubmitted] = useState(false);
 
@@ -55,7 +57,7 @@ function FeedbackForm({ defaultFeedback }: FeedbackFormProps) {
           className={styles.select}
           searchable={false}
           options={categories}
-          values={[categories[0]]}
+          values={defaultValue ? [defaultValue] : [categories[0]]}
           disabled={submittingForm}
           onChange={(values) => {
             setCategory(values[0].value as FeedbackTag);
@@ -78,22 +80,44 @@ function FeedbackForm({ defaultFeedback }: FeedbackFormProps) {
         <textarea
           rows={4}
           name="description"
-          value={defaultFeedback?.description}
+          defaultValue={defaultFeedback?.description}
           required
         ></textarea>
         <span className={styles.errorMsg}>Can&apos;t be empty</span>
       </div>
-      <Button
-        type="primaryPurple"
-        htmlType="submit"
-        disabled={submittingForm}
-        onClick={handleSubmitForm}
-      >
-        {submittingForm ? "Adding feedback..." : "Add Feedback"}
-      </Button>
-      <Button to=".." type="dark" disabled={submittingForm}>
+      {editing ? (
+        <Button
+          type="primaryPurple"
+          htmlType="submit"
+          name="intent"
+          value="add"
+          disabled={submittingForm}
+          onClick={handleSubmitForm}
+          block
+        >
+          {submittingForm ? "Saving changes" : "Save Changes"}
+        </Button>
+      ) : (
+        <Button
+          type="primaryPurple"
+          htmlType="submit"
+          name="intent"
+          value="add"
+          disabled={submittingForm}
+          onClick={handleSubmitForm}
+          block
+        >
+          {submittingForm ? "Adding feedback..." : "Add Feedback"}
+        </Button>
+      )}
+      <Button to=".." type="dark" disabled={submittingForm} block>
         Cancel
       </Button>
+      {editing ? (
+        <Button type="danger" name="intent" value="delete" block>
+          Delete
+        </Button>
+      ) : null}
     </Form>
   );
 }

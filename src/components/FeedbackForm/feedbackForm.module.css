@@ -1,8 +1,6 @@
 .form > button,
 form > a > button {
   margin-top: 1rem;
-  display: block;
-  width: 100%;
 }
 
 .form.submitting {

@@ -39,6 +39,10 @@
   color: var(--primary-blue);
 }
 
+.block {
+  width: 100%;
+}
+
 .disabled,
 .disabled:focus,
 .disabled:hover {

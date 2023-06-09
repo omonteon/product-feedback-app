@@ -21,6 +21,9 @@ interface ButtonProps {
   ariaExpanded?: boolean;
   ariaControls?: string;
   htmlType?: ButtonHTMLType;
+  block?: boolean;
+  name?: string;
+  value?: string;
   disabled?: boolean;
 }
 
@@ -32,6 +35,9 @@ function Button({
   ariaExpanded,
   ariaControls,
   htmlType = "button",
+  block = false,
+  name,
+  value,
   disabled = false,
   onClick,
 }: ButtonProps) {
@@ -41,9 +47,14 @@ function Button({
       aria-expanded={ariaExpanded}
       aria-controls={ariaControls}
       tabIndex={tabIndex}
-      className={`${styles.button} ${styles[type]} ${
-        disabled ? styles.disabled : ""
-      }`}
+      className={`
+      ${styles.button} 
+      ${styles[type]} 
+      ${disabled ? styles.disabled : ""}
+      ${block ? styles.block : ""}
+      `}
+      name={name}
+      value={value}
       disabled={disabled}
       onClick={onClick}
     >
