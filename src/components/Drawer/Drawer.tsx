@@ -1,4 +1,4 @@
-import { ReactNode, useEffect, useRef } from "react";
+import { ReactNode, useEffect } from "react";
 import FocusTrap from "focus-trap-react";
 import styles from "./drawer.module.css";
 
