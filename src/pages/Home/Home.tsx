@@ -11,7 +11,7 @@ import Card from "@components/Card";
 import styles from "./home.module.css";
 
 // Next tasks
-// 0. Add "status" field when editing feedback. Filter suggestions in home to show only "suggestions" (4 pomodoros)
+// 0. Add "status" field when editing feedback. Filter suggestions in home to show only "suggestions" (4 pomodoros) [DONE in ~1 pomodoro]
 // 1. Implement filtering by tag (3 pomodoros)
 // 2. Show correct number of feedback by category in the sidebar (2 pomodoros)
 // 3. Implement comment creation and replies too (4 pomodoros)
@@ -55,39 +55,59 @@ function HomePage() {
 
   return (
     <>
-      <header className={styles.header}>
-        <div>
-          <h1>Frontend Mentor</h1>
-          <h2>Feedback board</h2>
-        </div>
-        {/* TODO: Fix keyboard navigation which enters the sidebar when is hidden */}
-        <Sidebar open={sidebarOpen} toggle={toggleSidebar} />
-      </header>
-      <main className={styles.main}>
-        <header>
-          <p>
-            {/* TODO: Create and use dropdown component here */}
-            Sort by :{" "}
-            <b>
-              Most Upvotes <ChevronIcon />{" "}
-            </b>
-          </p>
-          <Button to="/feedback/new">+ Add Feedback</Button>
-        </header>
-        <Suspense
-          fallback={
-            <div className={styles.loadingList}>
+      <Suspense
+        fallback={
+          <div>
+            <header className={styles.header}>
+              <div>
+                <h1>Frontend Mentor</h1>
+                <h2>Feedback board</h2>
+              </div>
+            </header>
+            <main className={styles.main}>
+              <header>
+                <p>
+                  {/* TODO: Create and use dropdown component here */}
+                  Sort by :{" "}
+                  <b>
+                    Most Upvotes <ChevronIcon />{" "}
+                  </b>
+                </p>
+                <Button to="/feedback/new" disabled={true}>
+                  + Add Feedback
+                </Button>
+              </header>
               <Card>
                 <Skeleton />
               </Card>
+            </main>
+          </div>
+        }
+      >
+        <Await resolve={data} errorElement={<p>Error loading home data</p>}>
+          <header className={styles.header}>
+            <div>
+              <h1>Frontend Mentor</h1>
+              <h2>Feedback board</h2>
             </div>
-          }
-        >
-          <Await resolve={data} errorElement={<p>Error loading home data</p>}>
+            {/* TODO: Fix keyboard navigation which enters the sidebar when is hidden */}
+            <Sidebar open={sidebarOpen} toggle={toggleSidebar} />
+          </header>
+          <main className={styles.main}>
+            <header>
+              <p>
+                {/* TODO: Create and use dropdown component here */}
+                Sort by :{" "}
+                <b>
+                  Most Upvotes <ChevronIcon />{" "}
+                </b>
+              </p>
+              <Button to="/feedback/new">+ Add Feedback</Button>
+            </header>
             <FeedbackList />
-          </Await>
-        </Suspense>
-      </main>
+          </main>
+        </Await>
+      </Suspense>
     </>
   );
 }

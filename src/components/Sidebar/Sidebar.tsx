@@ -5,9 +5,8 @@ import Drawer from "@components/Drawer";
 import Button from "@components/Button";
 import Card from "@components/Card";
 import Tag from "@components/Tag";
-import Badge from "@components/Badge";
+import RoadmapCard from "@components/RoadmapCard";
 import styles from "./sidebar.module.css";
-import { Link } from "react-router-dom";
 
 const { CheckableTag } = Tag;
 
@@ -21,19 +20,6 @@ function Sidebar({ open = false, toggle }: SidebarProps) {
 
   // TODO: Get this data from API, localstorage or somewhere else
   const tags = ["All", "UI", "UX", "Enhancement", "Bug", "Feature"];
-  const statusList = [
-    {
-      text: "Planned",
-      count: 2,
-      color: getCSSVariableValue("--accent-orange"),
-    },
-    {
-      text: "In-Progress",
-      count: 3,
-      color: getCSSVariableValue("--primary-purple"),
-    },
-    { text: "Live", count: 1, color: getCSSVariableValue("--accent-blue") },
-  ];
 
   const handleCheckTag = (tag: string) => {
     setCheckedTag(tag);
@@ -68,34 +54,9 @@ function Sidebar({ open = false, toggle }: SidebarProps) {
           </CheckableTag>
         ))}
       </Card>
-      <Card className={styles.roadMapCard}>
-        <header>
-          <h3>Roadmap</h3> <Link to="roadmap">View</Link>
-        </header>
-        <ul>
-          {statusList.map((status) => (
-            <li key={status.text}>
-              <Badge
-                color={status.color}
-                text={
-                  <>
-                    {status.text} <b>{status.count}</b>
-                  </>
-                }
-                className={styles.roadMapBadge}
-              />
-            </li>
-          ))}
-        </ul>
-      </Card>
+      <RoadmapCard />
     </Drawer>
   );
-}
-
-// TODO: Probably move to utils
-function getCSSVariableValue(varName: string) {
-  const style = getComputedStyle(document.body);
-  return style.getPropertyValue(varName);
 }
 
 export default Sidebar;
