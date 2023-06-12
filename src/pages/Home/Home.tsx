@@ -6,34 +6,39 @@ import Button from "@components/Button";
 import Sidebar from "@components/Sidebar";
 import EmptyFeedback from "@components/EmptyFeedback";
 import FeedbackCard from "@components/FeedbackCard";
-import styles from "./home.module.css";
 import Skeleton from "@components/Skeleton";
 import Card from "@components/Card";
+import styles from "./home.module.css";
 
 // Next tasks
-// 1. Create Card component [DONE]
-// 2. Create CheckableTag component [DONE]
-// * I think checkable tag can exist by itself
-// * However, in this particular case, we need a list of those
-// that behave like a radio button instead
-// 3. Create Badge component [DONE]
-// 4. Implement Tag filters card component [DONE]
-// 5. Implement Roadmap card component [DONE]
-// 6. Implement DropDown component [PENDING]
-// 7. Implement empty home card component [DONE]
-// 8. Rename all index.tsx files to index.ts because they don't contain jsx [DONE]
-// 9. Install and configure ESLint [DONE]
-// 10. Define naming convention for event handler props and event handler functions.
-// 11. Read and define convention on how to use size units in the project (CSS).
-// 12. How to type rr6 loaders ? https://github.com/remix-run/react-router/discussions/9792 [DONE]
-// 13. Use Context API to share the current user data
-// 14. Maybe change everything to be called ProductRequest instead of Feedback ?
-// 15. Document the order in which imports should be done
-// 16. Configure testing enviroment
-// 17. Add "Page" suffix at the end of page components
-// 18. Improve how icons are imported
-// 19. Create custom hooks
-// 20. Make a schema for the forms (https://www.taniarascia.com/schema-based-form-system/)
+// 0. Add "status" field when editing feedback. Filter suggestions in home to show only "suggestions" (4 pomodoros)
+// 1. Implement filtering by tag (3 pomodoros)
+// 2. Show correct number of feedback by category in the sidebar (2 pomodoros)
+// 3. Implement comment creation and replies too (4 pomodoros)
+// 4. Implement sorting dropdown (2 pomodoros)
+// 5. Implement sorting logic in the "API" (2 pomodoros)
+// 6. Create RoadmapCard component (1 pomodoro)
+// 7. Create Column component (1 pomodoro)
+// 8. Create Tabs component (3 pomodoros)
+// 9. Create Roadmap page component (header + main) (3 pomodoros)
+// 10. Prepare to support DnD (1 pomodoro)
+// 11. Styles for tablet version (4 pomodoros)
+// 12. Create Non-existent components for smartphone (2 pomodoros)
+// 13. Styles for desktop version (4 pomodoros)
+// 14. Write tests (8 pomodoros)
+
+// Next "Go to poland" tasks
+// @. Test accessibillity
+// a. Define naming convention for event handler props and event handler functions.
+// b. Read and define convention on how to use size units in the project (CSS).
+// c. How to type rr6 loaders ? https://github.com/remix-run/react-router/discussions/9792
+// d. Improve how data is fetch and shared in the app (Sockets, Context API or Redux)
+// e. Maybe change everything to be called ProductRequest instead of Feedback ?
+// f. Document the order in which imports should be done
+// g. Add "Page" suffix at the end of page components
+// h. Improve how icons are imported
+// i. Create custom hooks
+// j. Make a schema for the forms (https://www.taniarascia.com/schema-based-form-system/)
 
 type HomeDataTuple = [Feedback[], CurrentUser];
 type HomeData = {
@@ -95,20 +100,22 @@ function FeedbackList() {
       {feedbackList?.length === 0 ? (
         <EmptyFeedback />
       ) : (
-        feedbackList?.map((feedback) => (
-          <FeedbackCard
-            key={feedback.id}
-            feedback={feedback}
-            redirectTo={`feedback/${feedback.id}`}
-            upVoted={isFeedbackUpVoted(currentUser.votes ?? [], feedback.id)}
-          />
-        ))
+        feedbackList
+          .filter((f) => f.status === "suggestion")
+          .map((feedback) => (
+            <FeedbackCard
+              key={feedback.id}
+              feedback={feedback}
+              redirectTo={`feedback/${feedback.id}`}
+              upVoted={isFeedbackUpVoted(currentUser.votes ?? [], feedback.id)}
+            />
+          ))
       )}
     </section>
   );
 }
 
-// TODO: Move this unot a utils module maybe?
+// TODO: Move this into a utils module maybe?
 function isFeedbackUpVoted(userVotes: Vote[], feedbackId: string): boolean {
   return userVotes.some((vote) => vote.productRequestId === feedbackId);
 }
