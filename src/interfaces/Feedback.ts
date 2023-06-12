@@ -6,12 +6,14 @@ export type FeedbackTag =
   | "Bug"
   | "Feature";
 
+export type FeedbackStatus = "planned" | "in-progress" | "live" | "suggestion";
+
 export interface Feedback {
   id: string;
   title: string;
   category: FeedbackTag;
   upvotes: number;
-  status: string;
+  status: FeedbackStatus;
   description: string;
   commentCount: number;
 }
@@ -56,7 +58,7 @@ export interface ProductRequest {
   title: string;
   category: FeedbackTag;
   upvotes: number;
-  status: string;
+  status: FeedbackStatus;
   description: string;
   comments?: Comment[];
 }
