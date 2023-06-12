@@ -11,7 +11,7 @@ export async function action({ request }: ActionFunctionArgs) {
     title: updates.title,
     category: updates.category,
     upvotes: 0,
-    status: "Planned",
+    status: "suggestion",
     description: updates.description,
     commentCount: 0,
   } as Feedback;
