@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Form, useNavigation } from "react-router-dom";
-import { Feedback, FeedbackTag } from "src/interfaces/Feedback";
+import { Feedback, FeedbackStatus, FeedbackTag } from "src/interfaces/Feedback";
 import Select from "react-dropdown-select";
 import Button from "@components/Button";
 import styles from "./feedbackForm.module.css";
@@ -13,6 +13,13 @@ const categories = [
   { label: "Bug", value: "bug" },
 ];
 
+const statusList = [
+  { label: "Suggestion", value: "suggestion" },
+  { label: "Planned", value: "planned" },
+  { label: "In-Progress", value: "in-progress" },
+  { label: "Live", value: "live" },
+];
+
 interface FeedbackFormProps {
   defaultFeedback?: Feedback;
   editing?: boolean;
@@ -21,8 +28,13 @@ interface FeedbackFormProps {
 function FeedbackForm({ defaultFeedback, editing = false }: FeedbackFormProps) {
   const submittingForm = useNavigation().state === "submitting";
   const defaultCategory = defaultFeedback?.category ?? "Feature";
-  const defaultValue = categories.find((c) => c.value === defaultCategory);
+  const defaultCategoryValue = categories.find(
+    (c) => c.value === defaultCategory
+  );
+  const defaultStatus = defaultFeedback?.status ?? "suggestion";
+  const defaultStatusValue = statusList.find((c) => c.value === defaultStatus);
   const [category, setCategory] = useState<FeedbackTag>(defaultCategory);
+  const [status, setStatus] = useState<FeedbackStatus>(defaultStatus);
   const [formSubmitted, setFormSubmitted] = useState(false);
 
   function handleSubmitForm() {
@@ -57,7 +69,9 @@ function FeedbackForm({ defaultFeedback, editing = false }: FeedbackFormProps) {
           className={styles.select}
           searchable={false}
           options={categories}
-          values={defaultValue ? [defaultValue] : [categories[0]]}
+          values={
+            defaultCategoryValue ? [defaultCategoryValue] : [categories[0]]
+          }
           disabled={submittingForm}
           onChange={(values) => {
             setCategory(values[0].value as FeedbackTag);
@@ -71,6 +85,30 @@ function FeedbackForm({ defaultFeedback, editing = false }: FeedbackFormProps) {
           value={category}
         />
       </div>
+
+      {editing ? (
+        <div className={styles.formElement}>
+          <label htmlFor="title">Update Status</label>
+          <p>Change feature state</p>
+          <Select
+            className={styles.select}
+            searchable={false}
+            options={statusList}
+            values={defaultStatusValue ? [defaultStatusValue] : [statusList[0]]}
+            disabled={submittingForm}
+            onChange={(values) => {
+              setStatus(values[0].value as FeedbackStatus);
+            }}
+            required
+          />
+          <input
+            type="hidden"
+            name="status"
+            disabled={submittingForm}
+            value={status}
+          />
+        </div>
+      ) : null}
 
       <div className={styles.formElement}>
         <label htmlFor="title">Feedback Detail</label>

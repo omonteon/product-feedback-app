@@ -30,6 +30,7 @@ export async function action({ request, params }: ActionFunctionArgs) {
     id: params.feedbackId,
     title: updates.title,
     category: updates.category,
+    status: updates.status,
     description: updates.description,
   } as Feedback;
 
