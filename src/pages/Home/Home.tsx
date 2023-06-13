@@ -12,8 +12,8 @@ import styles from "./home.module.css";
 
 // Next tasks
 // 0. Add "status" field when editing feedback. Filter suggestions in home to show only "suggestions" (4 pomodoros) [DONE in ~1 pomodoro]
-// 1. Implement filtering by tag (3 pomodoros)
-// 2. Show correct number of feedback by category in the sidebar (2 pomodoros)
+// 1. Implement filtering by tag (3 pomodoros) [Done in ~3 pomodoros]
+// 2. Show correct number of feedback by category in the sidebar (2 pomodoros) [DONE in 1 pomodoro]
 // 3. Implement comment creation and replies too (4 pomodoros)
 // 4. Implement sorting dropdown (2 pomodoros)
 // 5. Implement sorting logic in the "API" (2 pomodoros)
@@ -77,9 +77,11 @@ function HomePage() {
                   + Add Feedback
                 </Button>
               </header>
-              <Card>
-                <Skeleton />
-              </Card>
+              <section className={styles.mainContent}>
+                <Card>
+                  <Skeleton />
+                </Card>
+              </section>
             </main>
           </div>
         }
