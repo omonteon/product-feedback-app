@@ -1,5 +1,10 @@
 import { useState } from "react";
-import { useLoaderData, useNavigation, useSubmit } from "react-router-dom";
+import {
+  useAsyncValue,
+  useLoaderData,
+  useNavigation,
+  useSubmit,
+} from "react-router-dom";
 import { ReactComponent as CloseIcon } from "@assets/close-icon.svg";
 import { ReactComponent as HamIcon } from "@assets/ham-icon.svg";
 import Drawer from "@components/Drawer";
@@ -8,6 +13,7 @@ import Card from "@components/Card";
 import Tag from "@components/Tag";
 import RoadmapSummaryCard from "@components/RoadmapSummaryCard";
 import styles from "./sidebar.module.css";
+import { Feedback } from "src/interfaces/Feedback";
 
 const { CheckableTag } = Tag;
 
@@ -17,6 +23,7 @@ interface SidebarProps {
 }
 
 function Sidebar({ open = false, toggle }: SidebarProps) {
+  const [feedbackList] = useAsyncValue() as [Feedback[]];
   const { q } = useLoaderData() as { q: string };
   const navigation = useNavigation();
   const defaultTag = q ? q : "All";
@@ -65,7 +72,7 @@ function Sidebar({ open = false, toggle }: SidebarProps) {
           </CheckableTag>
         ))}
       </Card>
-      <RoadmapSummaryCard />
+      <RoadmapSummaryCard feedbackList={feedbackList} />
     </Drawer>
   );
 }
