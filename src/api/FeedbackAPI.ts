@@ -6,10 +6,15 @@ import {
   ProductRequest,
 } from "src/interfaces/Feedback";
 
-async function getFeedbackList(): Promise<Feedback[]> {
+async function getFeedbackList(query: string): Promise<Feedback[]> {
   const dataStr: string = localStorage.getItem("data") ?? "";
   const data: FeedbackAPIResponse = JSON.parse(dataStr ?? "");
-  const productRequests: ProductRequest[] = data.productRequests;
+  const productRequests: ProductRequest[] =
+    query && query !== "All"
+      ? data.productRequests.filter(
+          (pr) => pr.category.toLowerCase() === query.toLowerCase()
+        )
+      : data.productRequests;
 
   return new Promise((resolve) => {
     setTimeout(() => {
