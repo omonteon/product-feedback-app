@@ -1,4 +1,8 @@
-import { ActionFunctionArgs, defer } from "react-router-dom";
+import {
+  ActionFunctionArgs,
+  LoaderFunctionArgs,
+  defer,
+} from "react-router-dom";
 import { Feedback } from "src/interfaces/Feedback";
 import {
   getFeedbackList,
@@ -8,12 +12,15 @@ import {
 } from "@api/FeedbackAPI";
 import HomePage from "../pages/Home";
 
-export async function loader() {
-  const feedbackListPromise = getFeedbackList();
+export async function loader({ request }: LoaderFunctionArgs) {
+  const url = new URL(request.url);
+  const q = url.searchParams.get("q") ?? "";
+  const feedbackListPromise = getFeedbackList(q);
   const currentUserPromise = getCurrentUser();
 
   return defer({
     data: Promise.all([feedbackListPromise, currentUserPromise]),
+    q,
   });
 }
 
