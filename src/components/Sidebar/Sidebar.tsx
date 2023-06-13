@@ -31,7 +31,7 @@ function Sidebar({ open = false, toggle }: SidebarProps) {
       }
       toggle={toggle}
     >
-      <TagsCard defaultTag={q} />
+      <TagsCard defaultTag={q || "All"} />
       <RoadmapSummaryCard feedbackList={feedbackList} />
     </Drawer>
   );
