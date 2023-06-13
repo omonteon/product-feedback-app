@@ -2,9 +2,9 @@ import { Link, useAsyncValue } from "react-router-dom";
 import { Feedback } from "src/interfaces/Feedback";
 import Badge from "@components/Badge";
 import Card from "@components/Card";
-import styles from "./roadmapCard.module.css";
+import styles from "./roadmapSummaryCard.module.css";
 
-function RoadmapCard() {
+function RoadmapSummaryCard() {
   const [feedbackList] = useAsyncValue() as [Feedback[]];
   const countByStatus = getCountbyStatus(feedbackList);
   const statusList = [
@@ -69,4 +69,4 @@ function getCountbyStatus(feedbackList: Feedback[]) {
   return countByStatus;
 }
 
-export default RoadmapCard;
+export default RoadmapSummaryCard;

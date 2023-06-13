@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useLoaderData, useNavigation, useSubmit } from "react-router-dom";
 import { ReactComponent as CloseIcon } from "@assets/close-icon.svg";
 import { ReactComponent as HamIcon } from "@assets/ham-icon.svg";
@@ -6,7 +6,7 @@ import Drawer from "@components/Drawer";
 import Button from "@components/Button";
 import Card from "@components/Card";
 import Tag from "@components/Tag";
-import RoadmapCard from "@components/RoadmapCard";
+import RoadmapSummaryCard from "@components/RoadmapSummaryCard";
 import styles from "./sidebar.module.css";
 
 const { CheckableTag } = Tag;
@@ -65,7 +65,7 @@ function Sidebar({ open = false, toggle }: SidebarProps) {
           </CheckableTag>
         ))}
       </Card>
-      <RoadmapCard />
+      <RoadmapSummaryCard />
     </Drawer>
   );
 }
