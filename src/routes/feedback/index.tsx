@@ -1,5 +1,5 @@
 import { Params, ActionFunctionArgs, defer } from "react-router-dom";
-import { Feedback } from "src/interfaces/Feedback";
+import { Feedback, FeedbackDetails, Comment } from "src/interfaces/Feedback";
 import {
   getCurrentUser,
   getFeedbackById,
@@ -28,11 +28,24 @@ export async function action({ request, params }: ActionFunctionArgs) {
   const intent = formData.get("intent");
   const currentUser = await getCurrentUser();
 
-  console.log(intent);
-
   if (intent === "addComment") {
-    const comment = formData.get("comment");
-    console.log(comment);
+    const feedback = await getFeedbackById(params.feedbackId);
+    const commentText = formData.get("comment")?.toString() ?? "";
+    const comment: Comment = {
+      id: crypto.randomUUID(),
+      content: commentText,
+      user: {
+        image: currentUser.image,
+        name: currentUser.name,
+        username: currentUser.username,
+      },
+    };
+    return updateFeedbackById(params.feedbackId, {
+      comments:
+        Array.isArray(feedback.comments) && feedback.comments.length > 0
+          ? feedback.comments?.concat(comment)
+          : [comment],
+    } as FeedbackDetails);
   } else if (intent === "upVote") {
     const upVoted = formData.get("upVoted") === "true";
     console.log(upVoted);
@@ -50,11 +63,10 @@ export async function action({ request, params }: ActionFunctionArgs) {
     };
 
     await updateCurrentUser(updatedCurrentUser);
+    return updateFeedbackById(params.feedbackId, {
+      upvotes: Number(formData.get("upvotes")),
+    } as Feedback);
   }
-
-  return updateFeedbackById(params.feedbackId, {
-    upvotes: Number(formData.get("upvotes")),
-  } as Feedback);
 }
 
 export default function FeedbackDetailsRoute() {
