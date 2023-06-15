@@ -4,7 +4,7 @@ import { useFetcher } from "react-router-dom";
 
 interface VoteButtonProps {
   className?: string;
-  feedbackId: number;
+  feedbackId: string;
   count?: number;
   upVoted?: boolean;
 }
@@ -44,6 +44,7 @@ function VoteButton({
               upVoted: (upvotes > count).toString(),
               upvotes: upvotes.toString(),
               feedbackId: feedbackId.toString(),
+              intent: "upVote",
             },
             { method: "put" }
           );
