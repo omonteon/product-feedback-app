@@ -41,10 +41,10 @@ export interface CurrentUser {
 }
 
 export interface Comment {
-  id: number;
+  id: string;
   content: string;
   user: User;
-  replies: CommentReply[];
+  replies?: CommentReply[];
 }
 
 export interface CommentReply {
