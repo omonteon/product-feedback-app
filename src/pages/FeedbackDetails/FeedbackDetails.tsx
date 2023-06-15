@@ -46,7 +46,6 @@ function FeedbackDetailsPage() {
           <FeedbackDetails />
         </Await>
       </Suspense>
-      <AddComment className={styles.addComment} />
     </main>
   );
 }
@@ -76,6 +75,8 @@ function FeedbackDetails() {
           })}
         </Card>
       ) : null}
+
+      <AddComment className={styles.addComment} feedbackId={feedback.id} />
     </div>
   );
 }
