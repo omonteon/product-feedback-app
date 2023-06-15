@@ -35,7 +35,9 @@ async function getCurrentUser(): Promise<CurrentUser> {
   });
 }
 
-async function getFeedbackById(id: string | undefined): Promise<Feedback> {
+async function getFeedbackById(
+  id: string | undefined
+): Promise<FeedbackDetails> {
   if (id === undefined) {
     throw new Error("There was no id provided to get the feedback item.");
   }
