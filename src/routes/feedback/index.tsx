@@ -25,19 +25,32 @@ export async function action({ request, params }: ActionFunctionArgs) {
   }
   const feedbackId = params.feedbackId;
   const formData = await request.formData();
-  const upVoted = formData.get("upVoted") === "true";
+  const intent = formData.get("intent");
   const currentUser = await getCurrentUser();
-  // TODO: I don't think this could should be here...
-  const updatedCurrentUser = {
-    ...currentUser,
-    votes: upVoted
-      ? currentUser.votes?.concat({ productRequestId: feedbackId, voted: "up" })
-      : currentUser.votes?.filter(
-          (vote) => vote.productRequestId !== feedbackId
-        ),
-  };
 
-  await updateCurrentUser(updatedCurrentUser);
+  console.log(intent);
+
+  if (intent === "addComment") {
+    const comment = formData.get("comment");
+    console.log(comment);
+  } else if (intent === "upVote") {
+    const upVoted = formData.get("upVoted") === "true";
+    console.log(upVoted);
+    // TODO: I don't think this could should be here...
+    const updatedCurrentUser = {
+      ...currentUser,
+      votes: upVoted
+        ? currentUser.votes?.concat({
+            productRequestId: feedbackId,
+            voted: "up",
+          })
+        : currentUser.votes?.filter(
+            (vote) => vote.productRequestId !== feedbackId
+          ),
+    };
+
+    await updateCurrentUser(updatedCurrentUser);
+  }
 
   return updateFeedbackById(params.feedbackId, {
     upvotes: Number(formData.get("upvotes")),
