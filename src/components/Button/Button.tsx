@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { MouseEventHandler, ReactNode } from "react";
 import { Link } from "react-router-dom";
 import styles from "./button.module.css";
 
@@ -16,7 +16,7 @@ interface ButtonProps {
   tabIndex?: number;
   type?: ButtonType;
   to?: string;
-  onClick?: () => void;
+  onClick?: MouseEventHandler;
   children?: ReactNode;
   ariaExpanded?: boolean;
   ariaControls?: string;
