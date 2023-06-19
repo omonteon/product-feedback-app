@@ -68,6 +68,7 @@ function FeedbackDetails() {
             return (
               <Comment
                 key={comment.id}
+                feedbackId={feedback.id}
                 comment={comment}
                 className={styles.comment}
               />
@@ -76,7 +77,10 @@ function FeedbackDetails() {
         </Card>
       ) : null}
 
-      <AddComment className={styles.addComment} feedbackId={feedback.id} />
+      <Card className={`${styles.addComment}`}>
+        <h3>Add Comment</h3>
+        <AddComment feedbackId={feedback.id} />
+      </Card>
     </div>
   );
 }
