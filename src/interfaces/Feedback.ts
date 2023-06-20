@@ -48,6 +48,7 @@ export interface Comment {
 }
 
 export interface CommentReply {
+  id: string;
   content: string;
   replyingTo: string;
   user: User;
