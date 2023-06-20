@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import RootRoute, {
   loader as homeLoader,
@@ -17,7 +18,6 @@ import FeedbackEditRoute, {
 import { action as deleteFeedbackAction } from "./routes/feedback/delete";
 import RoadmapRoute from "./routes/roadmap";
 import dataJSON from "./data.json";
-import { useEffect, useState } from "react";
 
 function App() {
   const [dataLoaded, setDataLoaded] = useState(false);
@@ -29,8 +29,6 @@ function App() {
     }
     setDataLoaded(true);
   }, []);
-
-  console.log(dataLoaded);
 
   if (dataLoaded) {
     const router = createBrowserRouter([
