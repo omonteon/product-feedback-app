@@ -20,21 +20,26 @@ function CommentReply({
   const { user, content, replyingTo } = reply;
   const [replyFormVisible, setReplyFormVisible] = useState(false);
 
-  function handleClickReply() {
+  function toggleReply() {
     setReplyFormVisible(!replyFormVisible);
   }
 
   return (
     <div className={`${className || ""}`}>
-      <CommentHeader user={user} onClickReply={handleClickReply} />
+      <CommentHeader user={user} onClickReply={toggleReply} />
       <p className={styles.content}>
         <b>@{replyingTo}</b> {content}
       </p>
-      {replyFormVisible ? (
-        <div className={styles.replyForm}>
-          <AddComment feedbackId={feedbackId} commentId={commentId} />
-        </div>
-      ) : null}
+      <div
+        className={styles.replyForm}
+        style={{ display: replyFormVisible ? "block" : "none" }}
+      >
+        <AddComment
+          feedbackId={feedbackId}
+          commentId={commentId}
+          onCommentSubmitted={() => setReplyFormVisible(false)}
+        />
+      </div>
     </div>
   );
 }

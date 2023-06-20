@@ -6,11 +6,16 @@ import styles from "./addComment.module.css";
 interface AddCommentProps {
   feedbackId: string;
   commentId?: string;
+  onCommentSubmitted?: () => void;
 }
 
 const MAX_CHARS = 250;
 
-function AddComment({ feedbackId, commentId }: AddCommentProps) {
+function AddComment({
+  feedbackId,
+  commentId,
+  onCommentSubmitted = () => {},
+}: AddCommentProps) {
   const [comment, setComment] = useState("");
   const [charsLeft, setCharsLeft] = useState(MAX_CHARS);
   const fetcher = useFetcher();
@@ -20,16 +25,17 @@ function AddComment({ feedbackId, commentId }: AddCommentProps) {
     if (fetcher.state === "loading") {
       setComment("");
       setCharsLeft(MAX_CHARS);
+      onCommentSubmitted();
     }
   }, [fetcher.state]);
 
-  const handleTextAreaChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
+  function handleTextAreaChange(event: ChangeEvent<HTMLTextAreaElement>) {
     const textLength = event.target.value.length;
     if (MAX_CHARS - textLength >= 0) {
       setComment(event.target.value);
     }
     setCharsLeft(MAX_CHARS - textLength);
-  };
+  }
 
   return (
     <Form className={`${styles.form} ${submitting ? styles.submitting : ""}`}>
@@ -68,7 +74,9 @@ function AddComment({ feedbackId, commentId }: AddCommentProps) {
             }
           }}
         >
-          {submitting ? "Posting Comment..." : "Post Comment"}
+          {submitting
+            ? `${commentId ? "Posting Reply..." : "Posting Comment..."}`
+            : `${commentId ? "Post Reply" : "Post Comment"}`}
         </Button>
       </footer>
     </Form>
