@@ -3,6 +3,8 @@ import {
   Await,
   useAsyncValue,
   useLoaderData,
+  useNavigation,
+  useSearchParams,
   useSubmit,
 } from "react-router-dom";
 import { CurrentUser, Feedback, Vote } from "src/interfaces/Feedback";
@@ -60,8 +62,14 @@ const sortByOptions = [
 
 function HomePage() {
   const submit = useSubmit();
+  const navigation = useNavigation();
+  const [searchParams] = useSearchParams();
   const { data } = useLoaderData() as HomeData;
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const defaultSortingOption =
+    sortByOptions.find(
+      (option) => option.value === searchParams.get("sortBy")
+    ) ?? sortByOptions[0];
 
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
@@ -81,10 +89,9 @@ function HomePage() {
             <main className={styles.main}>
               <header>
                 <p>
-                  {/* TODO: Create and use dropdown component here */}
                   Sort by :{" "}
                   <b>
-                    Most Upvotes <ChevronIcon />{" "}
+                    {defaultSortingOption.label} <ChevronIcon />{" "}
                   </b>
                 </p>
                 <Button to="/feedback/new" disabled={true}>
@@ -101,46 +108,51 @@ function HomePage() {
         }
       >
         <Await resolve={data} errorElement={<p>Error loading home data</p>}>
-          <header className={styles.header}>
-            <div>
-              <h1>Frontend Mentor</h1>
-              <h2>Feedback board</h2>
-            </div>
-            {/* TODO: Fix keyboard navigation which enters the sidebar when is hidden */}
-            <Sidebar open={sidebarOpen} toggle={toggleSidebar} />
-          </header>
-          <main className={styles.main}>
-            <header>
-              <Select
-                className={styles.select}
-                searchable={false}
-                options={sortByOptions}
-                values={[sortByOptions[0]]}
-                contentRenderer={({ state }) => (
-                  <div style={{ cursor: "pointer" }}>
-                    Sort by : <b>{state.values[0].label}</b>
-                  </div>
-                )}
-                dropdownHandleRenderer={({ state }) => (
-                  // if dropdown is open show "–" else show "+"
-                  <span
-                    className={`${styles.selectHandle} ${
-                      state.dropdown ? styles.active : ""
-                    }`}
-                  >
-                    <ChevronIcon />
-                  </span>
-                )}
-                // disabled={submittingForm}
-                onChange={(values) => {
-                  submit({ sortBy: values[0].value });
-                }}
-                required
-              />
-              <Button to="/feedback/new">+ Add Feedback</Button>
+          <div
+            className={
+              navigation.state === "loading" ? styles.loading : undefined
+            }
+          >
+            <header className={styles.header}>
+              <div>
+                <h1>Frontend Mentor</h1>
+                <h2>Feedback board</h2>
+              </div>
+              {/* TODO: Fix keyboard navigation which enters the sidebar when is hidden */}
+              <Sidebar open={sidebarOpen} toggle={toggleSidebar} />
             </header>
-            <FeedbackList />
-          </main>
+            <main className={styles.main}>
+              <header>
+                <Select
+                  className={styles.select}
+                  searchable={false}
+                  options={sortByOptions}
+                  values={[defaultSortingOption]}
+                  contentRenderer={({ state }) => (
+                    <div style={{ cursor: "pointer" }}>
+                      Sort by : <b>{state.values[0].label}</b>
+                    </div>
+                  )}
+                  dropdownHandleRenderer={({ state }) => (
+                    <span
+                      className={`${styles.selectHandle} ${
+                        state.dropdown ? styles.active : ""
+                      }`}
+                    >
+                      <ChevronIcon />
+                    </span>
+                  )}
+                  disabled={navigation.state === "loading"}
+                  onChange={(values) => {
+                    submit({ sortBy: values[0].value });
+                  }}
+                  required
+                />
+                <Button to="/feedback/new">+ Add Feedback</Button>
+              </header>
+              <FeedbackList />
+            </main>
+          </div>
         </Await>
       </Suspense>
     </>
