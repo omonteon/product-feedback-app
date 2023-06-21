@@ -6,7 +6,10 @@ import {
   ProductRequest,
 } from "src/interfaces/Feedback";
 
-async function getFeedbackList(query: string): Promise<Feedback[]> {
+async function getFeedbackList(
+  query: string,
+  sortBy: string
+): Promise<Feedback[]> {
   const dataStr: string = localStorage.getItem("data") ?? "";
   const data: FeedbackAPIResponse = JSON.parse(dataStr ?? "");
   const productRequests: ProductRequest[] =
@@ -15,10 +18,15 @@ async function getFeedbackList(query: string): Promise<Feedback[]> {
           (pr) => pr.category.toLowerCase() === query.toLowerCase()
         )
       : data.productRequests;
+  const sortedProductRequests = sortBy
+    ? productRequests.sort((prA, prB) => {
+        return sortByVotesOrComments(sortBy, prA, prB);
+      })
+    : productRequests;
 
   return new Promise((resolve) => {
     setTimeout(() => {
-      resolve(adaptProductRequestsToFeedbackList(productRequests));
+      resolve(adaptProductRequestsToFeedbackList(sortedProductRequests));
     }, 1000);
   });
 }
@@ -139,6 +147,32 @@ async function deleteFeedback(id: string | undefined) {
       resolve(`Feedback item with id: ${id} was successfully deleted.`);
     }, 1000);
   });
+}
+
+// Helpers
+function sortByVotesOrComments(
+  sortBy: string,
+  prA: ProductRequest,
+  prB: ProductRequest
+) {
+  const prAComments = prA.comments?.length ?? 0;
+  const prBComments = prB.comments?.length ?? 0;
+
+  switch (sortBy) {
+    case "moreVotes":
+      return prB.upvotes - prA.upvotes;
+
+    case "lessVotes":
+      return prA.upvotes - prB.upvotes;
+    case "moreComments":
+      return prBComments - prAComments;
+
+    case "lessComments":
+      return prAComments - prBComments;
+
+    default:
+      return prB.upvotes - prA.upvotes;
+  }
 }
 
 // Adapters

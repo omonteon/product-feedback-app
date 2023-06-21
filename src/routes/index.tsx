@@ -15,7 +15,8 @@ import HomePage from "../pages/Home";
 export async function loader({ request }: LoaderFunctionArgs) {
   const url = new URL(request.url);
   const q = url.searchParams.get("q") ?? "";
-  const feedbackListPromise = getFeedbackList(q);
+  const sortBy = url.searchParams.get("sortBy") ?? "";
+  const feedbackListPromise = getFeedbackList(q, sortBy);
   const currentUserPromise = getCurrentUser();
 
   return defer({

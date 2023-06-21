@@ -1,5 +1,10 @@
 import { Suspense, useState } from "react";
-import { Await, useAsyncValue, useLoaderData } from "react-router-dom";
+import {
+  Await,
+  useAsyncValue,
+  useLoaderData,
+  useSubmit,
+} from "react-router-dom";
 import { CurrentUser, Feedback, Vote } from "src/interfaces/Feedback";
 import { ReactComponent as ChevronIcon } from "@assets/chevron-icon.svg";
 import Select from "react-dropdown-select";
@@ -47,13 +52,14 @@ type HomeData = {
 };
 
 const sortByOptions = [
-  { label: "Most Upvotes", value: "+votes" },
-  { label: "Least Upvotes", value: "-votes" },
-  { label: "Most Comments", value: "+comments" },
-  { label: "Least Comments", value: "-comments" },
+  { label: "Most Upvotes", value: "moreVotes" },
+  { label: "Least Upvotes", value: "lessVotes" },
+  { label: "Most Comments", value: "moreComments" },
+  { label: "Least Comments", value: "lessComments" },
 ];
 
 function HomePage() {
+  const submit = useSubmit();
   const { data } = useLoaderData() as HomeData;
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
@@ -127,9 +133,7 @@ function HomePage() {
                 )}
                 // disabled={submittingForm}
                 onChange={(values) => {
-                  console.log(values);
-
-                  // setCategory(values[0].value as FeedbackTag);
+                  submit({ sortBy: values[0].value });
                 }}
                 required
               />
