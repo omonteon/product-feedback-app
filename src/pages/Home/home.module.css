@@ -54,3 +54,33 @@
 .loadingList {
   margin: 2rem 1.5rem;
 }
+
+div.select {
+  border: none;
+  border-radius: 5px;
+  font-size: 0.8125rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+div.select:focus,
+div.select:focus-within,
+div.select:active {
+  outline: var(--primary-blue) solid 1px;
+  box-shadow: none;
+}
+
+.selectHandle {
+  display: flex;
+  width: 0.5rem;
+  margin-left: 0.5rem;
+}
+
+span.selectHandle path {
+  stroke: white;
+}
+
+.selectHandle.active {
+  transform: rotate(180deg);
+}

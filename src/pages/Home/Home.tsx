@@ -2,6 +2,7 @@ import { Suspense, useState } from "react";
 import { Await, useAsyncValue, useLoaderData } from "react-router-dom";
 import { CurrentUser, Feedback, Vote } from "src/interfaces/Feedback";
 import { ReactComponent as ChevronIcon } from "@assets/chevron-icon.svg";
+import Select from "react-dropdown-select";
 import Button from "@components/Button";
 import Sidebar from "@components/Sidebar";
 import EmptyFeedback from "@components/EmptyFeedback";
@@ -14,7 +15,7 @@ import styles from "./home.module.css";
 // 0. Add "status" field when editing feedback. Filter suggestions in home to show only "suggestions" (4 pomodoros) [DONE in ~1 pomodoro]
 // 1. Implement filtering by tag (3 pomodoros) [Done in ~3 pomodoros]
 // 2. Show correct number of feedback by category in the sidebar (2 pomodoros) [DONE in 1 pomodoro]
-// 3. Implement comment creation and replies too (4 pomodoros)
+// 3. Implement comment creation and replies too (4 pomodoros) [Done 6 pomodoros]
 // 4. Implement sorting dropdown (2 pomodoros)
 // 5. Implement sorting logic in the "API" (2 pomodoros)
 // 6. Create RoadmapCard component (1 pomodoro)
@@ -44,6 +45,13 @@ type HomeDataTuple = [Feedback[], CurrentUser];
 type HomeData = {
   data: HomeDataTuple;
 };
+
+const sortByOptions = [
+  { label: "Most Upvotes", value: "+votes" },
+  { label: "Least Upvotes", value: "-votes" },
+  { label: "Most Comments", value: "+comments" },
+  { label: "Least Comments", value: "-comments" },
+];
 
 function HomePage() {
   const { data } = useLoaderData() as HomeData;
@@ -97,13 +105,34 @@ function HomePage() {
           </header>
           <main className={styles.main}>
             <header>
-              <p>
-                {/* TODO: Create and use dropdown component here */}
-                Sort by :{" "}
-                <b>
-                  Most Upvotes <ChevronIcon />{" "}
-                </b>
-              </p>
+              <Select
+                className={styles.select}
+                searchable={false}
+                options={sortByOptions}
+                values={[sortByOptions[0]]}
+                contentRenderer={({ state }) => (
+                  <div style={{ cursor: "pointer" }}>
+                    Sort by : <b>{state.values[0].label}</b>
+                  </div>
+                )}
+                dropdownHandleRenderer={({ state }) => (
+                  // if dropdown is open show "–" else show "+"
+                  <span
+                    className={`${styles.selectHandle} ${
+                      state.dropdown ? styles.active : ""
+                    }`}
+                  >
+                    <ChevronIcon />
+                  </span>
+                )}
+                // disabled={submittingForm}
+                onChange={(values) => {
+                  console.log(values);
+
+                  // setCategory(values[0].value as FeedbackTag);
+                }}
+                required
+              />
               <Button to="/feedback/new">+ Add Feedback</Button>
             </header>
             <FeedbackList />
