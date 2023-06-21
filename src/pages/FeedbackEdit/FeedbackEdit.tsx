@@ -1,4 +1,4 @@
-import { Await, Link, useLoaderData } from "react-router-dom";
+import { Await, Link, useLoaderData, useNavigate } from "react-router-dom";
 import { ReactComponent as ChevronLeftIcon } from "@assets/chevron-left-icon.svg";
 import { ReactComponent as PlusIcon } from "@assets/plus-icon.svg";
 import { Feedback } from "src/interfaces/Feedback";
@@ -9,6 +9,7 @@ import { Suspense } from "react";
 import Skeleton from "@components/Skeleton";
 
 function FeedbackEditPage() {
+  const navigate = useNavigate();
   const { feedbackPromise } = useLoaderData() as {
     feedbackPromise: Promise<Feedback>;
   };
@@ -16,7 +17,7 @@ function FeedbackEditPage() {
   return (
     <div className={styles.container}>
       <header>
-        <Link to="..">
+        <Link to=".." onClick={() => navigate(-1)}>
           <ChevronLeftIcon /> Go Back
         </Link>
       </header>

@@ -1,4 +1,10 @@
-import { Await, Link, useAsyncValue, useLoaderData } from "react-router-dom";
+import {
+  Await,
+  Link,
+  useAsyncValue,
+  useLoaderData,
+  useNavigate,
+} from "react-router-dom";
 import {
   CurrentUser,
   FeedbackDetails as IFeedbackDetails,
@@ -20,12 +26,13 @@ type FeedbackDetailsData = {
 };
 
 function FeedbackDetailsPage() {
+  const navigate = useNavigate();
   const { data } = useLoaderData() as FeedbackDetailsData;
 
   return (
     <main className={styles.feedbackDetails}>
       <header>
-        <Link to="..">
+        <Link to=".." onClick={() => navigate(-1)}>
           <ChevronLeftIcon /> Go Back
         </Link>
 
