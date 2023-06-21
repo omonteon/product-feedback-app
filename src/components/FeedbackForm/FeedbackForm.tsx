@@ -67,6 +67,7 @@ function FeedbackForm({ defaultFeedback, editing = false }: FeedbackFormProps) {
         <p>Choose a category for your feedback</p>
         <Select
           className={styles.select}
+          dropdownGap={-60}
           searchable={false}
           options={categories}
           values={

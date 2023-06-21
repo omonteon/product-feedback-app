@@ -42,3 +42,21 @@ form > a > button {
 .formSubmitted .formElement:has(textarea:invalid) .errorMsg {
   display: block;
 }
+
+div.select {
+  padding: 0.875rem 1rem;
+  border: none;
+  border-radius: 5px;
+  font-size: 0.8125rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--gray-light-100);
+}
+
+div.select:focus,
+div.select:focus-within,
+div.select:active {
+  outline: var(--primary-blue) solid 1px;
+  box-shadow: none;
+}
