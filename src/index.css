@@ -97,7 +97,7 @@ textarea {
 textarea::placeholder,
 input,
 select {
-  color: #8c92b3; /* TODO: Maybe make this a variable */
+  color: #8c92b3;
 }
 
 input {
@@ -116,7 +116,7 @@ textarea:focus {
 }
 
 input::placeholder {
-  color: #8c92b3; /* TODO: Maybe make this a variable */
+  color: #8c92b3;
 }
 
 .sr-only {

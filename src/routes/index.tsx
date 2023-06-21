@@ -31,10 +31,8 @@ export async function action({ request }: ActionFunctionArgs) {
   if (!feedbackId) {
     throw new Error("Feedback id missing");
   }
-  // TODO: Maybe we can get the "checked" property ??
   const upVoted = formData.get("upVoted") === "true";
   const currentUser = await getCurrentUser();
-  // TODO: I don't think this could should be here...
   const updatedCurrentUser = {
     ...currentUser,
     votes: upVoted

@@ -15,7 +15,6 @@ import FeedbackEditRoute, {
   loader as feedbackEditLoader,
   action as feedbackEditAction,
 } from "./routes/feedback/edit";
-import { action as deleteFeedbackAction } from "./routes/feedback/delete";
 import RoadmapRoute from "./routes/roadmap";
 import dataJSON from "./data.json";
 
@@ -54,10 +53,6 @@ function App() {
         element: <FeedbackEditRoute />,
         loader: feedbackEditLoader,
         action: feedbackEditAction,
-      },
-      {
-        path: "/feedback/:feedbackId/delete",
-        action: deleteFeedbackAction,
       },
       {
         path: "/roadmap",

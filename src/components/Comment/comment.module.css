@@ -34,7 +34,7 @@
 .replies > div {
   padding-left: 1.5rem;
   padding-bottom: 1.5rem;
-  border-left: 1px solid rgb(140 146 179 / 25%); /* TODO: Maybe create a variable for this color ? */
+  border-left: 1px solid rgb(140 146 179 / 25%);
 }
 
 /* Styles necessary to draw left border a little bit into the last element */

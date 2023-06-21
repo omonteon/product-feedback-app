@@ -23,8 +23,8 @@ import styles from "./home.module.css";
 // 1. Implement filtering by tag (3 pomodoros) [Done in ~3 pomodoros]
 // 2. Show correct number of feedback by category in the sidebar (2 pomodoros) [DONE in 1 pomodoro]
 // 3. Implement comment creation and replies too (4 pomodoros) [Done 6 pomodoros]
-// 4. Implement sorting dropdown (2 pomodoros)
-// 5. Implement sorting logic in the "API" (2 pomodoros)
+// 4. Implement sorting dropdown (2 pomodoros) [Done 2 pomodoros]
+// 5. Implement sorting logic in the "API" (2 pomodoros) [Done 2 pomodoros]
 // 6. Create RoadmapCard component (1 pomodoro)
 // 7. Create Column component (1 pomodoro)
 // 8. Create Tabs component (3 pomodoros)
