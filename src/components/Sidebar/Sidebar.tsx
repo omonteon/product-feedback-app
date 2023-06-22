@@ -6,6 +6,7 @@ import Drawer from "@components/Drawer";
 import Button from "@components/Button";
 import RoadmapSummaryCard from "@components/RoadmapSummaryCard";
 import TagsCard from "@components/TagsCard";
+import styles from "./sidebar.module.css";
 
 interface SidebarProps {
   open: boolean;
@@ -31,7 +32,7 @@ function Sidebar({ open = false, toggle }: SidebarProps) {
       }
       toggle={toggle}
     >
-      <TagsCard defaultTag={q || "All"} />
+      <TagsCard className={styles.tagsCard} defaultTag={q || "All"} />
       <RoadmapSummaryCard feedbackList={feedbackList} />
     </Drawer>
   );

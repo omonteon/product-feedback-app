@@ -6,10 +6,18 @@
   display: none;
 }
 
+.headerCards > div {
+  flex: 1;
+}
+
 @media (min-width: 768px) {
+  .header {
+    margin: 3.5rem 2.5rem 2.5rem;
+  }
+
   .headerCards {
     display: flex;
-    column-gap: 0.5rem;
+    column-gap: 0.625rem;
   }
 }
 
