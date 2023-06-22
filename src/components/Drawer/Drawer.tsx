@@ -29,8 +29,11 @@ function Drawer({
   }, [isOpen, toggle]);
 
   return (
-    <FocusTrap paused={!isOpen}>
-      <div>
+    <FocusTrap
+      paused={!isOpen}
+      focusTrapOptions={{ fallbackFocus: "#fallbackTabbable" }}
+    >
+      <div id="fallbackTabbable" tabIndex={-1}>
         {toggleButton}
         <div className={`${styles.overlay} ${isOpen ? styles.open : ""}`}></div>
         <aside
