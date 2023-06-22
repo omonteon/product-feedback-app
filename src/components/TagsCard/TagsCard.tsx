@@ -4,7 +4,7 @@ import Card from "@components/Card";
 import CheckableTag from "@components/Tag/CheckableTag";
 import styles from "./tagsCard.module.css";
 
-function TagsCard({ defaultTag = "All" }) {
+function TagsCard({ className = "", defaultTag = "All" }) {
   const navigation = useNavigation();
   const [checkedTag, setCheckedTag] = useState(defaultTag);
   const submit = useSubmit();
@@ -22,7 +22,11 @@ function TagsCard({ defaultTag = "All" }) {
   };
 
   return (
-    <Card className={`${styles.tagsCard} ${searching ? styles.searching : ""}`}>
+    <Card
+      className={`${styles.tagsCard} ${searching ? styles.searching : ""} ${
+        className ?? ""
+      }`}
+    >
       {/* TODO: This might be better to do as a list for a11y reasons. */}
       {tags.map((tag) => (
         <CheckableTag
