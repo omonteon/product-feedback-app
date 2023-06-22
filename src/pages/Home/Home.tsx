@@ -17,6 +17,8 @@ import FeedbackCard from "@components/FeedbackCard";
 import Skeleton from "@components/Skeleton";
 import Card from "@components/Card";
 import styles from "./home.module.css";
+import TagsCard from "@components/TagsCard";
+import RoadmapSummaryCard from "@components/RoadmapSummaryCard";
 
 // Next tasks
 // 0. Add "status" field when editing feedback. Filter suggestions in home to show only "suggestions" (4 pomodoros) [DONE in ~1 pomodoro]
@@ -85,6 +87,8 @@ function HomePage() {
                 <h1>Frontend Mentor</h1>
                 <h2>Feedback board</h2>
               </div>
+              <TagsCard defaultTag={"All"} />
+              <RoadmapSummaryCard feedbackList={[]} />
             </header>
             <main className={styles.main}>
               <header>
@@ -114,12 +118,24 @@ function HomePage() {
             }
           >
             <header className={styles.header}>
-              <div>
-                <h1>Frontend Mentor</h1>
-                <h2>Feedback board</h2>
+              <nav className={styles.nav}>
+                <div>
+                  <h1>Frontend Mentor</h1>
+                  <h2>Feedback board</h2>
+                </div>
+                {/* TODO: Fix keyboard navigation which enters the sidebar when is hidden */}
+                <Sidebar open={sidebarOpen} toggle={toggleSidebar} />
+              </nav>
+              <div className={styles.headerCards}>
+                <Card className={styles.title}>
+                  <div>
+                    <h1>Frontend Mentor</h1>
+                    <h2>Feedback board</h2>
+                  </div>
+                </Card>
+                <TagsCard defaultTag={"All"} />
+                <RoadmapSummaryCard feedbackList={[]} />
               </div>
-              {/* TODO: Fix keyboard navigation which enters the sidebar when is hidden */}
-              <Sidebar open={sidebarOpen} toggle={toggleSidebar} />
             </header>
             <main className={styles.main}>
               <header>
