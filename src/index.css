@@ -83,6 +83,12 @@ p {
   margin: 0;
 }
 
+@media (min-width: 768px) {
+  p {
+    font-size: 0.9375rem;
+  }
+}
+
 textarea {
   background-color: var(--gray-light-100);
   color: var(--gray-dark-b);
