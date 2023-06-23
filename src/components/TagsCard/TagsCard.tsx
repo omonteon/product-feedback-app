@@ -1,11 +1,14 @@
 import { useState } from "react";
-import { useNavigation, useSubmit } from "react-router-dom";
+import { useNavigation, useSearchParams, useSubmit } from "react-router-dom";
 import Card from "@components/Card";
 import CheckableTag from "@components/Tag/CheckableTag";
 import styles from "./tagsCard.module.css";
 
 function TagsCard({ className = "", defaultTag = "All" }) {
+  // console.log(defaultTag);
+
   const navigation = useNavigation();
+  const [searchParams] = useSearchParams();
   const [checkedTag, setCheckedTag] = useState(defaultTag);
   const submit = useSubmit();
 
@@ -17,8 +20,9 @@ function TagsCard({ className = "", defaultTag = "All" }) {
   const tags = ["All", "UI", "UX", "Enhancement", "Bug", "Feature"];
 
   const handleCheckTag = (tag: string) => {
+    const searchParamsObj = Object.fromEntries(searchParams);
     setCheckedTag(tag);
-    submit({ q: tag });
+    submit({ ...searchParamsObj, q: tag });
   };
 
   return (

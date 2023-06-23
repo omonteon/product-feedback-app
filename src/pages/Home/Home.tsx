@@ -83,12 +83,14 @@ function HomePage() {
         fallback={
           <div>
             <header className={styles.header}>
-              <div>
-                <h1>Frontend Mentor</h1>
-                <h2>Feedback board</h2>
-              </div>
-              <TagsCard defaultTag={"All"} />
-              <RoadmapSummaryCard feedbackList={[]} />
+              <nav className={styles.nav}>
+                <div>
+                  <h1>Frontend Mentor</h1>
+                  <h2>Feedback board</h2>
+                </div>
+              </nav>
+              {/* <TagsCard defaultTag={searchParams.get("q")?.toString()} />
+              <RoadmapSummaryCard feedbackList={[]} /> */}
             </header>
             <main className={styles.main}>
               <header>
@@ -133,7 +135,7 @@ function HomePage() {
                     <h2>Feedback board</h2>
                   </div>
                 </Card>
-                <TagsCard defaultTag={"All"} />
+                <TagsCard defaultTag={searchParams.get("q")?.toString()} />
                 <RoadmapSummaryCard feedbackList={[]} />
               </div>
             </header>
@@ -160,7 +162,8 @@ function HomePage() {
                   )}
                   disabled={navigation.state === "loading"}
                   onChange={(values) => {
-                    submit({ sortBy: values[0].value });
+                    const searchParamsObj = Object.fromEntries(searchParams);
+                    submit({ ...searchParamsObj, sortBy: values[0].value });
                   }}
                   required
                 />
