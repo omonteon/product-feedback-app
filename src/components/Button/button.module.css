@@ -1,10 +1,17 @@
 .button {
   color: white;
   border: none;
-  padding: 0.625rem 1rem;
+  padding: 10px 16px;
   font-size: 0.8125rem;
   font-weight: 700;
   border-radius: 10px;
+}
+
+@media (min-width: 768px) {
+  .button {
+    font-size: 0.875rem;
+    padding: 12px 24px;
+  }
 }
 
 .button:hover {
