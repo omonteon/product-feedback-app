@@ -10,6 +10,28 @@
   flex: 1;
 }
 
+.title {
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  background: radial-gradient(
+    128.88% 128.88% at 103.9% -10.39%,
+    #e84d70 0%,
+    #a337f6 53.09%,
+    #28a7ed 100%
+  );
+}
+
+.title h1 {
+  font-size: 1.25rem;
+}
+
+.title h2 {
+  font-size: 0.9375rem;
+  font-weight: 500;
+}
+
 @media (min-width: 768px) {
   .header {
     margin: 3.5rem 2.5rem 2.5rem;
