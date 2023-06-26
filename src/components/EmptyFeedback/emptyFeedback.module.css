@@ -15,3 +15,19 @@
   margin-bottom: 1.5rem;
   color: var(--gray-dark-c);
 }
+
+@media (min-width: 768px) {
+  .cardContainer {
+    padding: 110px 140px;
+  }
+  .cardContainer img {
+    width: 8rem;
+  }
+  .cardContainer h3 {
+    margin: 3rem 0 1rem 0;
+  }
+
+  .cardContainer p {
+    margin-bottom: 3rem;
+  }
+}

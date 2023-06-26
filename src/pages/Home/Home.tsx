@@ -156,10 +156,10 @@ function FeedbackListHeader({ loading }: { loading: boolean }) {
   return (
     <header>
       <div>
-        <h3 className={styles.suggestionCount}>
+        <h4 className={styles.suggestionCount}>
           {" "}
           <BulbIcon /> {feedbackList?.length ?? 0} suggestions
-        </h3>
+        </h4>
         <Select
           className={styles.select}
           searchable={false}

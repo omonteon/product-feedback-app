@@ -31,7 +31,7 @@ function RoadmapSummaryCard({ feedbackList }: RoadmapSummaryCardProps) {
   return (
     <Card className={styles.roadMapCard}>
       <header>
-        <h3>Roadmap</h3> <Link to="roadmap">View</Link>
+        <h4>Roadmap</h4> <Link to="roadmap">View</Link>
       </header>
       <ul>
         {statusList.map((status) => (
