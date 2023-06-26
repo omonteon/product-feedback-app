@@ -9,6 +9,7 @@ import {
 } from "react-router-dom";
 import { CurrentUser, Feedback, Vote } from "src/interfaces/Feedback";
 import { ReactComponent as ChevronIcon } from "@assets/chevron-icon.svg";
+import { ReactComponent as BulbIcon } from "@assets/bulb-icon.svg";
 import Select from "react-dropdown-select";
 import Button from "@components/Button";
 import Sidebar from "@components/Sidebar";
@@ -36,6 +37,7 @@ import RoadmapSummaryCard from "@components/RoadmapSummaryCard";
 // 12. Create Non-existent components for smartphone (2 pomodoros)
 // 13. Styles for desktop version (4 pomodoros)
 // 14. Write tests (8 pomodoros)
+// 15. Corner case: There are two suggestions with the same upvotes, the list is sorted by most upvotes and you upvote the bottom one. It should sort the list accordingly.
 
 // Next "Go to poland" tasks
 // @. Test accessibillity
@@ -63,15 +65,11 @@ const sortByOptions = [
 ];
 
 function HomePage() {
-  const submit = useSubmit();
   const navigation = useNavigation();
   const [searchParams] = useSearchParams();
   const { data } = useLoaderData() as HomeData;
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const defaultSortingOption =
-    sortByOptions.find(
-      (option) => option.value === searchParams.get("sortBy")
-    ) ?? sortByOptions[0];
+  const loading = navigation.state === "loading";
 
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
@@ -97,7 +95,7 @@ function HomePage() {
                 <p>
                   Sort by :{" "}
                   <b>
-                    {defaultSortingOption.label} <ChevronIcon />{" "}
+                    {sortByOptions[0].label} <ChevronIcon />{" "}
                   </b>
                 </p>
                 <Button to="/feedback/new" disabled={true}>
@@ -114,11 +112,7 @@ function HomePage() {
         }
       >
         <Await resolve={data} errorElement={<p>Error loading home data</p>}>
-          <div
-            className={
-              navigation.state === "loading" ? styles.loading : undefined
-            }
-          >
+          <div className={loading ? styles.loading : undefined}>
             <header className={styles.header}>
               <nav className={styles.nav}>
                 <div>
@@ -140,41 +134,61 @@ function HomePage() {
               </div>
             </header>
             <main className={styles.main}>
-              <header>
-                <Select
-                  className={styles.select}
-                  searchable={false}
-                  options={sortByOptions}
-                  values={[defaultSortingOption]}
-                  contentRenderer={({ state }) => (
-                    <div style={{ cursor: "pointer" }}>
-                      Sort by : <b>{state.values[0].label}</b>
-                    </div>
-                  )}
-                  dropdownHandleRenderer={({ state }) => (
-                    <span
-                      className={`${styles.selectHandle} ${
-                        state.dropdown ? styles.active : ""
-                      }`}
-                    >
-                      <ChevronIcon />
-                    </span>
-                  )}
-                  disabled={navigation.state === "loading"}
-                  onChange={(values) => {
-                    const searchParamsObj = Object.fromEntries(searchParams);
-                    submit({ ...searchParamsObj, sortBy: values[0].value });
-                  }}
-                  required
-                />
-                <Button to="/feedback/new">+ Add Feedback</Button>
-              </header>
+              <FeedbackListHeader loading={loading} />
               <FeedbackList />
             </main>
           </div>
         </Await>
       </Suspense>
     </>
+  );
+}
+
+function FeedbackListHeader({ loading }: { loading: boolean }) {
+  const submit = useSubmit();
+  const [feedbackList] = useAsyncValue() as HomeDataTuple;
+  const [searchParams] = useSearchParams();
+  const defaultSortingOption =
+    sortByOptions.find(
+      (option) => option.value === searchParams.get("sortBy")
+    ) ?? sortByOptions[0];
+
+  return (
+    <header>
+      <div>
+        <h3 className={styles.suggestionCount}>
+          {" "}
+          <BulbIcon /> {feedbackList?.length ?? 0} suggestions
+        </h3>
+        <Select
+          className={styles.select}
+          searchable={false}
+          options={sortByOptions}
+          values={[defaultSortingOption]}
+          contentRenderer={({ state }) => (
+            <div style={{ cursor: "pointer" }}>
+              Sort by : <b>{state.values[0].label}</b>
+            </div>
+          )}
+          dropdownHandleRenderer={({ state }) => (
+            <span
+              className={`${styles.selectHandle} ${
+                state.dropdown ? styles.active : ""
+              }`}
+            >
+              <ChevronIcon />
+            </span>
+          )}
+          disabled={loading}
+          onChange={(values) => {
+            const searchParamsObj = Object.fromEntries(searchParams);
+            submit({ ...searchParamsObj, sortBy: values[0].value });
+          }}
+          required
+        />
+      </div>
+      <Button to="/feedback/new">+ Add Feedback</Button>
+    </header>
   );
 }
 
@@ -186,16 +200,14 @@ function FeedbackList() {
       {feedbackList?.length === 0 ? (
         <EmptyFeedback />
       ) : (
-        feedbackList
-          .filter((f) => f.status === "suggestion")
-          .map((feedback) => (
-            <FeedbackCard
-              key={feedback.id}
-              feedback={feedback}
-              redirectTo={`feedback/${feedback.id}`}
-              upVoted={isFeedbackUpVoted(currentUser.votes ?? [], feedback.id)}
-            />
-          ))
+        feedbackList.map((feedback) => (
+          <FeedbackCard
+            key={feedback.id}
+            feedback={feedback}
+            redirectTo={`feedback/${feedback.id}`}
+            upVoted={isFeedbackUpVoted(currentUser.votes ?? [], feedback.id)}
+          />
+        ))
       )}
     </section>
   );
