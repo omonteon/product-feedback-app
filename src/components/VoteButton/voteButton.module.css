@@ -37,3 +37,12 @@
 .upVoteIcon path {
   stroke: var(--primary-blue);
 }
+
+@media (min-width: 768px) {
+  .voteButton {
+    flex-direction: column;
+    padding: 0.75rem 0.5rem 0.5rem;
+    row-gap: 0.25rem;
+    width: 40px;
+  }
+}
