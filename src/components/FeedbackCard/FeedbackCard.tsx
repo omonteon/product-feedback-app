@@ -30,13 +30,23 @@ function FeedbackCard({
       to={redirectTo}
       className={`${styles.feedbackCard} ${styles.linkWrapper}`}
     >
-      <h4>{title}</h4>
-      <p>{description}</p>
-      <Tag className={styles.feedbackCardTag}>{category}</Tag>
-      <footer>
-        <VoteButton feedbackId={id} upVoted={upVoted} count={upvotes} />
+      <div>
+        <aside>
+          <VoteButton feedbackId={id} upVoted={upVoted} count={upvotes} />
+        </aside>
+        <div>
+          <h4>{title}</h4>
+          <p>{description}</p>
+          <Tag className={styles.feedbackCardTag}>{category}</Tag>
+          <footer>
+            <VoteButton feedbackId={id} upVoted={upVoted} count={upvotes} />
+            <CommentCount count={commentCount} />
+          </footer>
+        </div>
+      </div>
+      <aside>
         <CommentCount count={commentCount} />
-      </footer>
+      </aside>
     </Card>
   );
 }

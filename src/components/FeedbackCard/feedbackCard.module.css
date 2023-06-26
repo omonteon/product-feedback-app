@@ -1,3 +1,7 @@
+.feedbackCard aside {
+  display: none;
+}
+
 .feedbackCard h4 {
   margin-bottom: 0.75rem;
 }
@@ -7,6 +11,7 @@
 }
 
 .feedbackCardTag {
+  text-transform: capitalize;
   margin-bottom: 1rem;
 }
 
@@ -22,4 +27,47 @@
   column-gap: 0.5rem;
   font-weight: 700;
   font-size: 0.8125rem;
+}
+
+/* TODO: This might improve it I used css grid instead of flex */
+
+@media (min-width: 768px) {
+  .feedbackCard {
+    display: flex;
+    column-gap: 2.5rem;
+    padding: 1.75rem 2rem;
+  }
+  .feedbackCard > aside {
+    display: flex;
+    align-items: center;
+    max-width: 2.5rem;
+  }
+  .feedbackCard > div > aside {
+    display: flex;
+    align-items: flex-start;
+    max-width: 2.5rem;
+  }
+  .feedbackCard > div {
+    flex: 1;
+    display: flex;
+    column-gap: 2.5rem;
+  }
+  .feedbackCardTag {
+    margin-bottom: 0;
+  }
+  .feedbackCard footer > label {
+    display: none;
+  }
+  .feedbackCard footer {
+    display: none;
+  }
+  .feedbackCard h4 {
+    margin-bottom: 0.25rem;
+  }
+  .feedbackCard p {
+    margin-bottom: 0.75rem;
+  }
+  .commentBubble {
+    font-size: 1rem;
+  }
 }
