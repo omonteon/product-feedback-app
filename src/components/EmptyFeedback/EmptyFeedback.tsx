@@ -7,7 +7,7 @@ function EmptyFeedback() {
   return (
     <Card className={styles.cardContainer}>
       <img src={EmptyFeedbackGraphic} alt="Empty feedback list" />
-      <h3>There is no feedback yet.</h3>
+      <h2>There is no feedback yet.</h2>
       <p>
         Got a suggestion? Found a bug that needs to be squashed? We love hearing
         about new ideas to improve our app.

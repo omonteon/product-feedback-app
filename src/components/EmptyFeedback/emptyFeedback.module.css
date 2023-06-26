@@ -7,7 +7,7 @@
   width: 6.25rem;
 }
 
-.cardContainer h3 {
+.cardContainer h2 {
   margin: 2rem 0 1rem 0;
 }
 
@@ -23,7 +23,7 @@
   .cardContainer img {
     width: 8rem;
   }
-  .cardContainer h3 {
+  .cardContainer h2 {
     margin: 3rem 0 1rem 0;
   }
 
