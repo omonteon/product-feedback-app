@@ -3,21 +3,29 @@ import {
   Feedback,
   FeedbackAPIResponse,
   FeedbackDetails,
+  FeedbackStatus,
   ProductRequest,
 } from "src/interfaces/Feedback";
 
 async function getFeedbackList(
-  query: string,
-  sortBy: string
+  query?: string,
+  sortBy?: string,
+  status?: FeedbackStatus
 ): Promise<Feedback[]> {
   const dataStr: string = localStorage.getItem("data") ?? "";
   const data: FeedbackAPIResponse = JSON.parse(dataStr ?? "");
-  const productRequests: ProductRequest[] =
-    query && query !== "All"
-      ? data.productRequests.filter(
-          (pr) => pr.category.toLowerCase() === query.toLowerCase()
-        )
-      : data.productRequests;
+  const productRequests: ProductRequest[] = data.productRequests.filter(
+    (pr) => {
+      let validPR = true;
+      if (status) {
+        validPR = pr.status.toLowerCase() === status.toLowerCase();
+      }
+      if (query && query !== "All") {
+        validPR = pr.category.toLowerCase() === query.toLowerCase();
+      }
+      return validPR;
+    }
+  );
   const sortedProductRequests = sortBy
     ? productRequests.sort((prA, prB) => {
         return sortByVotesOrComments(sortBy, prA, prB);
