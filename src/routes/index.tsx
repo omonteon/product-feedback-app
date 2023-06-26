@@ -3,7 +3,7 @@ import {
   LoaderFunctionArgs,
   defer,
 } from "react-router-dom";
-import { Feedback } from "src/interfaces/Feedback";
+import { Feedback, FeedbackStatus } from "src/interfaces/Feedback";
 import {
   getFeedbackList,
   getCurrentUser,
@@ -12,11 +12,18 @@ import {
 } from "@api/FeedbackAPI";
 import HomePage from "../pages/Home";
 
+type HomeURLSearchParams = {
+  q: string;
+  sortBy: string;
+};
+
 export async function loader({ request }: LoaderFunctionArgs) {
   const url = new URL(request.url);
-  const q = url.searchParams.get("q") ?? "";
-  const sortBy = url.searchParams.get("sortBy") ?? "";
-  const feedbackListPromise = getFeedbackList(q, sortBy);
+  const { q, sortBy } = Object.fromEntries(
+    url.searchParams
+  ) as HomeURLSearchParams;
+  const status: FeedbackStatus = "suggestion";
+  const feedbackListPromise = getFeedbackList(q, sortBy, status);
   const currentUserPromise = getCurrentUser();
 
   return defer({
