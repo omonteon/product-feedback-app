@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Form, useNavigation } from "react-router-dom";
+import { Form, useNavigate, useNavigation } from "react-router-dom";
 import { Feedback, FeedbackStatus, FeedbackTag } from "src/interfaces/Feedback";
 import Select from "react-dropdown-select";
 import Button from "@components/Button";
@@ -26,6 +26,7 @@ interface FeedbackFormProps {
 }
 
 function FeedbackForm({ defaultFeedback, editing = false }: FeedbackFormProps) {
+  const navigate = useNavigate();
   const submittingForm = useNavigation().state === "submitting";
   const defaultCategory = defaultFeedback?.category ?? "Feature";
   const defaultCategoryValue = categories.find(
@@ -149,7 +150,13 @@ function FeedbackForm({ defaultFeedback, editing = false }: FeedbackFormProps) {
           {submittingForm ? "Adding feedback..." : "Add Feedback"}
         </Button>
       )}
-      <Button to=".." type="dark" disabled={submittingForm} block>
+      <Button
+        to=".."
+        type="dark"
+        onClick={() => navigate(-1)}
+        disabled={submittingForm}
+        block
+      >
         Cancel
       </Button>
       {editing ? (
