@@ -20,7 +20,7 @@ async function getFeedbackList(
       if (status) {
         validPR = pr.status.toLowerCase() === status.toLowerCase();
       }
-      if (query && query !== "All") {
+      if (query && query !== "All" && validPR) {
         validPR = pr.category.toLowerCase() === query.toLowerCase();
       }
       return validPR;
