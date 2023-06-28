@@ -46,6 +46,10 @@
   color: var(--primary-blue);
 }
 
+.link:hover {
+  text-decoration: underline;
+}
+
 .block {
   width: 100%;
 }
