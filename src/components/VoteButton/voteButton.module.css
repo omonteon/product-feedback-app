@@ -9,6 +9,12 @@
   font-size: 0.8125rem;
 }
 
+.voteButton:hover,
+.voteButton input:hover {
+  cursor: pointer;
+  background-color: var(--hover-blue);
+}
+
 .voteButton input {
   margin: 0;
   position: absolute;
