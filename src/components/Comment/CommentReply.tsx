@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { CommentReply } from "src/interfaces/Feedback";
+import AvatarTestImage from "@assets/avatar-test.png";
 import CommentHeader from "./CommentHeader";
 import AddComment from "@components/AddComment";
 import styles from "./comment.module.css";
@@ -25,7 +26,8 @@ function CommentReply({
   }
 
   return (
-    <div className={`${className || ""}`}>
+    <div className={`${styles.comment} ${className || ""}`}>
+      <img src={AvatarTestImage} alt={user.name} />
       <CommentHeader user={user} onClickReply={toggleReply} />
       <p className={styles.content}>
         <b>@{replyingTo}</b> {content}

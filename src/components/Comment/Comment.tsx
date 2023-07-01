@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Comment } from "src/interfaces/Feedback";
+import AvatarTestImage from "@assets/avatar-test.png";
 import CommentReply from "./CommentReply";
 import CommentHeader from "./CommentHeader";
 import AddComment from "@components/AddComment";
@@ -20,18 +21,21 @@ function Comment({ comment, feedbackId, className = "" }: CommentProps) {
   }
 
   return (
-    <div className={`${styles.comment} ${className}`}>
-      <CommentHeader user={user} onClickReply={toggleReply} />
-      <p>{content}</p>
-      <div
-        className={styles.replyForm}
-        style={{ display: replyFormVisible ? "block" : "none" }}
-      >
-        <AddComment
-          feedbackId={feedbackId}
-          commentId={comment.id}
-          onCommentSubmitted={() => setReplyFormVisible(false)}
-        />
+    <>
+      <div className={`${styles.comment} ${className}`}>
+        <img src={AvatarTestImage} alt={user.name} />
+        <CommentHeader user={user} onClickReply={toggleReply} />
+        <p>{content}</p>
+        <div
+          className={styles.replyForm}
+          style={{ display: replyFormVisible ? "block" : "none" }}
+        >
+          <AddComment
+            feedbackId={feedbackId}
+            commentId={comment.id}
+            onCommentSubmitted={() => setReplyFormVisible(false)}
+          />
+        </div>
       </div>
       {replies.length > 0 ? (
         <div className={styles.replies}>
@@ -47,7 +51,7 @@ function Comment({ comment, feedbackId, className = "" }: CommentProps) {
           })}
         </div>
       ) : null}
-    </div>
+    </>
   );
 }
 

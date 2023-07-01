@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import {
   Await,
   Link,
@@ -16,9 +17,8 @@ import Button from "@components/Button";
 import Card from "@components/Card";
 import Comment from "@components/Comment";
 import AddComment from "@components/AddComment";
-import styles from "./feedbackDetails.module.css";
-import { Suspense } from "react";
 import Skeleton from "@components/Skeleton";
+import styles from "./feedbackDetails.module.css";
 
 type FeedbackDetailsDataTuple = [IFeedbackDetails, CurrentUser];
 type FeedbackDetailsData = {
