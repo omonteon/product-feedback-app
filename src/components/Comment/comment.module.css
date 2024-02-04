@@ -67,6 +67,10 @@
     font-size: 0.9375rem;
     grid-column-start: 2;
   }
+  /* .comment has an immediate sibling with class .replies */
+  .comment:has(+ .replies) {
+    border-bottom: none;
+  }
   .replyForm {
     grid-column-start: 2;
   }
