@@ -63,13 +63,36 @@
   .comment {
     column-gap: 2rem;
   }
-  .comment p {
-    font-size: 0.9375rem;
+  .comment > p {
     grid-column-start: 2;
+  }
+  .comment:has(+ .replies) > p {
+    font-size: 0.9375rem;
+    padding-bottom: 48px;
+  }
+  .comment:has(+ .replies) > p::before {
+    position: absolute;
+    /* TODO: Create variables for avatar size and maybe this space between the line and the avatar */
+    top: calc(40px + 28px);
+    left: 20px;
+    width: 1px;
+    height: calc(100% - 40px - 28px);
+    content: "";
+    border-left: 1px solid rgb(140 146 179 / 25%);
   }
   /* .comment has an immediate sibling with class .replies */
   .comment:has(+ .replies) {
+    position: relative;
     border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+  .comment + .replies {
+    margin-top: 0;
+  }
+  .replies > div {
+    padding-left: 3rem;
+    margin-left: 20px;
   }
   .replyForm {
     grid-column-start: 2;
