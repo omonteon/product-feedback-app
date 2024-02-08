@@ -96,6 +96,11 @@
     padding-left: 3rem;
     margin-left: 20px;
   }
+  .replies > div:last-child {
+    margin-top: -2rem;
+    border-left: none;
+    padding-bottom: 0;
+  }
   .replies .comment {
     padding-bottom: 1rem;
     margin-bottom: 0;
