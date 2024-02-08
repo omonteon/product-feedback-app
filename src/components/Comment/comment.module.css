@@ -62,13 +62,15 @@
 @media (min-width: 768px) {
   .comment {
     column-gap: 2rem;
+    row-gap: 10px;
+    margin-bottom: 2rem;
   }
   .comment > p {
     grid-column-start: 2;
   }
   .comment:has(+ .replies) > p {
     font-size: 0.9375rem;
-    padding-bottom: 48px;
+    padding-bottom: 32px;
   }
   .comment:has(+ .replies) > p::before {
     position: absolute;
@@ -93,6 +95,10 @@
   .replies > div {
     padding-left: 3rem;
     margin-left: 20px;
+  }
+  .replies .comment {
+    padding-bottom: 1rem;
+    margin-bottom: 0;
   }
   .replyForm {
     grid-column-start: 2;
