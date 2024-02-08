@@ -15,6 +15,7 @@ interface CommentProps {
 function Comment({ comment, feedbackId, className = "" }: CommentProps) {
   const { user, content, replies = [] } = comment;
   const [replyFormVisible, setReplyFormVisible] = useState(false);
+  const hasReplies = replies.length > 0;
 
   function toggleReply() {
     setReplyFormVisible(!replyFormVisible);
@@ -37,7 +38,7 @@ function Comment({ comment, feedbackId, className = "" }: CommentProps) {
           />
         </div>
       </div>
-      {replies.length > 0 ? (
+      {hasReplies ? (
         <div className={styles.replies}>
           {replies.map((reply) => {
             return (
