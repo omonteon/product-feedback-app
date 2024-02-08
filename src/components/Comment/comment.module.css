@@ -13,6 +13,13 @@
 .comment p {
   color: var(--gray-dark-c);
   grid-column-start: 1;
+  grid-column-end: span 2;
+}
+
+.comment:has(+ .replies) {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
 }
 
 .header {
@@ -66,6 +73,7 @@
   }
   .comment > p {
     grid-column-start: 2;
+    grid-column-end: 2;
   }
   .comment:has(+ .replies) > p {
     font-size: 0.9375rem;
