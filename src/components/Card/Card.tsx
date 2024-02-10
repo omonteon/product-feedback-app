@@ -8,7 +8,7 @@ interface CardProps {
   children?: ReactNode;
 }
 
-function Card({ className, to, children }: CardProps) {
+function Card({ className = "", to, children }: CardProps) {
   const content = (
     <div className={`${styles.card} ${className}`}>{children}</div>
   );
