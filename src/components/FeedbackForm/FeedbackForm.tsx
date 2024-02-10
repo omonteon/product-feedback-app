@@ -125,51 +125,44 @@ function FeedbackForm({ defaultFeedback, editing = false }: FeedbackFormProps) {
         ></textarea>
         <span className={styles.errorMsg}>Can&apos;t be empty</span>
       </div>
-      {editing ? (
+      <div className={styles.footer}>
+        {editing ? (
+          <Button
+            type="primaryPurple"
+            htmlType="submit"
+            name="intent"
+            value="update"
+            disabled={submittingForm}
+            onClick={handleSubmitForm}
+          >
+            {submittingForm ? "Saving changes" : "Save Changes"}
+          </Button>
+        ) : (
+          <Button
+            type="primaryPurple"
+            htmlType="submit"
+            name="intent"
+            value="add"
+            disabled={submittingForm}
+            onClick={handleSubmitForm}
+          >
+            {submittingForm ? "Adding feedback..." : "Add Feedback"}
+          </Button>
+        )}
         <Button
-          type="primaryPurple"
-          htmlType="submit"
-          name="intent"
-          value="update"
+          to=".."
+          type="dark"
+          onClick={() => navigate(-1)}
           disabled={submittingForm}
-          onClick={handleSubmitForm}
-          block
         >
-          {submittingForm ? "Saving changes" : "Save Changes"}
+          Cancel
         </Button>
-      ) : (
-        <Button
-          type="primaryPurple"
-          htmlType="submit"
-          name="intent"
-          value="add"
-          disabled={submittingForm}
-          onClick={handleSubmitForm}
-          block
-        >
-          {submittingForm ? "Adding feedback..." : "Add Feedback"}
-        </Button>
-      )}
-      <Button
-        to=".."
-        type="dark"
-        onClick={() => navigate(-1)}
-        disabled={submittingForm}
-        block
-      >
-        Cancel
-      </Button>
-      {editing ? (
-        <Button
-          type="danger"
-          htmlType="submit"
-          name="intent"
-          value="delete"
-          block
-        >
-          Delete
-        </Button>
-      ) : null}
+        {editing ? (
+          <Button type="danger" htmlType="submit" name="intent" value="delete">
+            Delete
+          </Button>
+        ) : null}
+      </div>
     </Form>
   );
 }
