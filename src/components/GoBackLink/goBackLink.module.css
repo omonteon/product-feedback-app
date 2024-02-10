@@ -1,0 +1,12 @@
+.link {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: var(--gray-dark-c);
+  text-decoration: none;
+}
+
+@media (min-width: 768px) {
+  .link {
+    font-size: 0.875rem;
+  }
+}
