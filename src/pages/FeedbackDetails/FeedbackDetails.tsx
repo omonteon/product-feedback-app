@@ -1,17 +1,10 @@
 import { Suspense } from "react";
-import {
-  Await,
-  Link,
-  useAsyncValue,
-  useLoaderData,
-  useNavigate,
-} from "react-router-dom";
+import { Await, useAsyncValue, useLoaderData } from "react-router-dom";
 import {
   CurrentUser,
   FeedbackDetails as IFeedbackDetails,
   Vote,
 } from "src/interfaces/Feedback";
-import { ReactComponent as ChevronLeftIcon } from "@assets/chevron-left-icon.svg";
 import FeedbackCard from "@components/FeedbackCard";
 import Button from "@components/Button";
 import Card from "@components/Card";
@@ -19,6 +12,7 @@ import Comment from "@components/Comment";
 import AddComment from "@components/AddComment";
 import Skeleton from "@components/Skeleton";
 import styles from "./feedbackDetails.module.css";
+import GoBackLink from "@components/GoBackLink";
 
 type FeedbackDetailsDataTuple = [IFeedbackDetails, CurrentUser];
 type FeedbackDetailsData = {
@@ -26,15 +20,12 @@ type FeedbackDetailsData = {
 };
 
 function FeedbackDetailsPage() {
-  const navigate = useNavigate();
   const { data } = useLoaderData() as FeedbackDetailsData;
 
   return (
     <main className={styles.feedbackDetails}>
       <header>
-        <Link to=".." onClick={() => navigate(-1)}>
-          <ChevronLeftIcon /> Go Back
-        </Link>
+        <GoBackLink />
 
         <Button type="primaryBlue" to="edit">
           Edit Feedback
