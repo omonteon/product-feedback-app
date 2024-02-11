@@ -1,28 +1,22 @@
-import { Link, useNavigate } from "react-router-dom";
-import { ReactComponent as ChevronLeftIcon } from "@assets/chevron-left-icon.svg";
-import { ReactComponent as PlusIcon } from "@assets/plus-icon.svg";
-import Card from "@components/Card";
-import styles from "./feedbackNew.module.css";
+import { ReactComponent as NewFeedbackIcon } from "@assets/shared/icon-new-feedback.svg";
 import FeedbackForm from "@components/FeedbackForm";
+import GoBackLink from "@components/GoBackLink";
+import styles from "./feedbackNew.module.css";
+import FeedbackFormCard from "@components/FeedbackFormCard";
 
 function FeedbackNewPage() {
-  const navigate = useNavigate();
-
   return (
     <div className={styles.feedbackNew}>
       <header>
-        <Link to=".." onClick={() => navigate(-1)}>
-          <ChevronLeftIcon /> Go Back
-        </Link>
+        <GoBackLink />
       </header>
       <main>
-        <span className={styles.plusIcon}>
-          <PlusIcon />
-        </span>
-        <Card>
-          <h3>Create New Feedback</h3>
+        <FeedbackFormCard
+          icon={<NewFeedbackIcon />}
+          title="Create New Feedback"
+        >
           <FeedbackForm />
-        </Card>
+        </FeedbackFormCard>
       </main>
     </div>
   );
