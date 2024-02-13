@@ -48,6 +48,7 @@ function FeedbackDetailsPage() {
   );
 }
 
+// TODO: Move this component out of this file
 function FeedbackDetails() {
   const [feedback, currentUser] = useAsyncValue() as FeedbackDetailsDataTuple;
   const userVotes = currentUser.votes ?? [];
