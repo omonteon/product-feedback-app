@@ -70,6 +70,7 @@ function HomePage() {
   const { data } = useLoaderData() as HomeData;
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const loading = navigation.state === "loading";
+  const defaultTag = searchParams.get("q")?.toString();
 
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
@@ -79,7 +80,7 @@ function HomePage() {
     <>
       <Suspense
         fallback={
-          <div>
+          <div className={`${styles.container} ${loading && styles.loading}`}>
             <header className={styles.header}>
               <nav className={styles.nav}>
                 <div>
@@ -87,8 +88,16 @@ function HomePage() {
                   <h2>Feedback board</h2>
                 </div>
               </nav>
-              {/* <TagsCard defaultTag={searchParams.get("q")?.toString()} />
-              <RoadmapSummaryCard feedbackList={[]} /> */}
+              <div className={styles.headerCards}>
+                <Card className={styles.title}>
+                  <div>
+                    <h1>Frontend Mentor</h1>
+                    <h2>Feedback board</h2>
+                  </div>
+                </Card>
+                <TagsCard defaultTag={defaultTag} />
+                <RoadmapSummaryCard feedbackList={[]} />
+              </div>
             </header>
             <main className={styles.main}>
               <header>
@@ -112,7 +121,7 @@ function HomePage() {
         }
       >
         <Await resolve={data} errorElement={<p>Error loading home data</p>}>
-          <div className={loading ? styles.loading : undefined}>
+          <div className={`${styles.container} ${loading && styles.loading}`}>
             <header className={styles.header}>
               <nav className={styles.nav}>
                 <div>
@@ -129,7 +138,7 @@ function HomePage() {
                     <h2>Feedback board</h2>
                   </div>
                 </Card>
-                <TagsCard defaultTag={searchParams.get("q")?.toString()} />
+                <TagsCard defaultTag={defaultTag} />
                 <RoadmapSummaryCard feedbackList={[]} />
               </div>
             </header>
@@ -144,6 +153,7 @@ function HomePage() {
   );
 }
 
+// TODO: Take this component out of this file
 function FeedbackListHeader({ loading }: { loading: boolean }) {
   const submit = useSubmit();
   const [feedbackList] = useAsyncValue() as HomeDataTuple;
@@ -191,7 +201,7 @@ function FeedbackListHeader({ loading }: { loading: boolean }) {
     </header>
   );
 }
-
+// TODO: Take this component out of this file
 function FeedbackList() {
   const [feedbackList, currentUser] = useAsyncValue() as HomeDataTuple;
 

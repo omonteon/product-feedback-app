@@ -177,3 +177,23 @@ span.selectHandle path {
 .selectHandle.active {
   transform: rotate(180deg);
 }
+
+@media (min-width: 1440px) {
+  .container {
+    display: grid;
+    grid-template-columns: 255px 825px;
+    column-gap: 30px;
+    margin: 95px auto 0;
+    width: calc(255px + 825px + 30px);
+  }
+  .header {
+    margin: 0;
+  }
+  .headerCards {
+    flex-direction: column;
+    row-gap: 24px;
+  }
+  .main {
+    margin: 0;
+  }
+}
