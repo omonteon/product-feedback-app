@@ -131,6 +131,7 @@ function HomePage() {
                 {/* TODO: Fix keyboard navigation which enters the sidebar when is hidden */}
                 <Sidebar open={sidebarOpen} toggle={toggleSidebar} />
               </nav>
+              {/* TODO: Make a component for this */}
               <div className={styles.headerCards}>
                 <Card className={styles.title}>
                   <div>

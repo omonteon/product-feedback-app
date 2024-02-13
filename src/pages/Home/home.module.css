@@ -193,6 +193,13 @@ span.selectHandle path {
     flex-direction: column;
     row-gap: 24px;
   }
+  .headerCards > div {
+    flex: auto;
+    padding: 24px;
+  }
+  .title {
+    height: 140px;
+  }
   .main {
     margin: 0;
   }
