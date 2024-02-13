@@ -54,7 +54,7 @@ form > a > button {
 }
 
 div.select {
-  padding: 0.875rem 1rem;
+  padding: 12px 24px;
   border: none;
   border-radius: 5px;
   font-size: 0.8125rem;

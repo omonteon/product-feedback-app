@@ -203,4 +203,7 @@ span.selectHandle path {
   .main {
     margin: 0;
   }
+  .mainContent {
+    padding: 24px 0;
+  }
 }

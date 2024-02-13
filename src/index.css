@@ -120,7 +120,7 @@ input {
   color: var(--gray-dark-b);
   border: none;
   border-radius: 5px;
-  padding: 14px 16px;
+  padding: 13px 16px;
   width: 100%;
   display: block;
 }
@@ -132,6 +132,14 @@ textarea:focus {
 
 input::placeholder {
   color: #8c92b3;
+}
+
+@media (min-width: 768px) {
+  input,
+  textarea,
+  select {
+    font-size: 0.9375rem;
+  }
 }
 
 .sr-only {
@@ -154,6 +162,7 @@ div.react-dropdown-select-dropdown-handle {
 
 div.react-dropdown-select-dropdown {
   left: -4px;
+  top: calc(48px + 16px);
   width: calc(100% + 8px);
   border-radius: 10px;
   box-shadow: 0px 10px 40px -7px rgba(55, 63, 104, 0.350492);
@@ -161,7 +170,7 @@ div.react-dropdown-select-dropdown {
 }
 
 span.react-dropdown-select-item {
-  padding: 0.875rem 1rem;
+  padding: 12px 24px;
   color: var(--gray-dark-c);
 }
 
