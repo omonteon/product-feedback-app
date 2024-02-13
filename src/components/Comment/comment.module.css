@@ -71,9 +71,16 @@
     row-gap: 10px;
     margin-bottom: 2rem;
   }
+  .comment header p {
+    font-size: 0.875rem;
+  }
+  .comment header button {
+    font-size: 0.8125rem;
+  }
   .comment > p {
     grid-column-start: 2;
     grid-column-end: 2;
+    font-size: 0.9375rem;
   }
   .comment:has(+ .replies) > p {
     font-size: 0.9375rem;
