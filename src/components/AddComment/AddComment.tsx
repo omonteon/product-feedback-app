@@ -6,6 +6,7 @@ import styles from "./addComment.module.css";
 interface AddCommentProps {
   feedbackId: string;
   commentId?: string;
+  replyingTo?: string;
   onCommentSubmitted?: () => void;
 }
 
@@ -14,6 +15,7 @@ const MAX_CHARS = 250;
 function AddComment({
   feedbackId,
   commentId,
+  replyingTo,
   onCommentSubmitted = () => {},
 }: AddCommentProps) {
   const [comment, setComment] = useState("");
@@ -58,7 +60,8 @@ function AddComment({
                   comment: comment.toString(),
                   feedbackId: feedbackId.toString(),
                   commentId,
-                  intent: "replyComment",
+                  replyingTo: replyingTo ?? "",
+                  intent: "replyComment", // TODO: Create constants for the intents
                 },
                 { method: "put" }
               );

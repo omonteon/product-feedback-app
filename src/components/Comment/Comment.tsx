@@ -34,6 +34,7 @@ function Comment({ comment, feedbackId, className = "" }: CommentProps) {
           <AddComment
             feedbackId={feedbackId}
             commentId={comment.id}
+            replyingTo={user.username}
             onCommentSubmitted={() => setReplyFormVisible(false)}
           />
         </div>

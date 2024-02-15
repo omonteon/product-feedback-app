@@ -39,6 +39,7 @@ function CommentReply({
         <AddComment
           feedbackId={feedbackId}
           commentId={commentId}
+          replyingTo={user.username}
           onCommentSubmitted={() => setReplyFormVisible(false)}
         />
       </div>

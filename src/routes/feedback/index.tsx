@@ -30,9 +30,9 @@ export async function action({ request, params }: ActionFunctionArgs) {
   }
   const feedbackId = params.feedbackId;
   const formData = await request.formData();
-  const intent = formData.get("intent");
+  const intent = formData.get("intent")?.toString() ?? "";
+  const replyingTo = formData.get("replyingTo")?.toString() ?? "";
   const currentUser = await getCurrentUser();
-
   if (intent === "addComment") {
     const feedback = await getFeedbackById(params.feedbackId);
     const commentText = formData.get("comment")?.toString() ?? "";
@@ -63,7 +63,7 @@ export async function action({ request, params }: ActionFunctionArgs) {
     const reply: CommentReply = {
       id: crypto.randomUUID(),
       content,
-      replyingTo: currentUser.username,
+      replyingTo,
       user: {
         image: currentUser.image,
         name: currentUser.name,
