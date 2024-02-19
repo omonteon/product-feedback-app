@@ -10,12 +10,12 @@
   border: none;
 }
 
-.tag:hover {
+.tag.checkable:hover {
   cursor: pointer;
   background-color: var(--hover-blue);
 }
 
-.tag.checked {
+.tag.checkable.checked {
   color: white;
   background-color: var(--primary-blue);
 }

@@ -16,7 +16,9 @@ function CheckableTag({
 }: CheckableTagProps) {
   return (
     <button
-      className={`${styles.tag} ${checked ? styles.checked : ""}`}
+      className={`${styles.tag} ${styles.checkable} ${
+        checked ? styles.checked : ""
+      }`}
       disabled={disabled}
       onClick={onClick}
     >
