@@ -25,34 +25,33 @@ function VoteButton({
     voteCount = formUpvotes;
   }
 
-  // FIXME: When you click/tap the padding of the label, it does not trigger the checkbox
-
   return (
-    <label className={`${styles.voteButton} ${className}`}>
-      <ChevronIcon className={styles.upVoteIcon} />
-      <input
-        name="upvotes"
-        type="checkbox"
-        checked={checked}
-        value={voteCount}
-        onClick={(event) => event.stopPropagation()}
-        onChange={() => {
-          const upvotes = upVoted ? count - 1 : count + 1;
-          // For some reason RR6 requires all form data to be strings
-          fetcher.submit(
-            {
-              upVoted: (upvotes > count).toString(),
-              upvotes: upvotes.toString(),
-              feedbackId: feedbackId.toString(),
-              intent: "upVote",
-            },
-            { method: "put" }
-          );
-        }}
-        aria-checked={checked}
-      />
-      <b>{voteCount}</b>
-    </label>
+    <div onClick={(event) => event.stopPropagation()} role="presentation">
+      <label className={`${styles.voteButton} ${className}`}>
+        <ChevronIcon className={styles.upVoteIcon} />
+        <input
+          name="upvotes"
+          type="checkbox"
+          checked={checked}
+          value={voteCount}
+          onChange={() => {
+            const upvotes = upVoted ? count - 1 : count + 1;
+            // For some reason RR6 requires all form data to be strings
+            fetcher.submit(
+              {
+                upVoted: (upvotes > count).toString(),
+                upvotes: upvotes.toString(),
+                feedbackId: feedbackId.toString(),
+                intent: "upVote",
+              },
+              { method: "put" }
+            );
+          }}
+          aria-checked={checked}
+        />
+        <b>{voteCount}</b>
+      </label>
+    </div>
   );
 }
 
