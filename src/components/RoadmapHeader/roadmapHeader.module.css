@@ -1,0 +1,24 @@
+.roadmapHeader {
+  padding: 26px 24px;
+  background-color: var(--gray-dark-a);
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.roadmapHeader h1 {
+  font-size: 1.125rem;
+  line-height: 1.4445;
+  /* margin-top: 3px; */
+}
+
+.roadmapHeader a {
+  color: white;
+  line-height: 22px;
+}
+
+.roadmapHeader svg path {
+  /* TODO: create a variable for this color */
+  stroke: #cdd2ee;
+}
