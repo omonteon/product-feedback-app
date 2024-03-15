@@ -6,7 +6,7 @@ function GoBackLink() {
   const navigate = useNavigate();
   return (
     <Link to=".." onClick={() => navigate(-1)} className={styles.link}>
-      <ChevronLeftIcon /> Go Back
+      <ChevronLeftIcon /> <span>Go Back</span>
     </Link>
   );
 }

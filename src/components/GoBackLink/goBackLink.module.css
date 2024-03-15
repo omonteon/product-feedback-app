@@ -3,6 +3,9 @@
   font-weight: 700;
   color: var(--gray-dark-c);
   text-decoration: none;
+  display: flex;
+  column-gap: 1rem;
+  align-items: center;
 }
 
 @media (min-width: 768px) {
