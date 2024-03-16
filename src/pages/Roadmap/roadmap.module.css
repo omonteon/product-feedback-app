@@ -1,1 +1,28 @@
+.tabList {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0;
+  height: 56px;
+  margin: 0;
+  border-bottom: 1px solid rgb(151, 151, 151, 0.25); /* TODO: Create a variable for this color */
+}
 
+.tabList > li {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  list-style: none;
+  cursor: pointer;
+  text-align: center;
+  flex: 1;
+  font-size: 0.8125rem;
+  font-weight: bold;
+  opacity: 0.4;
+}
+
+li.selectedTab {
+  opacity: 1;
+  border-bottom: 4px solid var(--primary-purple);
+}
