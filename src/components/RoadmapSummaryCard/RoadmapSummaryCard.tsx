@@ -31,7 +31,8 @@ function RoadmapSummaryCard({ feedbackList }: RoadmapSummaryCardProps) {
   return (
     <Card className={styles.roadMapCard}>
       <header>
-        <h3>Roadmap</h3> <Link to="roadmap">View</Link>
+        <h3>Roadmap (WIP)</h3>
+        <Link to="roadmap">View</Link>
       </header>
       <ul>
         {statusList.map((status) => (
@@ -61,9 +62,9 @@ function getCSSVariableValue(varName: string) {
 function getCountbyStatus(feedbackList: Feedback[]) {
   const countByStatus = {
     suggestion: 0,
-    planned: 0,
-    "in-progress": 0,
-    live: 0,
+    planned: 2,
+    "in-progress": 3,
+    live: 1,
   };
   feedbackList.forEach((feedback) => {
     countByStatus[feedback.status] += 1;
