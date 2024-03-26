@@ -7,6 +7,10 @@ import {
   ProductRequest,
 } from "src/interfaces/Feedback";
 
+/*
+  THIS CODE IS MEANT TO BE REPLACED BY A REAL API
+*/
+
 async function getFeedbackList(
   query?: string,
   sortBy?: string,
