@@ -38,11 +38,11 @@ Users should be able to:
 
 ### Built with
 
-- TypeScript (First time using TS).
-- React Router v6 (First time using it).
+- TypeScript.
+- React Router v6.
 - CSS Modules
 - Vite
-- [React](https://reactjs.org/) - JS library
+- [React](https://reactjs.org/)
 
 ## Author
 
