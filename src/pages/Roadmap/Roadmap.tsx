@@ -1,10 +1,10 @@
+import { Suspense } from "react";
+import { Await, useLoaderData } from "react-router-dom";
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
 import RoadmapHeader from "@components/RoadmapHeader";
-import styles from "./roadmap.module.css";
+import RoadmapFeedbackList from "@components/RoadmapFeedbackList";
 import { CurrentUser, Feedback } from "src/interfaces/Feedback";
-import { Await, useLoaderData } from "react-router-dom";
-import { Suspense } from "react";
-import FeedbackList from "@components/FeedbackList";
+import styles from "./roadmap.module.css";
 
 type HomeDataTuple = [Feedback[], CurrentUser];
 type HomeData = {
@@ -50,12 +50,12 @@ function RoadmapPage() {
               {tabs.map((tab) => (
                 <TabPanel key={tab.title} className={styles.tabPanel}>
                   <header>
-                    <h2>
+                    <h3>
                       {tab.title} ({tab.count})
-                    </h2>
+                    </h3>
                     <p>{tab.description}</p>
                   </header>
-                  <FeedbackList />
+                  <RoadmapFeedbackList />
                 </TabPanel>
               ))}
             </Tabs>

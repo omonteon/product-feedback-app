@@ -56,6 +56,7 @@ function App() {
       },
       {
         path: "/roadmap",
+        loader: homeLoader,
         element: <RoadmapRoute />,
       },
     ]);
