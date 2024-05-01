@@ -52,3 +52,11 @@
     width: 40px;
   }
 }
+
+.voteButton.disabled,
+.voteButton.disabled > .upVoteIcon path {
+  background-color: var(--gray-light-300);
+  color: inherit;
+  stroke: var(--primary-blue);
+  opacity: 0.5;
+}

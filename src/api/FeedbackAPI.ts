@@ -49,9 +49,10 @@ async function getCurrentUser(): Promise<CurrentUser> {
   const currentUser = data.currentUser;
 
   return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve(currentUser);
-    }, 1000);
+    resolve(currentUser);
+    // setTimeout(() => {
+    //   resolve(currentUser);
+    // }, 1000);
   });
 }
 
@@ -94,9 +95,10 @@ async function updateFeedbackById(
   localStorage.setItem("data", JSON.stringify({ ...data, productRequests }));
   // TODO: Implement rejection too
   return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve(productRequestItem as FeedbackDetails);
-    }, 1000);
+    resolve(productRequestItem as FeedbackDetails);
+    // setTimeout(() => {
+    //   resolve(productRequestItem as FeedbackDetails);
+    // }, 200);
   });
 }
 

@@ -16,6 +16,7 @@ function VoteButton({
   upVoted = false,
 }: VoteButtonProps) {
   const fetcher = useFetcher();
+  const loading = fetcher.state !== "idle";
   let checked = upVoted;
   let voteCount = count;
 
@@ -27,13 +28,18 @@ function VoteButton({
 
   return (
     <div onClick={(event) => event.stopPropagation()} role="presentation">
-      <label className={`${styles.voteButton} ${className}`}>
+      <label
+        className={`${styles.voteButton} ${
+          loading && styles.disabled
+        } ${className}`}
+      >
         <ChevronIcon className={styles.upVoteIcon} />
         <input
           name="upvotes"
           type="checkbox"
           checked={checked}
           value={voteCount}
+          disabled={loading}
           onChange={() => {
             const upvotes = upVoted ? count - 1 : count + 1;
             // For some reason RR6 requires all form data to be strings
