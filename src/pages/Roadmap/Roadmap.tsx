@@ -44,26 +44,26 @@ function RoadmapContent({ data }: { data: HomeDataTuple }) {
       description: "Ideas prioritized for research",
       count: plannedFeedback.length,
       feedbackList: plannedFeedback,
-      statusColor: "var(--accent-orange)",
+      status: "planned",
     },
     {
       title: "In-Progress",
       description: "Currently being developed",
       count: inProgressFeedback.length,
       feedbackList: inProgressFeedback,
-      statusColor: "var(--primary-purple)",
+      status: "in-progress",
     },
     {
       title: "Live",
       description: "Released features",
       count: liveFeedback.length,
       feedbackList: liveFeedback,
-      statusColor: "var(--accent-blue)",
+      status: "live",
     },
   ];
 
   return (
-    <div className={`${styles.container}`}>
+    <div className={styles.container}>
       <RoadmapHeader />
       <main className={styles.main}>
         <Tabs
@@ -72,7 +72,10 @@ function RoadmapContent({ data }: { data: HomeDataTuple }) {
         >
           <TabList className={styles.tabList}>
             {tabs.map((tab) => (
-              <Tab key={tab.title}>
+              <Tab
+                key={tab.title}
+                className={`${styles.tab} ${styles[tab.status]}`}
+              >
                 {tab.title} ({tab.count})
               </Tab>
             ))}

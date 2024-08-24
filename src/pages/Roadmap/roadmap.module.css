@@ -5,10 +5,10 @@
   padding: 0;
   height: 56px;
   margin: 0;
-  border-bottom: 1px solid rgb(151, 151, 151, 0.25); /* TODO: Create a variable for this color */
+  border-bottom: 1px solid rgba(151, 151, 151, 0.25);
 }
 
-.tabList > li {
+.tab {
   height: 100%;
   display: flex;
   align-items: center;
@@ -22,9 +22,20 @@
   opacity: 0.4;
 }
 
-li.selectedTab {
+.selectedTab {
   opacity: 1;
-  box-shadow: 0px -4px 0px 0px inset var(--primary-purple);
+}
+
+.selectedTab.planned {
+  box-shadow: 0px -4px 0px 0px var(--accent-orange) inset;
+}
+
+.selectedTab.in-progress {
+  box-shadow: 0px -4px 0px 0px var(--primary-purple) inset;
+}
+
+.selectedTab.live {
+  box-shadow: 0px -4px 0px 0px var(--accent-blue) inset;
 }
 
 .tabPanel {
