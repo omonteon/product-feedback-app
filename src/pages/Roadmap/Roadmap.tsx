@@ -44,18 +44,21 @@ function RoadmapContent({ data }: { data: HomeDataTuple }) {
       description: "Ideas prioritized for research",
       count: plannedFeedback.length,
       feedbackList: plannedFeedback,
+      statusColor: "var(--accent-orange)",
     },
     {
       title: "In-Progress",
       description: "Currently being developed",
       count: inProgressFeedback.length,
       feedbackList: inProgressFeedback,
+      statusColor: "var(--primary-purple)",
     },
     {
       title: "Live",
       description: "Released features",
       count: liveFeedback.length,
       feedbackList: liveFeedback,
+      statusColor: "var(--accent-blue)",
     },
   ];
 

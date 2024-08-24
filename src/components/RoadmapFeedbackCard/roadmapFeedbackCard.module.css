@@ -1,0 +1,118 @@
+.card {
+  --status-color: var(--accent-orange);
+  background-color: #fff;
+  border-radius: 5px;
+  padding: 24px;
+  margin-bottom: 1rem;
+  position: relative;
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 6px;
+  background-color: var(--status-color);
+  border-radius: 5px 5px 0 0;
+}
+
+.card.planned {
+  --status-color: var(--accent-orange);
+}
+
+.card.in-progress {
+  --status-color: var(--primary-purple);
+}
+
+.card.live {
+  --status-color: var(--accent-blue);
+}
+
+.status {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+  text-transform: capitalize;
+  color: var(--gray-dark-c);
+  font-size: 0.8125rem;
+  font-weight: 400;
+}
+
+.statusDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 8px;
+  background-color: var(--status-color);
+}
+
+.card h3 {
+  margin-bottom: 0.5rem;
+  font-size: 0.8125rem;
+  line-height: 1.4375rem;
+  font-weight: 700;
+  color: var(--gray-dark-a);
+}
+
+.card p {
+  margin-bottom: 0.5rem;
+  font-size: 0.8125rem;
+  line-height: 1.4375rem;
+  font-weight: 400;
+  color: var(--gray-dark-c);
+}
+
+.tag {
+  margin-bottom: 1rem;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@media (min-width: 768px) {
+  .card {
+    padding: 20px;
+  }
+
+  .card h3 {
+    font-size: 0.8125rem;
+    line-height: 1.4375rem;
+  }
+
+  .card p {
+    font-size: 0.8125rem;
+    line-height: 1.4375rem;
+    margin-bottom: 1rem;
+  }
+
+  .tag {
+    margin-bottom: 1.25rem;
+  }
+}
+
+@media (min-width: 1440px) {
+  .card {
+    padding: 32px;
+  }
+
+  .card h3 {
+    font-size: 1.125rem;
+    line-height: 1.625rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .card p {
+    font-size: 1rem;
+    line-height: 1.4375rem;
+    margin-bottom: 1rem;
+  }
+
+  .tag {
+    margin-bottom: 1.5rem;
+  }
+}

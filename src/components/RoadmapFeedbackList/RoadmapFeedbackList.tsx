@@ -1,5 +1,5 @@
-import FeedbackCard from "@components/FeedbackCard";
 import { CurrentUser, Feedback, Vote } from "src/interfaces/Feedback";
+import RoadmapFeedbackCard from "@components/RoadmapFeedbackCard";
 import styles from "./roadmapFeedbackList.module.css";
 
 interface RoadmapFeedbackListProps {
@@ -14,10 +14,9 @@ function RoadmapFeedbackList({
   return (
     <section className={styles.mainContent}>
       {feedbackList.map((feedback) => (
-        <FeedbackCard
+        <RoadmapFeedbackCard
           key={feedback.id}
           feedback={feedback}
-          redirectTo={`feedback/${feedback.id}`}
           upVoted={isFeedbackUpVoted(currentUser.votes ?? [], feedback.id)}
         />
       ))}
