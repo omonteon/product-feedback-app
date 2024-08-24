@@ -14,22 +14,29 @@ import {
 async function getFeedbackList(
   query?: string,
   sortBy?: string,
-  status?: FeedbackStatus
+  status?: FeedbackStatus | FeedbackStatus[]
 ): Promise<Feedback[]> {
   const dataStr: string = localStorage.getItem("data") ?? "";
   const data: FeedbackAPIResponse = JSON.parse(dataStr ?? "");
-  const productRequests: ProductRequest[] = data.productRequests.filter(
-    (pr) => {
-      let validPR = true;
-      if (status) {
-        validPR = pr.status.toLowerCase() === status.toLowerCase();
-      }
-      if (query && query !== "All" && validPR) {
-        validPR = pr.category.toLowerCase() === query.toLowerCase();
-      }
-      return validPR;
+  let filteredFeedback = data.productRequests;
+
+  if (Array.isArray(status)) {
+    filteredFeedback = filteredFeedback.filter((feedback: ProductRequest) =>
+      status.includes(feedback.status)
+    );
+  } else if (status) {
+    filteredFeedback = filteredFeedback.filter(
+      (feedback: ProductRequest) => feedback.status === status
+    );
+  }
+
+  const productRequests: ProductRequest[] = filteredFeedback.filter((pr) => {
+    let validPR = true;
+    if (query && query !== "All" && validPR) {
+      validPR = pr.category.toLowerCase() === query.toLowerCase();
     }
-  );
+    return validPR;
+  });
   const sortedProductRequests = sortBy
     ? productRequests.sort((prA, prB) => {
         return sortByVotesOrComments(sortBy, prA, prB);
