@@ -1,4 +1,5 @@
 import { Feedback } from "src/interfaces/Feedback";
+import { Link } from "react-router-dom";
 import Tag from "@components/Tag";
 import VoteButton from "@components/VoteButton";
 import CommentCount from "@components/FeedbackCard/CommentCount";
@@ -29,7 +30,9 @@ function RoadmapFeedbackCard({
         <span className={styles.statusDot}></span>
         {status}
       </div>
-      <h3>{title}</h3>
+      <Link to={`/feedback/${id}/edit`} className={styles.titleLink}>
+        <h3>{title}</h3>
+      </Link>
       <p>{description}</p>
       <Tag className={styles.tag}>{category}</Tag>
       <div className={styles.footer}>
