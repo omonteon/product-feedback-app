@@ -30,7 +30,7 @@ function RoadmapFeedbackCard({
         <span className={styles.statusDot}></span>
         {status}
       </div>
-      <Link to={`/feedback/${id}/edit`} className={styles.titleLink}>
+      <Link to={`/feedback/${id}`} className={styles.titleLink}>
         <h3>{title}</h3>
       </Link>
       <p>{description}</p>
