@@ -15,7 +15,10 @@ import FeedbackEditRoute, {
   loader as feedbackEditLoader,
   action as feedbackEditAction,
 } from "./routes/feedback/edit";
-import RoadmapRoute, { loader as roadmapLoader } from "./routes/roadmap";
+import RoadmapRoute, {
+  loader as roadmapLoader,
+  action as roadmapAction,
+} from "./routes/roadmap";
 import dataJSON from "./data.json";
 
 function App() {
@@ -57,6 +60,7 @@ function App() {
       {
         path: "/roadmap",
         loader: roadmapLoader,
+        action: roadmapAction,
         element: <RoadmapRoute />,
       },
     ]);
