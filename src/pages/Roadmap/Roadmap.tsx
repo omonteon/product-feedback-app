@@ -2,6 +2,7 @@ import { Suspense } from "react";
 import { Await, useLoaderData } from "react-router-dom";
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
 import RoadmapHeader from "@components/RoadmapHeader";
+import RoadmapColumn from "@components/RoadmapColumn";
 import RoadmapFeedbackList from "@components/RoadmapFeedbackList";
 import { CurrentUser, Feedback } from "src/interfaces/Feedback";
 import styles from "./roadmap.module.css";
@@ -67,6 +68,7 @@ function RoadmapContent({ data }: { data: HomeDataTuple }) {
       <RoadmapHeader />
       <main className={styles.main}>
         <Tabs
+          className={styles.mobileView}
           selectedTabClassName={styles.selectedTab}
           selectedTabPanelClassName={styles.selectedPanel}
         >
@@ -82,19 +84,34 @@ function RoadmapContent({ data }: { data: HomeDataTuple }) {
           </TabList>
           {tabs.map((tab) => (
             <TabPanel key={tab.title} className={styles.tabPanel}>
-              <header>
-                <h3>
-                  {tab.title} ({tab.count})
-                </h3>
-                <p>{tab.description}</p>
-              </header>
+              <RoadmapColumn
+                title={tab.title}
+                count={tab.count}
+                description={tab.description}
+              >
+                <RoadmapFeedbackList
+                  feedbackList={tab.feedbackList}
+                  currentUser={currentUser}
+                />
+              </RoadmapColumn>
+            </TabPanel>
+          ))}
+        </Tabs>
+        <div className={styles.desktopView}>
+          {tabs.map((tab) => (
+            <RoadmapColumn
+              key={tab.title}
+              title={tab.title}
+              count={tab.count}
+              description={tab.description}
+            >
               <RoadmapFeedbackList
                 feedbackList={tab.feedbackList}
                 currentUser={currentUser}
               />
-            </TabPanel>
+            </RoadmapColumn>
           ))}
-        </Tabs>
+        </div>
       </main>
     </div>
   );

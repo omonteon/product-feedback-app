@@ -22,3 +22,9 @@
   /* TODO: create a variable for this color */
   stroke: #cdd2ee;
 }
+
+@media (min-width: 768px) {
+  .roadmapHeader {
+    border-radius: 10px;
+  }
+}
